@@ -475,7 +475,77 @@
     z-index: 200;
     display: none;
   }
+  .map-legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+  }
+  .legend-item {
+    font-size: 0.85em;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-img {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card-img-icon {
+    font-size: 1.8em;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+    flex-shrink: 0;
+  }
+  .card-img-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .card-img-title {
+    font-weight: 700;
+    font-size: 0.95em;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+  .card-img-area {
+    font-size: 0.75em;
+    color: rgba(255,255,255,0.85);
+  }
+  .card-img-cost {
+    font-weight: 700;
+    font-size: 1em;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+  }
+  .card-img.food { background: linear-gradient(135deg, #ef4444 0%, #f97316 100%); }
+  .card-img.cafe { background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%); }
+  .card-img.attraction { background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); }
+  .card-img.pass { background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%); }
+  .card-img.shopping { background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%); }
+  .card-img.nature { background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%); }
+  .card-img.transport { background: linear-gradient(135deg, #6b7280 0%, #9ca3af 100%); }
+  .naver-photo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #03c75a;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.8em;
+    font-weight: 500;
+    margin-top: 6px;
+    margin-left: 6px;
+    transition: opacity 0.2s;
+  }
+  .naver-photo-btn:hover { opacity: 0.85; }
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
 
@@ -500,6 +570,7 @@
   <button type="button" class="tab" onclick="switchTab(this,'alllist')">📋 完整清單</button>
   <button type="button" class="tab" onclick="switchTab(this,'budget')">💰 預算</button>
   <button type="button" class="tab" onclick="switchTab(this,'backup')">🔄 備案</button>
+  <button type="button" class="tab" onclick="switchTab(this,'mapview')">🗺️ 地圖</button>
 </div>
 
 <div class="container">
@@ -616,6 +687,7 @@
   </div>
 
   <div class="card food" data-id="d1-1">
+    <div class="card-img food"><span class="card-img-icon">🍗</span><div class="card-img-info"><div class="card-img-title">puradak 炸雞</div><div class="card-img-area">海雲台 · 宵夜</div></div><div class="card-img-cost">₩20,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -623,7 +695,6 @@
         <div class="card-title">puradak 炸雞 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">宵夜 | 海雲台 | W18,000~22,000/份</div>
       </div>
-      <div class="card-cost">₩20,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -637,6 +708,7 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要（可外送）</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡</span></div>
       <a href="https://map.naver.com/v5/search/%ED%91%B8%EB%9D%BC%EB%8B%AD%EC%B9%98%ED%82%A8%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <a href="https://search.naver.com/search.naver?where=image&query=%ED%91%B8%EB%9D%BC%EB%8B%AD%EC%B9%98%ED%82%A8+%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
       <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
@@ -665,6 +737,7 @@
   </div>
 
   <div class="card pass" data-id="d2-1">
+    <div class="card-img pass"><span class="card-img-icon">🛷</span><div class="card-img-info"><div class="card-img-title">Skyline Luge 斜坡滑車</div><div class="card-img-area">機張 · PASS</div></div><div class="card-img-cost">PASS</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -672,7 +745,6 @@
         <div class="card-title">Skyline Luge 斜坡滑車 <span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">機張 | 原價 W28,000 | ~1.5hr（含排隊）</div>
       </div>
-      <div class="card-cost" style="color:#f59e0b">PASS</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -685,11 +757,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">建議線上預購（KKday、Klook）</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡</span></div>
       <a href="https://map.naver.com/v5/search/%EC%8A%A4%EC%B9%B4%EC%9D%B4%EB%9D%BC%EC%9D%B8%EB%A3%A8%EC%A7%80%20%EB%B6%80%EC%82%B0" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%8A%A4%EC%B9%B4%EC%9D%B4%EB%9D%BC%EC%9D%B8%EB%A3%A8%EC%A7%80+%EB%B6%80%EC%82%B0" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card food" data-id="d2-2">
+    <div class="card-img cafe"><span class="card-img-icon">☕</span><div class="card-img-info"><div class="card-img-title">coralani 躺椅咖啡廳</div><div class="card-img-area">機張 · 下午茶</div></div><div class="card-img-cost">₩8,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -697,7 +771,6 @@
         <div class="card-title">coralani 躺椅咖啡廳 <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">下午茶 | 機張 | W7,000~9,000</div>
       </div>
-      <div class="card-cost">₩8,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -710,11 +783,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要（座位充足）</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">信用卡可用</span></div>
       <a href="https://map.naver.com/v5/search/%EC%BD%94%EB%9E%84%EB%9D%BC%EB%8B%88%20%EA%B8%B0%EC%9E%A5" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%BD%94%EB%9E%84%EB%9D%BC%EB%8B%88+%EA%B8%B0%EC%9E%A5+%EC%B9%B4%ED%8E%98" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card food" data-id="d2-3">
+    <div class="card-img food"><span class="card-img-icon">🍜</span><div class="card-img-info"><div class="card-img-title">龍宮海鮮炸醬麵</div><div class="card-img-area">機張 · 午餐</div></div><div class="card-img-cost">₩10,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -722,7 +797,6 @@
         <div class="card-title">釜山龍宮海鮮炸醬麵 <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">午餐 | 機張 | W9,000~11,000</div>
       </div>
-      <div class="card-cost">₩10,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -735,7 +809,8 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">可電話預約 051-723-0944</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">信用卡可用</span></div>
       <a href="https://map.naver.com/v5/search/%EC%9A%A9%EA%B6%81%ED%95%B4%EB%AC%BC%EC%A7%9C%EC%9E%A5%20%EA%B8%B0%EC%9E%A5" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%9A%A9%EA%B6%81%ED%95%B4%EB%AC%BC%EC%A7%9C%EC%9E%A5+%EA%B8%B0%EC%9E%A5" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
@@ -745,6 +820,7 @@
   </div>
 
   <div class="card pass" data-id="d2-4">
+    <div class="card-img pass"><span class="card-img-icon">🏙️</span><div class="card-img-info"><div class="card-img-title">Busan X the SKY</div><div class="card-img-area">海雲台 · PASS</div></div><div class="card-img-cost">PASS</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -752,7 +828,6 @@
         <div class="card-title">Busan X the SKY <span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">世界最高星巴克 | 海雲台 | 原價 W27,000</div>
       </div>
-      <div class="card-cost" style="color:#f59e0b">PASS</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -766,11 +841,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">建議線上預購（Klook、마이리얼트립）</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡（成人 ₩29,000）</span></div>
       <a href="https://map.naver.com/v5/search/%EB%B6%80%EC%82%B0%EC%97%91%EC%8A%A4%EB%8D%94%EC%8A%A4%EC%B9%B4%EC%9D%B4" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EB%B6%80%EC%82%B0%EC%97%91%EC%8A%A4%EB%8D%94%EC%8A%A4%EC%B9%B4%EC%9D%B4" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card food" data-id="d2-5">
+    <div class="card-img food"><span class="card-img-icon">🍞</span><div class="card-img-info"><div class="card-img-title">自然島鹽麵包</div><div class="card-img-area">海雲台 · 點心</div></div><div class="card-img-cost">₩4,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -778,7 +855,6 @@
         <div class="card-title">自然島鹽麵包 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">點心 | 海雲台 | W3,500~5,000</div>
       </div>
-      <div class="card-cost">₩4,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -790,11 +866,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡</span></div>
       <a href="https://map.naver.com/v5/search/%EC%9E%90%EC%97%B0%EB%8F%84%EC%86%8C%EA%B8%88%EB%B9%B5%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%9E%90%EC%97%B0%EB%8F%84%EC%86%8C%EA%B8%88%EB%B9%B5+%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card pass" data-id="d2-6">
+    <div class="card-img pass"><span class="card-img-icon">🚂</span><div class="card-img-info"><div class="card-img-title">海雲台海岸列車</div><div class="card-img-area">海雲台 · PASS</div></div><div class="card-img-cost">PASS</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -802,7 +880,6 @@
         <div class="card-title">海雲台海岸列車（藍線公園）<span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">海雲台到青沙浦 | 原價 W7,000（單程）</div>
       </div>
-      <div class="card-cost" style="color:#f59e0b">PASS</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -815,11 +892,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">強烈建議線上預購（週末常售罄）</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡（單程 ₩8,000）</span></div>
       <a href="https://map.naver.com/v5/search/%EB%B8%94%EB%A3%A8%EB%9D%BC%EC%9D%B8%ED%8C%8C%ED%81%AC%20%ED%95%B4%EB%B3%80%EC%97%B4%EC%B0%A8" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EB%B8%94%EB%A3%A8%EB%9D%BC%EC%9D%B8%ED%8C%8C%ED%81%AC+%ED%95%B4%EB%B3%80%EC%97%B4%EC%B0%A8" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card attraction" data-id="d2-7">
+    <div class="card-img nature"><span class="card-img-icon">📸</span><div class="card-img-info"><div class="card-img-title">青沙浦天空步道</div><div class="card-img-area">海雲台 · 免費</div></div><div class="card-img-cost">免費</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -827,7 +906,6 @@
         <div class="card-title">青沙浦天空步道 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">免費景點 | 海雲台（青沙浦站下車即到）</div>
       </div>
-      <div class="card-cost" style="color:#16a34a">免費</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -839,11 +917,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">免費入場</span></div>
       <a href="https://map.naver.com/v5/search/%EC%B2%AD%EC%82%AC%ED%8F%AC%EB%8B%A4%EB%A6%BF%EB%8F%8C%EC%A0%84%EB%A7%9D%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%B2%AD%EC%82%AC%ED%8F%AC%EB%8B%A4%EB%A6%BF%EB%8F%8C%EC%A0%84%EB%A7%9D%EB%8C%80" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card food" data-id="d2-8">
+    <div class="card-img cafe"><span class="card-img-icon">☕</span><div class="card-img-info"><div class="card-img-title">diart coffee</div><div class="card-img-area">海雲台 · 海景咖啡</div></div><div class="card-img-cost">₩8,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -851,7 +931,6 @@
         <div class="card-title">diart coffee <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">點心 | 海雲台 | W6,000~9,000</div>
       </div>
-      <div class="card-cost">₩8,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -863,11 +942,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要（海景窗位建議早到）</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡</span></div>
       <a href="https://map.naver.com/v5/search/%EB%94%94%EC%95%84%ED%8A%B8%EC%BB%A4%ED%94%BC%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EB%94%94%EC%95%84%ED%8A%B8%EC%BB%A4%ED%94%BC+%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card food" data-id="d2-9">
+    <div class="card-img food"><span class="card-img-icon">🍜</span><div class="card-img-info"><div class="card-img-title">31cm 海鮮刀削麵</div><div class="card-img-area">海雲台 · 晚餐</div></div><div class="card-img-cost">₩11,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -875,7 +956,6 @@
         <div class="card-title">海雲台 31 公分海鮮刀削麵 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">晚餐 | 海雲台 | W10,000~12,000</div>
       </div>
-      <div class="card-cost">₩11,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -888,7 +968,8 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不接受訂位，現場排隊</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡</span></div>
       <a href="https://map.naver.com/v5/search/%ED%95%B4%EC%9A%B4%EB%8C%80%2031cm%20%ED%95%B4%EB%AC%BC%EC%B9%BC%EA%B5%AD%EC%88%98" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%ED%95%B4%EC%9A%B4%EB%8C%80+31cm+%ED%95%B4%EB%AC%BC%EC%B9%BC%EA%B5%AD%EC%88%98" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
@@ -898,6 +979,7 @@
   </div>
 
   <div class="card pass" data-id="d2-10">
+    <div class="card-img pass"><span class="card-img-icon">♨️</span><div class="card-img-info"><div class="card-img-title">Spa Land 汗蒸幕</div><div class="card-img-area">Centum City · PASS</div></div><div class="card-img-cost">PASS</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -905,7 +987,6 @@
         <div class="card-title">Spa Land 汗蒸幕 <span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">海雲台 Centum City | 原價 W18,000~22,000 | 走一天完美收尾</div>
       </div>
-      <div class="card-cost" style="color:#f59e0b">PASS</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -919,7 +1000,8 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要，可線上預購省排隊</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡（成人 ₩25,000，19:00後 ₩16,000）</span></div>
       <a href="https://map.naver.com/v5/search/%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C%20%EC%84%BC%ED%85%80%EC%8B%9C%ED%8B%B0" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C+%EC%84%BC%ED%85%80%EC%8B%9C%ED%8B%B0" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
@@ -949,6 +1031,7 @@
   </div>
 
   <div class="card food" data-id="d3-1">
+    <div class="card-img food"><span class="card-img-icon">🥪</span><div class="card-img-info"><div class="card-img-title">egg drop 吐司</div><div class="card-img-area">西面 · 早餐</div></div><div class="card-img-cost">₩6,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -956,7 +1039,6 @@
         <div class="card-title">egg drop 吐司 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">點心/早餐 | 西面 | W5,000~7,000</div>
       </div>
-      <div class="card-cost">₩6,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -968,11 +1050,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">信用卡可用</span></div>
       <a href="https://map.naver.com/v5/search/%EC%97%90%EA%B7%B8%EB%93%9C%EB%9E%8D%20%EC%84%9C%EB%A9%B4" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%97%90%EA%B7%B8%EB%93%9C%EB%9E%8D+%EC%84%9C%EB%A9%B4" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card pass" data-id="d3-2">
+    <div class="card-img pass"><span class="card-img-icon">🏃</span><div class="card-img-info"><div class="card-img-title">Running Man 體驗館</div><div class="card-img-area">西面 · PASS</div></div><div class="card-img-cost">PASS</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -980,7 +1064,6 @@
         <div class="card-title">Running Man 體驗館 <span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">西面 | 原價 W18,000 | ~1.5hr</div>
       </div>
-      <div class="card-cost" style="color:#f59e0b">PASS</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -992,11 +1075,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">可線上預購；現場購票亦可</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡（成人 ₩19,000）</span></div>
       <a href="https://map.naver.com/v5/search/%EB%9F%B0%EB%8B%9D%EB%A7%A8%EC%B2%B4%ED%97%98%EA%B4%80%20%EC%84%9C%EB%A9%B4" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EB%9F%B0%EB%8B%9D%EB%A7%A8%EC%B2%B4%ED%97%98%EA%B4%80+%EB%B6%80%EC%82%B0" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card shopping" data-id="d3-3">
+    <div class="card-img shopping"><span class="card-img-icon">🛍️</span><div class="card-img-info"><div class="card-img-title">樂天百貨</div><div class="card-img-area">西面 · 購物</div></div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1015,11 +1100,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">信用卡、現金、行動支付</span></div>
       <a href="https://map.naver.com/v5/search/%EB%A1%AF%EB%8D%B0%EC%95%84%EC%9A%B8%EB%A0%9B%20%EC%84%9C%EB%A9%B4" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EB%A1%AF%EB%8D%B0%EB%B0%B1%ED%99%94%EC%A0%90+%EB%B6%80%EC%82%B0%EB%B3%B8%EC%A0%90" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card food" data-id="d3-4">
+    <div class="card-img food"><span class="card-img-icon">🐙</span><div class="card-img-info"><div class="card-img-title">螞蟻家辣炒章魚</div><div class="card-img-area">西面 · 午餐</div></div><div class="card-img-cost">₩16,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1027,7 +1114,6 @@
         <div class="card-title">螞蟻家辣炒章魚 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">午餐 | 西面 | W15,000~18,000/人</div>
       </div>
-      <div class="card-cost">₩16,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1040,11 +1126,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">建議電話預約；無預約可現場候位</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">信用卡可用</span></div>
       <a href="https://map.naver.com/v5/search/%EA%B0%9C%EB%AF%B8%EC%A7%91%20%EC%84%9C%EB%A9%B4" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EA%B0%9C%EB%AF%B8%EC%A7%91+%EC%84%9C%EB%A9%B4+%EB%82%99%EA%B3%B1%EC%83%88" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card attraction" data-id="d3-5">
+    <div class="card-img cafe"><span class="card-img-icon">☕</span><div class="card-img-info"><div class="card-img-title">田埔咖啡街</div><div class="card-img-area">西面 · 散步</div></div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1063,7 +1151,8 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">大多不需要</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">信用卡為主</span></div>
       <a href="https://map.naver.com/v5/search/%EC%A0%84%ED%8F%AC%EC%B9%B4%ED%8E%98%EA%B1%B0%EB%A6%AC" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%A0%84%ED%8F%AC%EC%B9%B4%ED%8E%98%EA%B1%B0%EB%A6%AC+%EB%B6%80%EC%82%B0" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
@@ -1073,6 +1162,7 @@
   </div>
 
   <div class="card pass" data-id="d3-6">
+    <div class="card-img pass"><span class="card-img-icon">🚡</span><div class="card-img-info"><div class="card-img-title">松島海上纜車</div><div class="card-img-area">松島 · PASS</div></div><div class="card-img-cost">PASS</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1080,7 +1170,6 @@
         <div class="card-title">松島海上纜車 <span class="badge badge-pass">PASS</span> <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">松島 | 原價 W17,000（水晶車廂）</div>
       </div>
-      <div class="card-cost" style="color:#f59e0b">PASS</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1092,11 +1181,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要，可線上預購</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡（一般艙來回 ₩17,000 / 水晶艙 ₩22,000）</span></div>
       <a href="https://map.naver.com/v5/search/%EC%86%A1%EB%8F%84%ED%95%B4%EC%83%81%EC%BC%80%EC%9D%B4%EB%B8%94%EC%B9%B4" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%86%A1%EB%8F%84%ED%95%B4%EC%83%81%EC%BC%80%EC%9D%B4%EB%B8%94%EC%B9%B4" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card pass" data-id="d3-7">
+    <div class="card-img pass"><span class="card-img-icon">🌉</span><div class="card-img-info"><div class="card-img-title">松島龍宮雲橋</div><div class="card-img-area">松島 · PASS</div></div><div class="card-img-cost">PASS</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1104,7 +1195,6 @@
         <div class="card-title">松島龍宮雲橋 <span class="badge badge-pass">PASS</span> <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">松島 | 纜車下來順遊</div>
       </div>
-      <div class="card-cost" style="color:#f59e0b">PASS</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1116,7 +1206,8 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">入場 ₩1,000（現金、信用卡）</span></div>
       <a href="https://map.naver.com/v5/search/%EC%86%A1%EB%8F%84%EC%9A%A9%EA%B6%81%EA%B5%AC%EB%A6%84%EB%8B%A4%EB%A6%AC" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%86%A1%EB%8F%84%EC%9A%A9%EA%B6%81%EA%B5%AC%EB%A6%84%EB%8B%A4%EB%A6%AC" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
@@ -1126,6 +1217,7 @@
   </div>
 
   <div class="card food" data-id="d3-8">
+    <div class="card-img food"><span class="card-img-icon">🐟</span><div class="card-img-info"><div class="card-img-title">古來思魚糕 + 元祖糖餅</div><div class="card-img-area">南浦洞 · 點心</div></div><div class="card-img-cost">₩5,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1133,7 +1225,6 @@
         <div class="card-title">古來思魚糕 + 元祖糖餅 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">點心 | 南浦洞 | W3,000~5,000 each</div>
       </div>
-      <div class="card-cost">₩5,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1148,11 +1239,13 @@
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">魚糕可刷卡；糖餅僅收現金（每個約 ₩2,000）</span></div>
       <a href="https://map.naver.com/v5/search/%EA%B3%A0%EB%9E%98%EC%82%AC%EC%96%B4%EB%AC%B5%20%EB%82%A8%ED%8F%AC%EB%8F%99" target="_blank" class="naver-btn">魚糕導航</a>
       <a href="https://map.naver.com/v5/search/%EC%9B%90%EC%A1%B0%EC%94%A8%EC%95%97%ED%98%B8%EB%96%A1%20BIFF%EA%B4%91%EC%9E%A5" target="_blank" class="naver-btn">糖餅導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EA%B3%A0%EB%9E%98%EC%82%AC%EC%96%B4%EB%AC%B5+%EB%82%A8%ED%8F%AC%EB%8F%99" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card food" data-id="d3-9">
+    <div class="card-img food"><span class="card-img-icon">🍲</span><div class="card-img-info"><div class="card-img-title">南浦雪濃湯</div><div class="card-img-area">南浦洞 · 晚餐</div></div><div class="card-img-cost">₩10,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1160,7 +1253,6 @@
         <div class="card-title">南浦雪濃湯 <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">晚餐 | 南浦洞 | W9,000~11,000</div>
       </div>
-      <div class="card-cost">₩10,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1173,11 +1265,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡</span></div>
       <a href="https://map.naver.com/v5/search/%EB%82%A8%ED%8F%AC%EC%84%A4%EB%A0%81%ED%83%95" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EB%82%A8%ED%8F%AC%EC%84%A4%EB%A0%81%ED%83%95+%EB%B6%80%EC%82%B0" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card shopping" data-id="d3-10">
+    <div class="card-img shopping"><span class="card-img-icon">🛍️</span><div class="card-img-info"><div class="card-img-title">BIFF廣場 + 富平市場</div><div class="card-img-area">南浦洞 · 逛街</div></div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1199,11 +1293,13 @@
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">市場以現金為主，部分攤位可刷卡</span></div>
       <a href="https://map.naver.com/v5/search/BIFF%EA%B4%91%EC%9E%A5" target="_blank" class="naver-btn">BIFF 導航</a>
       <a href="https://map.naver.com/v5/search/%EB%B6%80%ED%8F%89%EA%B9%A1%ED%86%B5%EC%8B%9C%EC%9E%A5" target="_blank" class="naver-btn">罐頭市場導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=BIFF%EA%B4%91%EC%9E%A5+%EB%B6%80%EC%82%B0+%EB%B6%80%ED%8F%89%EA%B9%A1%ED%86%B5%EC%8B%9C%EC%9E%A5" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card food" data-id="d3-11">
+    <div class="card-img food"><span class="card-img-icon">🍡</span><div class="card-img-info"><div class="card-img-title">紅豆奶油艾草糕</div><div class="card-img-area">南浦洞 · 甜點</div></div><div class="card-img-cost">₩3,500</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1211,7 +1307,6 @@
         <div class="card-title">紅豆奶油艾草糕 <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">點心 | 南浦洞 | W3,000~4,000</div>
       </div>
-      <div class="card-cost">₩3,500</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1222,7 +1317,8 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金為主</span></div>
       <a href="https://map.naver.com/v5/search/%ED%8C%A5%EC%95%99%EA%B8%88%20%EC%91%A5%ED%81%AC%EB%A6%BC%EB%96%A1%20%EB%82%A8%ED%8F%AC%EB%8F%99" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%91%A5%ED%81%AC%EB%A6%BC%EB%96%A1+%EB%82%A8%ED%8F%AC%EB%8F%99" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
@@ -1251,6 +1347,7 @@
   </div>
 
   <div class="card attraction" data-id="d4-1">
+    <div class="card-img nature"><span class="card-img-icon">🏘️</span><div class="card-img-info"><div class="card-img-title">白淺灘文化村</div><div class="card-img-area">影島 · 免費</div></div><div class="card-img-cost">免費</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1258,7 +1355,6 @@
         <div class="card-title">白淺灘文化村 <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">景點 | 影島 | 免費</div>
       </div>
-      <div class="card-cost" style="color:#16a34a">免費</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1271,11 +1367,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要（免費）</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">免費入場</span></div>
       <a href="https://map.naver.com/v5/search/%ED%9D%B0%EC%97%AC%EC%9A%B8%EB%AC%B8%ED%99%94%EB%A7%88%EC%9D%84" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%ED%9D%B0%EC%97%AC%EC%9A%B8%EB%AC%B8%ED%99%94%EB%A7%88%EC%9D%84+%EB%B6%80%EC%82%B0" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card food" data-id="d4-2">
+    <div class="card-img cafe"><span class="card-img-icon">☕</span><div class="card-img-info"><div class="card-img-title">THRILL ON THE MUG</div><div class="card-img-area">影島 · 海景咖啡</div></div><div class="card-img-cost">₩8,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1283,7 +1381,6 @@
         <div class="card-title">THRILL ON THE MUG 海景咖啡廳 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">下午茶 | 影島 | W7,000~10,000</div>
       </div>
-      <div class="card-cost">₩8,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1295,7 +1392,8 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">建議致電確認 070-4141-1162</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">信用卡可用</span></div>
       <a href="https://map.naver.com/v5/search/%EC%8A%A4%EB%A6%B4%EC%98%A8%EB%8D%94%EB%A8%B8%EA%B7%B8" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%8A%A4%EB%A6%B4%EC%98%A8%EB%8D%94%EB%A8%B8%EA%B7%B8+%EC%98%81%EB%8F%84" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
@@ -1306,6 +1404,7 @@
   </div>
 
   <div class="card attraction" data-id="d4-3">
+    <div class="card-img attraction"><span class="card-img-icon">🎨</span><div class="card-img-info"><div class="card-img-title">甘川洞文化村</div><div class="card-img-area">甘川洞 · 拍照</div></div><div class="card-img-cost">₩2,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1313,7 +1412,6 @@
         <div class="card-title">甘川洞文化村 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">景點 | 甘川洞 | 免費入村（蓋章地圖 W2,000）</div>
       </div>
-      <div class="card-cost">₩2,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1327,7 +1425,8 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要（蓋章地圖 ₩2,000）</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡</span></div>
       <a href="https://map.naver.com/v5/search/%EA%B0%90%EC%B2%9C%EB%AC%B8%ED%99%94%EB%A7%88%EC%9D%84" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EA%B0%90%EC%B2%9C%EB%AC%B8%ED%99%94%EB%A7%88%EC%9D%84+%EB%B6%80%EC%82%B0" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
@@ -1338,6 +1437,7 @@
   </div>
 
   <div class="card food" data-id="d4-4">
+    <div class="card-img food"><span class="card-img-icon">🥯</span><div class="card-img-info"><div class="card-img-title">All Sunday 貝果</div><div class="card-img-area">廣安里 · 點心</div></div><div class="card-img-cost">₩5,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1345,7 +1445,6 @@
         <div class="card-title">All Sunday 貝果 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">點心 | 廣安里 | W4,000~6,000</div>
       </div>
-      <div class="card-cost">₩5,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1357,11 +1456,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不接受預約；貝果 11:00 和 15:30 出爐</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">信用卡可用</span></div>
       <a href="https://map.naver.com/v5/search/%EC%98%AC%EC%8D%AC%EB%8D%B0%EC%9D%B4%20%EA%B4%91%EC%95%88%EB%A6%AC" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%98%AC%EC%8D%AC%EB%8D%B0%EC%9D%B4+%EA%B4%91%EC%95%88%EB%A6%AC+%EB%B2%A0%EC%9D%B4%EA%B8%80" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card attraction" data-id="d4-5">
+    <div class="card-img nature"><span class="card-img-icon">🏖️</span><div class="card-img-info"><div class="card-img-title">廣安里海邊散步</div><div class="card-img-area">廣安里 · 免費</div></div><div class="card-img-cost">免費</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1369,7 +1470,6 @@
         <div class="card-title">廣安里海邊散步</div>
         <div class="card-sub">免費 | 看廣安大橋 | 悠閒時光</div>
       </div>
-      <div class="card-cost" style="color:#16a34a">免費</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1377,11 +1477,13 @@
       <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">廣安大橋就在眼前，傍晚走海邊超舒服</span></div>
       <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~1 小時散步放空</span></div>
       <a href="https://map.naver.com/v5/search/%EA%B4%91%EC%95%88%EB%A6%AC%ED%95%B4%EC%88%98%EC%9A%95%EC%9E%A5" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EA%B4%91%EC%95%88%EB%A6%AC%ED%95%B4%EC%88%98%EC%9A%95%EC%9E%A5+%EC%95%BC%EA%B2%BD" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card food" data-id="d4-6">
+    <div class="card-img food"><span class="card-img-icon">🥩</span><div class="card-img-info"><div class="card-img-title">83 獬豸烤肉</div><div class="card-img-area">廣安里 · 晚餐</div></div><div class="card-img-cost">₩22,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1389,7 +1491,6 @@
         <div class="card-title">83 獬豸烤肉 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">晚餐 | 廣安里 | W18,000~25,000/人</div>
       </div>
-      <div class="card-cost">₩22,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1403,7 +1504,8 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">強烈建議！用 Catchtable App 預約</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">信用卡可用</span></div>
       <a href="https://map.naver.com/v5/search/83%ED%95%B4%EC%B9%98%20%EA%B4%91%EC%95%88%EB%A6%AC" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=83%ED%95%B4%EC%B9%98+%EA%B4%91%EC%95%88%EB%A6%AC+%EA%B3%A0%EA%B8%B0" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
@@ -1414,6 +1516,7 @@
   </div>
 
   <div class="card food" data-id="d4-7">
+    <div class="card-img food"><span class="card-img-icon">🍪</span><div class="card-img-info"><div class="card-img-title">Busan Bada Sand</div><div class="card-img-area">海雲台 · 伴手禮</div></div><div class="card-img-cost">₩18,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1421,7 +1524,6 @@
         <div class="card-title">Busan Bada Sand 奶油餅乾 <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">伴手禮/點心 | 海雲台 | W15,000~20,000/盒</div>
       </div>
-      <div class="card-cost">₩18,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1433,7 +1535,8 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡</span></div>
       <a href="https://map.naver.com/v5/search/%EB%B6%80%EC%82%B0%EB%B0%94%EB%8B%A4%EC%83%81%EB%93%9C%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EB%B6%80%EC%82%B0%EB%B0%94%EB%8B%A4%EC%83%8C%EB%93%9C+%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
@@ -1458,6 +1561,7 @@
   </div>
 
   <div class="card food" data-id="d5-1">
+    <div class="card-img food"><span class="card-img-icon">🐚</span><div class="card-img-info"><div class="card-img-title">大海鮑魚粥</div><div class="card-img-area">海雲台 · 早午餐</div></div><div class="card-img-cost">₩13,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1465,7 +1569,6 @@
         <div class="card-title">大海鮑魚粥 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">早午餐 | 海雲台 | W12,000~15,000</div>
       </div>
-      <div class="card-cost">₩13,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1477,11 +1580,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡</span></div>
       <a href="https://map.naver.com/v5/search/%ED%81%B0%EB%B0%94%EB%8B%A4%EC%A0%84%EB%B3%B5%EC%A3%BD%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%ED%81%B0%EB%B0%94%EB%8B%A4%EC%A0%84%EB%B3%B5%EC%A3%BD+%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card food" data-id="d5-2">
+    <div class="card-img food"><span class="card-img-icon">🍞</span><div class="card-img-info"><div class="card-img-title">Standard Bread</div><div class="card-img-area">海雲台 · 點心</div></div><div class="card-img-cost">₩6,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1489,7 +1594,6 @@
         <div class="card-title">Standard Bread 法式吐司 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">點心 | 海雲台 | W5,000~7,000</div>
       </div>
-      <div class="card-cost">₩6,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1501,11 +1605,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">可用 Catchtable 預約</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡</span></div>
       <a href="https://map.naver.com/v5/search/%EC%8A%A4%ED%83%A0%EB%8D%94%EB%93%9C%EB%B8%8C%EB%A0%88%EB%93%9C%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%8A%A4%ED%83%A0%EB%8D%94%EB%93%9C%EB%B8%8C%EB%A0%88%EB%93%9C+%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card attraction" data-id="d5-3">
+    <div class="card-img nature"><span class="card-img-icon">🏖️</span><div class="card-img-info"><div class="card-img-title">海雲台最後散步</div><div class="card-img-area">海雲台 · 免費</div></div><div class="card-img-cost">免費</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1513,18 +1619,19 @@
         <div class="card-title">海雲台海邊最後散步</div>
         <div class="card-sub">免費 | 最後看一眼釜山的海</div>
       </div>
-      <div class="card-cost" style="color:#16a34a">免費</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
       <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">해운대해수욕장</span></div>
       <div class="detail-row"><span class="detail-label">活動</span><span class="detail-value">海邊走走、拍照留念，享受最後的釜山時光</span></div>
       <a href="https://map.naver.com/v5/search/%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EC%88%98%EC%9A%95%EC%9E%A5" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EC%88%98%EC%9A%95%EC%9E%A5" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card food" data-id="d5-4">
+    <div class="card-img food"><span class="card-img-icon">🥩</span><div class="card-img-info"><div class="card-img-title">伍班長烤肉</div><div class="card-img-area">海雲台 · 午餐</div></div><div class="card-img-cost">₩20,000</div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1532,7 +1639,6 @@
         <div class="card-title">伍班長烤肉 <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">午餐 | 海雲台 | W18,000~22,000/人</div>
       </div>
-      <div class="card-cost">₩20,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1545,11 +1651,13 @@
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">建議電話預約 051-747-8085</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">信用卡可用</span></div>
       <a href="https://map.naver.com/v5/search/%EC%98%A4%EB%B0%98%EC%9E%A5%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
-      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+            <a href="https://search.naver.com/search.naver?where=image&query=%EC%98%A4%EB%B0%98%EC%9E%A5+%ED%95%B4%EC%9A%B4%EB%8C%80+%EA%B3%A0%EA%B8%B0" target="_blank" class="naver-photo-btn">📸 Naver 實景</a>
+<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
   </div>
 
   <div class="card attraction" data-id="d5-5">
+    <div class="card-img shopping"><span class="card-img-icon">🛍️</span><div class="card-img-info"><div class="card-img-title">最後採購</div><div class="card-img-area">Centum City · 購物</div></div></div>
     <div class="card-main" onclick="toggleDetail(this)">
       <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
       <div class="card-body">
@@ -1949,6 +2057,38 @@
   </div>
 </div>
 
+<!-- ==================== 地圖 ==================== -->
+<div class="section" id="mapview">
+  <div class="day-header">
+    <div class="day-header-top">
+      <h2>🗺️ 景點地圖</h2>
+    </div>
+    <div class="meta">所有行程景點標示於地圖上，按天數分色顯示</div>
+    <div class="day-tags">
+      <span class="day-tag" style="background:#fee2e2;color:#991b1b">● Day 1</span>
+      <span class="day-tag" style="background:#dbeafe;color:#1e40af">● Day 2</span>
+      <span class="day-tag" style="background:#d1fae5;color:#065f46">● Day 3</span>
+      <span class="day-tag" style="background:#fef3c7;color:#92400e">● Day 4</span>
+      <span class="day-tag" style="background:#ede9fe;color:#5b21b6">● Day 5</span>
+      <span class="day-tag" style="background:#f3f4f6;color:#374151">📍 住宿</span>
+    </div>
+  </div>
+  <div id="map" style="height:500px;border-radius:12px;margin-bottom:16px;z-index:1;"></div>
+  <div class="info-box">
+    <h3>📍 地區分佈</h3>
+    <div class="map-legend">
+      <div class="legend-item"><strong>海雲台/Centum City</strong>：住宿地、Day 2 & 5 主要活動區</div>
+      <div class="legend-item"><strong>機張（東北）</strong>：Day 2 上午 Skyline Luge</div>
+      <div class="legend-item"><strong>西面（中心）</strong>：Day 3 上午 購物+美食</div>
+      <div class="legend-item"><strong>松島（西南）</strong>：Day 3 下午 纜車+雲橋</div>
+      <div class="legend-item"><strong>南浦洞（南）</strong>：Day 3 傍晚 市場+小吃</div>
+      <div class="legend-item"><strong>影島（南）</strong>：Day 4 上午 文化村+咖啡</div>
+      <div class="legend-item"><strong>甘川洞（西南）</strong>：Day 4 中午 彩色村莊</div>
+      <div class="legend-item"><strong>廣安里（中）</strong>：Day 4 下午 海邊+烤肉</div>
+    </div>
+  </div>
+</div>
+
 </div>
 
 
@@ -2119,6 +2259,95 @@ function resetAll() {
 
 // Init
 loadState();
+
+// Map initialization
+function initMap() {
+  if (!document.getElementById('map') || typeof L === 'undefined') return;
+
+  var map = L.map('map').setView([35.14, 129.10], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  var colors = {
+    hotel: '#374151',
+    day1: '#dc2626',
+    day2: '#2563eb',
+    day3: '#059669',
+    day4: '#d97706',
+    day5: '#7c3aed'
+  };
+
+  function addMarker(lat, lng, name, day, color) {
+    var icon = L.divIcon({
+      className: 'map-marker',
+      html: '<div style="background:' + color + ';color:white;padding:2px 6px;border-radius:4px;font-size:11px;font-weight:600;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,0.3);">' + day + '</div>',
+      iconSize: null,
+      iconAnchor: [20, 10]
+    });
+    L.marker([lat, lng], {icon: icon}).addTo(map).bindPopup('<strong>' + name + '</strong><br><small>' + day + '</small>');
+  }
+
+  // Hotel
+  addMarker(35.1694, 129.1308, 'Centum City 住宿', '🏨 住宿', colors.hotel);
+
+  // Day 1
+  addMarker(35.1628, 129.1635, 'puradak 炸雞', 'D1', colors.day1);
+
+  // Day 2
+  addMarker(35.2414, 129.2198, 'Skyline Luge', 'D2', colors.day2);
+  addMarker(35.2456, 129.2231, 'coralani 咖啡', 'D2', colors.day2);
+  addMarker(35.2442, 129.2215, '龍宮炸醬麵', 'D2', colors.day2);
+  addMarker(35.1598, 129.1602, 'X the SKY', 'D2', colors.day2);
+  addMarker(35.1625, 129.1631, '自然島鹽麵包', 'D2', colors.day2);
+  addMarker(35.1763, 129.2012, '海岸列車', 'D2', colors.day2);
+  addMarker(35.1698, 129.2016, '青沙浦步道', 'D2', colors.day2);
+  addMarker(35.1572, 129.1589, 'diart coffee', 'D2', colors.day2);
+  addMarker(35.1612, 129.1638, '31cm 刀削麵', 'D2', colors.day2);
+  addMarker(35.1694, 129.1308, 'Spa Land', 'D2', colors.day2);
+
+  // Day 3
+  addMarker(35.1579, 129.0592, 'egg drop', 'D3', colors.day3);
+  addMarker(35.1567, 129.0582, 'Running Man', 'D3', colors.day3);
+  addMarker(35.1561, 129.0598, '樂天百貨', 'D3', colors.day3);
+  addMarker(35.1575, 129.0588, '螞蟻家', 'D3', colors.day3);
+  addMarker(35.1541, 129.0612, '田埔咖啡街', 'D3', colors.day3);
+  addMarker(35.0839, 129.0198, '松島纜車', 'D3', colors.day3);
+  addMarker(35.0822, 129.0178, '龍宮雲橋', 'D3', colors.day3);
+  addMarker(35.0984, 129.0302, '魚糕+糖餅', 'D3', colors.day3);
+  addMarker(35.0978, 129.0312, '南浦雪濃湯', 'D3', colors.day3);
+  addMarker(35.0976, 129.0298, 'BIFF+富平', 'D3', colors.day3);
+
+  // Day 4
+  addMarker(35.0867, 129.0218, '白淺灘文化村', 'D4', colors.day4);
+  addMarker(35.0841, 129.0225, 'THRILL ON THE MUG', 'D4', colors.day4);
+  addMarker(35.0975, 129.0102, '甘川文化村', 'D4', colors.day4);
+  addMarker(35.1532, 129.1189, 'All Sunday 貝果', 'D4', colors.day4);
+  addMarker(35.1530, 129.1185, '廣安里海邊', 'D4', colors.day4);
+  addMarker(35.1536, 129.1192, '83烤肉', 'D4', colors.day4);
+  addMarker(35.1608, 129.1622, 'Bada Sand', 'D4', colors.day4);
+
+  // Day 5
+  addMarker(35.1618, 129.1628, '大海鮑魚粥', 'D5', colors.day5);
+  addMarker(35.1622, 129.1633, 'Standard Bread', 'D5', colors.day5);
+  addMarker(35.1587, 129.1604, '海雲台海邊', 'D5', colors.day5);
+  addMarker(35.1620, 129.1630, '伍班長烤肉', 'D5', colors.day5);
+
+  // Fix map rendering when tab becomes visible
+  window._busanMap = map;
+}
+
+// Re-render map when map tab is shown
+var origSwitchTab = switchTab;
+switchTab = function(btn, tabId) {
+  origSwitchTab(btn, tabId);
+  if (tabId === 'mapview' && window._busanMap) {
+    setTimeout(function() { window._busanMap.invalidateSize(); }, 100);
+  }
+};
+
+// Init map on load
+initMap();
 </script>
 </body>
 </html>
