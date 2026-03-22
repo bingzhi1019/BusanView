@@ -1,0 +1,1537 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>釜山五天四夜行程表</title>
+<style>
+  :root {
+    --primary: #0066cc;
+    --primary-light: #e8f0fe;
+    --accent: #ff6b35;
+    --food: #e74c3c;
+    --food-bg: #fdf0ef;
+    --attraction: #2ecc71;
+    --attraction-bg: #edfaf3;
+    --shopping: #9b59b6;
+    --shopping-bg: #f5eef8;
+    --pass: #f39c12;
+    --pass-bg: #fef9e7;
+    --transport: #3498db;
+    --gray: #6b7280;
+    --gray-light: #f3f4f6;
+    --border: #e5e7eb;
+    --shadow: 0 2px 8px rgba(0,0,0,0.08);
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', sans-serif;
+    background: #f8f9fa;
+    color: #1a1a1a;
+    line-height: 1.6;
+    padding-bottom: 80px;
+  }
+  .header {
+    background: linear-gradient(135deg, #0066cc 0%, #004999 100%);
+    color: white;
+    padding: 24px 16px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .header h1 { font-size: 1.5em; margin-bottom: 4px; }
+  .header .subtitle { opacity: 0.9; font-size: 0.9em; }
+  .tabs {
+    display: flex;
+    overflow-x: auto;
+    background: white;
+    border-bottom: 2px solid var(--border);
+    position: sticky;
+    top: 76px;
+    z-index: 99;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 12px 16px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9em;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    color: var(--gray);
+  }
+  .tab:hover { color: var(--primary); background: var(--primary-light); }
+  .tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+  .container { max-width: 800px; margin: 0 auto; padding: 16px; }
+  .section { display: none; }
+  .section.active { display: block; }
+  .day-header {
+    background: white;
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow);
+  }
+  .day-header h2 { font-size: 1.2em; color: var(--primary); }
+  .day-header .meta { font-size: 0.85em; color: var(--gray); margin-top: 4px; }
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: all 0.2s;
+    border-left: 4px solid var(--border);
+  }
+  .card.food { border-left-color: var(--food); }
+  .card.attraction { border-left-color: var(--attraction); }
+  .card.shopping { border-left-color: var(--shopping); }
+  .card.pass { border-left-color: var(--pass); }
+  .card.transport { border-left-color: var(--transport); }
+  .card.done { opacity: 0.5; }
+  .card-main {
+    display: flex;
+    align-items: flex-start;
+    padding: 14px;
+    gap: 12px;
+    cursor: pointer;
+  }
+  .card-check {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .card-check.checked {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+  }
+  .card-check.checked::after { content: '\2713'; font-size: 14px; font-weight: bold; }
+  .card-body { flex: 1; min-width: 0; }
+  .card-time {
+    font-size: 0.8em;
+    color: var(--primary);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .card-title {
+    font-weight: 600;
+    font-size: 1em;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .card-title .badge {
+    font-size: 0.7em;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+  .badge-pass { background: var(--pass-bg); color: #b7791f; }
+  .badge-p1 { background: #fee2e2; color: #991b1b; }
+  .badge-p2 { background: #fef3c7; color: #92400e; }
+  .badge-p3 { background: var(--gray-light); color: var(--gray); }
+  .card-sub { font-size: 0.85em; color: var(--gray); }
+  .card-expand { font-size: 1.2em; color: var(--gray); flex-shrink: 0; transition: transform 0.2s; }
+  .card-expand.open { transform: rotate(180deg); }
+  .card-detail {
+    display: none;
+    padding: 0 14px 14px 48px;
+    font-size: 0.85em;
+  }
+  .card-detail.open { display: block; }
+  .detail-row {
+    display: flex;
+    gap: 8px;
+    padding: 4px 0;
+    border-bottom: 1px solid var(--gray-light);
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-label { color: var(--gray); min-width: 70px; flex-shrink: 0; }
+  .detail-value { flex: 1; }
+  .naver-btn {
+    display: inline-block;
+    background: #03c75a;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.8em;
+    font-weight: 500;
+    margin-top: 6px;
+    transition: opacity 0.2s;
+  }
+  .naver-btn:hover { opacity: 0.85; }
+  .transport-card {
+    background: var(--primary-light);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    font-size: 0.85em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-left: 4px solid var(--transport);
+  }
+  .transport-icon { font-size: 1.2em; }
+  .note-input {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.85em;
+    margin-top: 6px;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 32px;
+  }
+  .info-box {
+    background: white;
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+  }
+  .info-box h3 {
+    font-size: 1em;
+    margin-bottom: 10px;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .info-box ul { padding-left: 20px; }
+  .info-box li { margin-bottom: 6px; font-size: 0.9em; }
+  .info-box .app-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+  }
+  .app-item {
+    background: var(--gray-light);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.85em;
+  }
+  .app-item strong { display: block; margin-bottom: 2px; }
+  .app-item .desc { color: var(--gray); font-size: 0.9em; }
+  .budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85em;
+  }
+  .budget-table th, .budget-table td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .budget-table th { background: var(--gray-light); font-weight: 600; }
+  .budget-table .total { font-weight: 700; background: var(--primary-light); }
+  .share-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 10px 16px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    z-index: 100;
+  }
+  .share-btn {
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.2s;
+  }
+  .share-btn.primary { background: var(--primary); color: white; }
+  .share-btn.secondary { background: var(--gray-light); color: #333; }
+  .share-btn:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+  .optional-box {
+    background: #fffbeb;
+    border: 1px dashed #f59e0b;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    font-size: 0.85em;
+  }
+  .optional-box h4 { color: #b45309; margin-bottom: 6px; }
+  .progress-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: white;
+    border-radius: 2px;
+    transition: width 0.3s;
+  }
+  .summary-stat {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+    justify-content: center;
+  }
+  .stat {
+    background: rgba(255,255,255,0.2);
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 0.8em;
+    color: white;
+  }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.3em; }
+    .card-main { padding: 10px; }
+    .card-detail { padding: 0 10px 10px 38px; }
+  }
+  .copy-toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    z-index: 200;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>釜山五天四夜</h1>
+  <div class="subtitle">住宿：Centum City 地鐵站 | PASS 48hr</div>
+  <div class="progress-bar"><div class="progress-fill" id="totalProgress" style="width:0%"></div></div>
+  <div class="summary-stat" id="summaryStats"></div>
+</div>
+
+<div class="tabs" id="tabs">
+  <div class="tab active" data-tab="prep">行前準備</div>
+  <div class="tab" data-tab="day1">D1 抵達</div>
+  <div class="tab" data-tab="day2">D2 PASS 1</div>
+  <div class="tab" data-tab="day3">D3 PASS 2</div>
+  <div class="tab" data-tab="day4">D4 西南區</div>
+  <div class="tab" data-tab="day5">D5 回程</div>
+  <div class="tab" data-tab="budget">預算</div>
+  <div class="tab" data-tab="backup">備案</div>
+</div>
+
+<div class="container">
+
+<!-- ==================== 行前準備 ==================== -->
+<div class="section active" id="prep">
+  <div class="info-box">
+    <h3>必裝 APP</h3>
+    <div class="app-grid">
+      <div class="app-item"><strong>Naver Map</strong><div class="desc">導航首選，支援中文搜尋，公車/地鐵/步行路線最準</div></div>
+      <div class="app-item"><strong>Papago</strong><div class="desc">Naver 翻譯，韓文翻譯最準確，支援拍照翻譯</div></div>
+      <div class="app-item"><strong>Kakao T</strong><div class="desc">叫車 APP（類似 Uber），支援信用卡付款</div></div>
+      <div class="app-item"><strong>Kakao Metro</strong><div class="desc">地鐵路線查詢，有到站時間、轉乘資訊</div></div>
+      <div class="app-item"><strong>Coupang Eats</strong><div class="desc">外送平台，深夜叫外送首選</div></div>
+      <div class="app-item"><strong>VISIT BUSAN PASS</strong><div class="desc">釜山 PASS 官方 APP，購買 + 使用 QR code</div></div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <h3>付款方式</h3>
+    <ul>
+      <li><strong>T-money 交通卡</strong>：機場便利商店購買（W2,500 卡費），各便利商店可儲值，搭地鐵/公車/便利商店通用</li>
+      <li><strong>信用卡</strong>：韓國幾乎所有店家都收信用卡（含小吃攤），JCB/Visa/Master 皆可</li>
+      <li><strong>現金</strong>：傳統市場、糖餅攤位建議備少量現金</li>
+      <li><strong>Apple Pay</strong>：部分店家支援，但不穩定，不建議作為主要付款</li>
+    </ul>
+  </div>
+
+  <div class="info-box">
+    <h3>換匯攻略</h3>
+    <ul>
+      <li><strong>最划算</strong>：南浦洞「友利銀行 우리은행 남포동지점」或「釜山站換錢所」</li>
+      <li>建議帶 <strong>美金 USD</strong> 去韓國換，匯率最好（比直接換韓元好）</li>
+      <li>第一天先在機場換少量（W50,000 夠用），Day 3 到南浦洞時再大量換</li>
+      <li>或用 <strong>台新 Richart / 中信 LINE Pay</strong> 等海外回饋高的信用卡刷卡為主</li>
+    </ul>
+  </div>
+
+  <div class="info-box">
+    <h3>需要預約的項目</h3>
+    <ul>
+      <li><strong>Skyline Luge</strong>：建議線上預約選時段（PASS APP 可預約）</li>
+      <li><strong>Busan X the SKY</strong>：建議線上預約選時段，平日比較不用</li>
+      <li><strong>釜山鑽石灣遊艇</strong>：<em>必須預約</em>（此行程排為備案）</li>
+      <li>其他景點現場出示 PASS QR code 即可入場</li>
+    </ul>
+  </div>
+
+  <div class="info-box">
+    <h3>交通概覽（從 Centum City 出發）</h3>
+    <ul>
+      <li><strong>到海雲台海邊</strong>：地鐵 2 號線 1 站（3 分鐘）或步行 15 分鐘</li>
+      <li><strong>到西面</strong>：地鐵 2 號線 5 站（約 12 分鐘）W1,400</li>
+      <li><strong>到南浦洞</strong>：地鐵 2 號線到西面轉 1 號線（約 30 分鐘）W1,400</li>
+      <li><strong>到廣安里</strong>：地鐵 2 號線到金蓮山站 步行 10 分鐘（約 15 分鐘）W1,400</li>
+      <li><strong>到機張 Skyline Luge</strong>：Kakao T 叫車（約 25 分鐘）W15,000~18,000</li>
+      <li><strong>到甘川洞</strong>：地鐵到土城站 + 巴士（約 50 分鐘）W1,400+W1,200</li>
+      <li><strong>到影島</strong>：地鐵到南浦 + 巴士 7/71（約 40 分鐘）</li>
+      <li><strong>到金海機場</strong>：地鐵 2 號線到沙上轉輕軌（約 50 分鐘）W2,800 | Kakao T 叫車（約 30 分鐘）W25,000~30,000</li>
+    </ul>
+  </div>
+
+  <div class="info-box">
+    <h3>行前 Checklist</h3>
+    <ul>
+      <li>下載以上 6 個 APP 並註冊</li>
+      <li>購買釜山 PASS 48hr（VISIT BUSAN PASS APP 或 Klook）</li>
+      <li>預約 Skyline Luge 時段</li>
+      <li>準備美金現鈔（建議 $200~300 USD）</li>
+      <li>開通信用卡海外刷卡功能</li>
+      <li>購買韓國 eSIM 或 WiFi 分享器</li>
+      <li>確認護照有效期 > 6 個月</li>
+      <li>K-ETA 或免簽確認</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== DAY 1 ==================== -->
+<div class="section" id="day1">
+  <div class="day-header">
+    <h2>Day 1 - 抵達釜山</h2>
+    <div class="meta">19:55 抵達金海機場 到 Centum City | 輕鬆夜晚</div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">飛</span>
+    <div><strong>19:55 抵達金海機場</strong><br>預計 20:20 完成入境 + 領行李</div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">車</span>
+    <div><strong>機場 到 Centum City 飯店</strong><br>推薦 Kakao T 叫車（約 30 分鐘）W25,000~30,000<br>
+    <small>第一天拖行李，叫車最方便。地鐵需轉車，約 50 分鐘</small></div>
+  </div>
+
+  <div class="card food" data-id="d1-1">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">21:00 - 22:00</div>
+        <div class="card-title">puradak 炸雞 <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">宵夜 | 海雲台 | W18,000~22,000/份</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">푸라닭치킨 해운대점</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">蒜味炸雞（갈릭）、起司炸雞（치즈）</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~1 小時</span></div>
+      <div class="detail-row"><span class="detail-label">交通</span><span class="detail-value">飯店步行或 Coupang Eats 外送到飯店</span></div>
+      <div class="detail-row"><span class="detail-label">備註</span><span class="detail-value">如果太晚到可改叫外送！橋村炸雞（교촌치킨 해운대점）也是好選擇</span></div>
+      <a href="https://map.naver.com/v5/search/%ED%91%B8%EB%9D%BC%EB%8B%AD%EC%B9%98%ED%82%A8%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="optional-box">
+    <h4>如果還有體力</h4>
+    <p>Centum City 新世界百貨（신세계백화점 센텀시티）營業到 20:00，到了可能已關。可以散步到海雲台海邊看夜景（步行約 15 分鐘）。</p>
+  </div>
+</div>
+
+<!-- ==================== DAY 2 ==================== -->
+<div class="section" id="day2">
+  <div class="day-header">
+    <h2>Day 2 PASS Day 1 — 機張 + 海雲台</h2>
+    <div class="meta">啟用 48hr PASS | 高價值景點集中日 | PASS 價值約 W90,000+</div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">車</span>
+    <div><strong>08:30 Centum City 到 機張 Skyline Luge</strong><br>Kakao T 叫車（約 25 分鐘）W15,000~18,000<br>
+    <small>搜尋：스카이라인루지 부산 | 早上去人少，不用排太久</small></div>
+  </div>
+
+  <div class="card pass" data-id="d2-1">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">09:00 - 10:30</div>
+        <div class="card-title">Skyline Luge 斜坡滑車 <span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">機張 | 原價 W28,000 | ~1.5hr（含排隊）</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">스카이라인루지 부산</span></div>
+      <div class="detail-row"><span class="detail-label">使用方式</span><span class="detail-value">出示 PASS QR code 到 領取手環 到 搭纜車上山 到 滑下來（建議玩 3 次）</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">約 1.5 小時</span></div>
+      <div class="detail-row"><span class="detail-label">注意</span><span class="detail-value">建議線上先預約時段（09:00 第一場最佳）</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%8A%A4%EC%B9%B4%EC%9D%B4%EB%9D%BC%EC%9D%B8%EB%A3%A8%EC%A7%80%20%EB%B6%80%EC%82%B0" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card food" data-id="d2-2">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">10:45 - 11:30</div>
+        <div class="card-title">coralani 躺椅咖啡廳 <span class="badge badge-p2">志願2</span></div>
+        <div class="card-sub">下午茶 | 機張 | W7,000~9,000</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">코랄라니 기장</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">海景躺椅！邊喝咖啡邊看海，拍照超美</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">30~45 分鐘</span></div>
+      <div class="detail-row"><span class="detail-label">交通</span><span class="detail-value">Luge 開車約 10 分鐘可到</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%BD%94%EB%9E%84%EB%9D%BC%EB%8B%88%20%EA%B8%B0%EC%9E%A5" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card food" data-id="d2-3">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">11:30 - 12:30</div>
+        <div class="card-title">釜山龍宮海鮮炸醬麵 <span class="badge badge-p2">志願2</span></div>
+        <div class="card-sub">午餐 | 機張 | W9,000~11,000</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">용궁해물짜장 기장</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">海鮮炸醬麵（해물짜장）、海鮮炒碼麵（해물짬뽕）</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~45 分鐘</span></div>
+      <div class="detail-row"><span class="detail-label">提醒</span><span class="detail-value">11:30 去吃避開 12 點尖峰人潮！</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%9A%A9%EA%B6%81%ED%95%B4%EB%AC%BC%EC%A7%9C%EC%9E%A5%20%EA%B8%B0%EC%9E%A5" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">車</span>
+    <div><strong>12:30 機張 到 海雲台</strong><br>Kakao T 叫車（約 25 分鐘）W15,000 | 或公車 181（約 40 分鐘）W1,200</div>
+  </div>
+
+  <div class="card pass" data-id="d2-4">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">13:30 - 14:30</div>
+        <div class="card-title">Busan X the SKY <span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">世界最高星巴克 | 海雲台 | 原價 W27,000</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">부산엑스더스카이</span></div>
+      <div class="detail-row"><span class="detail-label">地點</span><span class="detail-value">LCT 大樓 98-100 樓，海雲台海邊旁</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">100 層樓觀景台 + 世界最高星巴克（99F），透明地板</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~1 小時</span></div>
+      <div class="detail-row"><span class="detail-label">星巴克</span><span class="detail-value">飲料需另外付費 W6,000~8,000，有限定杯</span></div>
+      <a href="https://map.naver.com/v5/search/%EB%B6%80%EC%82%B0%EC%97%91%EC%8A%A4%EB%8D%94%EC%8A%A4%EC%B9%B4%EC%9D%B4" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card food" data-id="d2-5">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">14:30 - 15:00</div>
+        <div class="card-title">自然島鹽麵包 <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">點心 | 海雲台 | W3,500~5,000</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">자연도소금빵 해운대</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">鹽麵包（소금빵）現烤出爐的最好吃！</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">15~20 分鐘（外帶邊走邊吃）</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%9E%90%EC%97%B0%EB%8F%84%EC%86%8C%EA%B8%88%EB%B9%B5%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card pass" data-id="d2-6">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">15:15 - 16:00</div>
+        <div class="card-title">海雲台海岸列車（藍線公園）<span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">海雲台到青沙浦 | 原價 W7,000（單程）</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">블루라인파크 해변열차</span></div>
+      <div class="detail-row"><span class="detail-label">路線</span><span class="detail-value">海雲台尾浦站到青沙浦站（單程約 25 分鐘），沿途看海超美</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">單程 25 分鐘 + 等車 15 分鐘</span></div>
+      <div class="detail-row"><span class="detail-label">提醒</span><span class="detail-value">PASS 含單程，回程可步行或搭公車</span></div>
+      <a href="https://map.naver.com/v5/search/%EB%B8%94%EB%A3%A8%EB%9D%BC%EC%9D%B8%ED%8C%8C%ED%81%AC%20%ED%95%B4%EB%B3%80%EC%97%B4%EC%B0%A8" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card attraction" data-id="d2-7">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">16:00 - 16:30</div>
+        <div class="card-title">青沙浦天空步道 <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">免費景點 | 海雲台（青沙浦站下車即到）</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">청사포다릿돌전망대</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">透明玻璃步道伸向海面，免費！配合海岸列車下車順遊</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~30 分鐘拍照</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%B2%AD%EC%82%AC%ED%8F%AC%EB%8B%A4%EB%A6%BF%EB%8F%8C%EC%A0%84%EB%A7%9D%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card food" data-id="d2-8">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">16:45 - 17:15</div>
+        <div class="card-title">diart coffee <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">點心 | 海雲台 | W6,000~9,000</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">디아트커피 해운대</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">墨西哥奶油蜂蜜麵包（멕시칸빵）、海景座位</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~30 分鐘</span></div>
+      <a href="https://map.naver.com/v5/search/%EB%94%94%EC%95%84%ED%8A%B8%EC%BB%A4%ED%94%BC%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card food" data-id="d2-9">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">17:30 - 18:30</div>
+        <div class="card-title">海雲台 31 公分海鮮刀削麵 <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">晚餐 | 海雲台 | W10,000~12,000</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">해운대 31cm 해물칼국수</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">海鮮刀削麵（해물칼국수）、海鮮煎餅（해물파전）</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~45 分鐘</span></div>
+      <div class="detail-row"><span class="detail-label">避峰</span><span class="detail-value">17:30 去吃剛好避開 18-19 點尖峰！</span></div>
+      <a href="https://map.naver.com/v5/search/%ED%95%B4%EC%9A%B4%EB%8C%80%2031cm%20%ED%95%B4%EB%AC%BC%EC%B9%BC%EA%B5%AD%EC%88%98" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">走</span>
+    <div><strong>18:30 海雲台 到 Spa Land</strong><br>步行回 Centum City（約 15 分鐘），Spa Land 就在新世界百貨 B1</div>
+  </div>
+
+  <div class="card pass" data-id="d2-10">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">19:00 - 21:30</div>
+        <div class="card-title">Spa Land 汗蒸幕 <span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">海雲台 Centum City | 原價 W18,000~22,000 | 走一天完美收尾</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">스파랜드 센텀시티</span></div>
+      <div class="detail-row"><span class="detail-label">地點</span><span class="detail-value">新世界百貨 Centum City B1（就在你住的地鐵站旁！）</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">多種溫泉池 + 汗蒸房 + 休息區，走了一天最適合來泡</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">2~3 小時，不趕時間慢慢泡</span></div>
+      <div class="detail-row"><span class="detail-label">注意</span><span class="detail-value">需全裸入浴池區（男女分開），汗蒸房區穿館內衣服</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C%20%EC%84%BC%ED%85%80%EC%8B%9C%ED%8B%B0" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="optional-box">
+    <h4>Day 2 備案調整</h4>
+    <p>Spa Land 可換成 <strong>ClubD Oasis 汗蒸幕水上樂園</strong>（클럽디오아시스，PASS，更大更新）<br>
+    如果 coralani 太遠不想去，機張午餐可改 11:00 直接吃<br>
+    晚餐可換成 <strong>大海鮑魚粥</strong>（큰바다전복죽 해운대，W12,000~15,000）</p>
+  </div>
+</div>
+
+<!-- ==================== DAY 3 ==================== -->
+<div class="section" id="day3">
+  <div class="day-header">
+    <h2>Day 3 PASS Day 2 — 西面 + 松島 + 南浦洞</h2>
+    <div class="meta">PASS 持續中 | 西南區一日遊 | 美食 + 購物重點日</div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">地鐵</span>
+    <div><strong>09:00 Centum City 到 西面</strong><br>地鐵 2 號線（5 站，約 12 分鐘）W1,400<br>
+    <small>센텀시티역 到 서면역</small></div>
+  </div>
+
+  <div class="card food" data-id="d3-1">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">09:20 - 09:50</div>
+        <div class="card-title">egg drop 吐司 <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">點心/早餐 | 西面 | W5,000~7,000</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">에그드랍 서면점</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">培根起司蛋（베이컨치즈）、半熟蛋吐司超好吃</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~20 分鐘（可外帶邊走邊吃）</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%97%90%EA%B7%B8%EB%93%9C%EB%9E%8D%20%EC%84%9C%EB%A9%B4" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card pass" data-id="d3-2">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">10:00 - 11:30</div>
+        <div class="card-title">Running Man 體驗館 <span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">西面 | 原價 W18,000 | ~1.5hr</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">런닝맨체험관 서면</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">以韓綜 Running Man 為主題的體驗館，多種遊戲關卡</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">1~1.5 小時</span></div>
+      <a href="https://map.naver.com/v5/search/%EB%9F%B0%EB%8B%9D%EB%A7%A8%EC%B2%B4%ED%97%98%EA%B4%80%20%EC%84%9C%EB%A9%B4" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card shopping" data-id="d3-3">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">11:30 - 12:30</div>
+        <div class="card-title">樂天 Outlet <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">購物 | 西面 | 逛逛看有沒有好貨</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">롯데아울렛 서면</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~1 小時（控制時間！下午還有行程）</span></div>
+      <div class="detail-row"><span class="detail-label">提醒</span><span class="detail-value">退稅門檻 W30,000 以上可退稅</span></div>
+      <a href="https://map.naver.com/v5/search/%EB%A1%AF%EB%8D%B0%EC%95%84%EC%9A%B8%EB%A0%9B%20%EC%84%9C%EB%A9%B4" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card food" data-id="d3-4">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">12:30 - 13:30</div>
+        <div class="card-title">螞蟻家辣炒章魚 <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">午餐 | 西面 | W15,000~18,000/人</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">개미집 낙곱새 서면</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">辣炒章魚牛腸蝦（낙곱새），辣度可選，超下飯！配炒飯收尾</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~50 分鐘</span></div>
+      <div class="detail-row"><span class="detail-label">備案</span><span class="detail-value">若想吃飯類：松亭3代豬肉湯飯（송정3대국밥 W8,000~10,000）</span></div>
+      <a href="https://map.naver.com/v5/search/%EA%B0%9C%EB%AF%B8%EC%A7%91%20%EC%84%9C%EB%A9%B4" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card attraction" data-id="d3-5">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">13:30 - 14:00</div>
+        <div class="card-title">田埔咖啡街 <span class="badge badge-p2">志願2</span></div>
+        <div class="card-sub">散步 | 西面 | 消化一下隨意逛</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">전포카페거리</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">文青風咖啡街，很多特色獨立咖啡廳</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">20~30 分鐘散步（剛吃飽走走消化）</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%A0%84%ED%8F%AC%EC%B9%B4%ED%8E%98%EA%B1%B0%EB%A6%AC" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">地鐵</span>
+    <div><strong>14:15 西面 到 松島</strong><br>地鐵 1 號線 서면到자갈치（6 站，約 15 分鐘）W1,400，再轉巴士 26/30 或步行 15 分鐘到纜車站</div>
+  </div>
+
+  <div class="card pass" data-id="d3-6">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">15:00 - 16:00</div>
+        <div class="card-title">松島海上纜車 <span class="badge badge-pass">PASS</span> <span class="badge badge-p2">志願2</span></div>
+        <div class="card-sub">松島 | 原價 W17,000（水晶車廂）</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">송도해상케이블카</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">海上來回纜車，推薦水晶（透明底）車廂！</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">來回約 40~50 分鐘</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%86%A1%EB%8F%84%ED%95%B4%EC%83%81%EC%BC%80%EC%9D%B4%EB%B8%94%EC%B9%B4" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card pass" data-id="d3-7">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">16:00 - 16:30</div>
+        <div class="card-title">松島龍宮雲橋 <span class="badge badge-pass">PASS</span> <span class="badge badge-p2">志願2</span></div>
+        <div class="card-sub">松島 | 纜車下來順遊</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">송도용궁구름다리</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">沿海岸延伸的步道，搭配纜車一起逛</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~30 分鐘</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%86%A1%EB%8F%84%EC%9A%A9%EA%B6%81%EA%B5%AC%EB%A6%84%EB%8B%A4%EB%A6%AC" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">巴士</span>
+    <div><strong>16:30 松島 到 南浦洞</strong><br>巴士或 Kakao T（約 15 分鐘）W1,200~W8,000</div>
+  </div>
+
+  <div class="card food" data-id="d3-8">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">17:00 - 17:20</div>
+        <div class="card-title">古來思魚糕 + 元祖糖餅 <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">點心 | 南浦洞 | W3,000~5,000 each</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">魚糕搜尋</span><span class="detail-value">고래사어묵 남포동</span></div>
+      <div class="detail-row"><span class="detail-label">糖餅搜尋</span><span class="detail-value">원조씨앗호떡 남포동 (BIFF광장)</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">古來思的起司魚糕（치즈어묵），元祖糖餅現炸（有堅果餡料）</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~20 分鐘（邊走邊吃）</span></div>
+      <div class="detail-row"><span class="detail-label">提醒</span><span class="detail-value">這兩家在 BIFF 廣場附近，可一次吃到</span></div>
+      <a href="https://map.naver.com/v5/search/%EA%B3%A0%EB%9E%98%EC%82%AC%EC%96%B4%EB%AC%B5%20%EB%82%A8%ED%8F%AC%EB%8F%99" target="_blank" class="naver-btn">魚糕導航</a>
+      <a href="https://map.naver.com/v5/search/%EC%9B%90%EC%A1%B0%EC%94%A8%EC%95%97%ED%98%B8%EB%96%A1%20BIFF%EA%B4%91%EC%9E%A5" target="_blank" class="naver-btn">糖餅導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card food" data-id="d3-9">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">17:30 - 18:15</div>
+        <div class="card-title">南浦雪濃湯 <span class="badge badge-p2">志願2</span></div>
+        <div class="card-sub">晚餐 | 南浦洞 | W9,000~11,000</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">남포설렁탕</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">雪濃湯（설렁탕）、搭配泡菜 + 蔥絲自己加鹽調味</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~40 分鐘</span></div>
+      <div class="detail-row"><span class="detail-label">避峰</span><span class="detail-value">17:30 去剛好！提早吃避開排隊</span></div>
+      <a href="https://map.naver.com/v5/search/%EB%82%A8%ED%8F%AC%EC%84%A4%EB%A0%81%ED%83%95" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card shopping" data-id="d3-10">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">18:30 - 19:30</div>
+        <div class="card-title">BIFF 廣場 + 光復路 + 富平罐頭市場 <span class="badge badge-p2">志願2</span></div>
+        <div class="card-sub">購物/逛街 | 南浦洞 | 一路順遊</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">BIFF搜尋</span><span class="detail-value">BIFF광장</span></div>
+      <div class="detail-row"><span class="detail-label">光復路搜尋</span><span class="detail-value">광복로패션거리</span></div>
+      <div class="detail-row"><span class="detail-label">罐頭市場</span><span class="detail-value">부평깡통시장</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">BIFF 廣場有電影手印 + 小吃，光復路是時尚街，富平夜市晚上開</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">合計 1~1.5 小時，隨意逛</span></div>
+      <a href="https://map.naver.com/v5/search/BIFF%EA%B4%91%EC%9E%A5" target="_blank" class="naver-btn">BIFF 導航</a>
+      <a href="https://map.naver.com/v5/search/%EB%B6%80%ED%8F%89%EA%B9%A1%ED%86%B5%EC%8B%9C%EC%9E%A5" target="_blank" class="naver-btn">罐頭市場導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card food" data-id="d3-11">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">19:30 - 19:45</div>
+        <div class="card-title">紅豆奶油艾草糕 <span class="badge badge-p2">志願2</span></div>
+        <div class="card-sub">點心 | 南浦洞 | W3,000~4,000</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">팥앙금 쑥크림떡 남포동</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~15 分鐘外帶</span></div>
+      <a href="https://map.naver.com/v5/search/%ED%8C%A5%EC%95%99%EA%B8%88%20%EC%91%A5%ED%81%AC%EB%A6%BC%EB%96%A1%20%EB%82%A8%ED%8F%AC%EB%8F%99" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">地鐵</span>
+    <div><strong>20:00 南浦洞 到 Centum City</strong><br>地鐵 1 號線 남포역到서면 轉 2 號線到센텀시티역（約 30 分鐘）W1,400<br>
+    <small>在南浦洞「友利銀行」換匯！回程順路</small></div>
+  </div>
+</div>
+
+<!-- ==================== DAY 4 ==================== -->
+<div class="section" id="day4">
+  <div class="day-header">
+    <h2>Day 4 — 影島 + 甘川洞 + 廣安里</h2>
+    <div class="meta">文青路線 | 海景咖啡 + 彩色村莊 + 烤肉收尾</div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">地鐵+巴士</span>
+    <div><strong>09:00 Centum City 到 影島（白淺灘）</strong><br>地鐵 2 號線到남포 + 巴士 7/71（約 40 分鐘）W1,400+W1,200<br>
+    <small>搜尋：흰여울문화마을</small></div>
+  </div>
+
+  <div class="card attraction" data-id="d4-1">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">09:45 - 10:45</div>
+        <div class="card-title">白淺灘文化村 <span class="badge badge-p2">志願2</span></div>
+        <div class="card-sub">景點 | 影島 | 免費</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">흰여울문화마을</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">依山面海的白色村落，像小型聖托里尼。沿海散步道超美</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~1 小時散步拍照</span></div>
+      <div class="detail-row"><span class="detail-label">注意</span><span class="detail-value">有居民居住，請輕聲</span></div>
+      <a href="https://map.naver.com/v5/search/%ED%9D%B0%EC%97%AC%EC%9A%B8%EB%AC%B8%ED%99%94%EB%A7%88%EC%9D%84" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card food" data-id="d4-2">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">11:00 - 12:00</div>
+        <div class="card-title">THRILL ON THE MUG 海景咖啡廳 <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">下午茶 | 影島 | W7,000~10,000</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">스릴온더머그 영도</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">無敵海景！落地窗面海，拍照超美的咖啡廳</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~1 小時悠閒坐坐</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%8A%A4%EB%A6%B4%EC%98%A8%EB%8D%94%EB%A8%B8%EA%B7%B8" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">巴士</span>
+    <div><strong>12:00 影島 到 甘川洞文化村</strong><br>巴士（約 30 分鐘）或 Kakao T（約 20 分鐘）W8,000~10,000<br>
+    <small>搜尋：감천문화마을</small></div>
+  </div>
+
+  <div class="card attraction" data-id="d4-3">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">12:30 - 14:30</div>
+        <div class="card-title">甘川洞文化村 <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">景點 | 甘川洞 | 免費入村（蓋章地圖 W2,000）</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">감천문화마을</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">彩色房屋依山而建，「韓國的馬丘比丘」。買蓋章地圖集章可換明信片</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">1.5~2 小時（走上走下，有階梯）</span></div>
+      <div class="detail-row"><span class="detail-label">美食</span><span class="detail-value">村裡有小吃，可在此簡單吃午餐（辣炒年糕、魚糕等）</span></div>
+      <div class="detail-row"><span class="detail-label">拍照點</span><span class="detail-value">小王子雕像、魚形階梯、星星觀景台</span></div>
+      <a href="https://map.naver.com/v5/search/%EA%B0%90%EC%B2%9C%EB%AC%B8%ED%99%94%EB%A7%88%EC%9D%84" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">車</span>
+    <div><strong>14:30 甘川洞 到 廣安里</strong><br>Kakao T 叫車（約 20 分鐘）W12,000~15,000<br>
+    <small>甘川洞出來搭車比較方便，巴士轉車多</small></div>
+  </div>
+
+  <div class="card food" data-id="d4-4">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">15:00 - 15:30</div>
+        <div class="card-title">All Sunday 貝果 <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">點心 | 廣安里 | W4,000~6,000</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">올썬데이 광안리</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">各種口味貝果，當下午點心剛好</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~20 分鐘</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%98%AC%EC%8D%AC%EB%8D%B0%EC%9D%B4%20%EA%B4%91%EC%95%88%EB%A6%AC" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card attraction" data-id="d4-5">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">15:30 - 16:30</div>
+        <div class="card-title">廣安里海邊散步</div>
+        <div class="card-sub">免費 | 看廣安大橋 | 悠閒時光</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">광안리해수욕장</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">廣安大橋就在眼前，傍晚走海邊超舒服</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~1 小時散步放空</span></div>
+      <a href="https://map.naver.com/v5/search/%EA%B4%91%EC%95%88%EB%A6%AC%ED%95%B4%EC%88%98%EC%9A%95%EC%9E%A5" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card food" data-id="d4-6">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">17:00 - 18:30</div>
+        <div class="card-title">83 獬豸烤肉 <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">晚餐 | 廣安里 | W18,000~25,000/人</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">83해치 광안리</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">豬五花（삼겹살）、牛排骨（갈비），店員會幫烤！</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">1~1.5 小時</span></div>
+      <div class="detail-row"><span class="detail-label">避峰</span><span class="detail-value">17:00 開吃！避開 18-19 點尖峰排隊</span></div>
+      <div class="detail-row"><span class="detail-label">備案</span><span class="detail-value">水邊最高豬肉湯飯（물가에최고돼지국밥 W9,000~12,000）如果想吃便宜一點</span></div>
+      <a href="https://map.naver.com/v5/search/83%ED%95%B4%EC%B9%98%20%EA%B4%91%EC%95%88%EB%A6%AC" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">地鐵</span>
+    <div><strong>18:30 廣安里 到 Centum City</strong><br>地鐵 2 號線 금련산역到센텀시티역（2 站，約 8 分鐘）W1,400<br>
+    <small>吃完散步到金蓮山站，看廣安大橋夜景亮燈</small></div>
+  </div>
+
+  <div class="card food" data-id="d4-7">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">19:00 - 19:30</div>
+        <div class="card-title">Busan Bada Sand 奶油餅乾 <span class="badge badge-p2">志願2</span></div>
+        <div class="card-sub">伴手禮/點心 | 海雲台 | W15,000~20,000/盒</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">부산바다상드 해운대</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">釜山超人氣伴手禮！奶油夾心餅乾，適合帶回去送人</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~20 分鐘</span></div>
+      <a href="https://map.naver.com/v5/search/%EB%B6%80%EC%82%B0%EB%B0%94%EB%8B%A4%EC%83%81%EB%93%9C%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="optional-box">
+    <h4>晚上自由時間</h4>
+    <p>回到 Centum City 後可以：<br>
+    再去 Spa Land / ClubD Oasis 泡湯放鬆（如果 Day 2 沒去 ClubD）<br>
+    叫 Coupang Eats 外送炸雞到飯店（橋村炸雞 교촌치킨）<br>
+    海雲台海邊夜景散步</p>
+  </div>
+</div>
+
+<!-- ==================== DAY 5 ==================== -->
+<div class="section" id="day5">
+  <div class="day-header">
+    <h2>Day 5 - 最後巡禮 + 回程</h2>
+    <div class="meta">21:05 飛機 | 海雲台悠閒半日 | 16:30 前出發去機場</div>
+  </div>
+
+  <div class="card food" data-id="d5-1">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">09:30 - 10:30</div>
+        <div class="card-title">大海鮑魚粥 <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">早午餐 | 海雲台 | W12,000~15,000</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">큰바다전복죽 해운대</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">鮑魚粥（전복죽），溫和好消化，最後一天早餐完美</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~45 分鐘</span></div>
+      <a href="https://map.naver.com/v5/search/%ED%81%B0%EB%B0%94%EB%8B%A4%EC%A0%84%EB%B3%B5%EC%A3%BD%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card food" data-id="d5-2">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">10:30 - 11:00</div>
+        <div class="card-title">Standard Bread 法式吐司 <span class="badge badge-p1">志願1</span></div>
+        <div class="card-sub">點心 | 海雲台 | W5,000~7,000</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">스탠다드브레드 해운대</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">法式吐司（프렌치토스트），甜甜的早餐後甜點</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~20 分鐘外帶</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%8A%A4%ED%83%A0%EB%8D%94%EB%93%9C%EB%B8%8C%EB%A0%88%EB%93%9C%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card attraction" data-id="d5-3">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">11:00 - 12:00</div>
+        <div class="card-title">海雲台海邊最後散步</div>
+        <div class="card-sub">免費 | 最後看一眼釜山的海</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">해운대해수욕장</span></div>
+      <div class="detail-row"><span class="detail-label">活動</span><span class="detail-value">海邊走走、拍照留念，享受最後的釜山時光</span></div>
+      <a href="https://map.naver.com/v5/search/%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EC%88%98%EC%9A%95%EC%9E%A5" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card food" data-id="d5-4">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">12:30 - 13:30</div>
+        <div class="card-title">伍班長烤肉 <span class="badge badge-p2">志願2</span></div>
+        <div class="card-sub">午餐 | 海雲台 | W18,000~22,000/人</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">오반장 해운대점</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">最後一頓大餐！烤肉吃好吃滿再走</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~1 小時</span></div>
+      <div class="detail-row"><span class="detail-label">備案</span><span class="detail-value">想吃湯飯可改 松亭3代豬肉湯飯 西面店（송정3대국밥）</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%98%A4%EB%B0%98%EC%9E%A5%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="card attraction" data-id="d5-5">
+    <div class="card-main" onclick="toggleDetail(this)">
+      <div class="card-check" onclick="event.stopPropagation();toggleCheck(this)"></div>
+      <div class="card-body">
+        <div class="card-time">14:00 - 15:30</div>
+        <div class="card-title">最後採購時間</div>
+        <div class="card-sub">Centum City 新世界百貨 / 便利商店掃貨</div>
+      </div>
+      <span class="card-expand">&#9660;</span>
+    </div>
+    <div class="card-detail">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">신세계백화점 센텀시티</span></div>
+      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">B1 超市買零食伴手禮、樂天/CU/GS25 便利商店買泡麵餅乾</span></div>
+      <div class="detail-row"><span class="detail-label">退稅</span><span class="detail-value">百貨公司可辦退稅，記得帶護照</span></div>
+      <a href="https://map.naver.com/v5/search/%EC%8B%A0%EC%84%B8%EA%B3%84%EB%B0%B1%ED%99%94%EC%A0%90%20%EC%84%BC%ED%85%80%EC%8B%9C%ED%8B%B0" target="_blank" class="naver-btn">Naver Map 導航</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">行李</span>
+    <div><strong>15:30 - 16:00</strong> 回飯店收行李、Check out</div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">車</span>
+    <div><strong>16:30 Centum City 到 金海機場</strong><br>
+    推薦 Kakao T 叫車（約 30 分鐘）W25,000~30,000<br>
+    地鐵備案：2 號線到沙上轉釜山金海輕軌（約 50 分鐘）W2,800<br>
+    <small>最後一天拖行李，叫車最輕鬆</small></div>
+  </div>
+
+  <div class="transport-card">
+    <span class="transport-icon">飛</span>
+    <div><strong>17:00~17:30 抵達金海機場</strong><br>
+    辦理報到 + 退稅（機場自動退稅機）+ 過安檢 + 免稅店<br>
+    <strong>21:05 起飛回台北</strong></div>
+  </div>
+</div>
+
+<!-- ==================== 預算 ==================== -->
+<div class="section" id="budget">
+  <div class="day-header">
+    <h2>預算估算</h2>
+    <div class="meta">以 1 人為單位，W1 約 NT$0.024（2026 年 3 月參考匯率）</div>
+  </div>
+
+  <div class="info-box">
+    <h3>釜山 PASS 48hr 價值分析</h3>
+    <table class="budget-table">
+      <tr><th>景點</th><th>原價</th></tr>
+      <tr><td>Skyline Luge</td><td>W28,000</td></tr>
+      <tr><td>Busan X the SKY</td><td>W27,000</td></tr>
+      <tr><td>Spa Land</td><td>W20,000</td></tr>
+      <tr><td>海雲台海岸列車</td><td>W7,000</td></tr>
+      <tr><td>Running Man 體驗館</td><td>W18,000</td></tr>
+      <tr><td>松島海上纜車</td><td>W17,000</td></tr>
+      <tr><td>松島龍宮雲橋</td><td>W8,000</td></tr>
+      <tr class="total"><td>使用價值合計</td><td>W125,000（約 NT$3,000）</td></tr>
+      <tr><td>48hr PASS 售價</td><td>W55,000（約 NT$1,320）</td></tr>
+      <tr class="total" style="color:#2ecc71"><td>省下</td><td>W70,000（約 NT$1,680）</td></tr>
+    </table>
+  </div>
+
+  <div class="info-box">
+    <h3>餐費估算</h3>
+    <table class="budget-table">
+      <tr><th>天數</th><th>餐點</th><th>預估費用</th></tr>
+      <tr><td>Day 1</td><td>宵夜炸雞</td><td>W20,000</td></tr>
+      <tr><td>Day 2</td><td>咖啡+午餐+點心x2+晚餐</td><td>W45,000</td></tr>
+      <tr><td>Day 3</td><td>早餐+午餐+點心x3+晚餐</td><td>W45,000</td></tr>
+      <tr><td>Day 4</td><td>咖啡+貝果+烤肉+餅乾</td><td>W55,000</td></tr>
+      <tr><td>Day 5</td><td>鮑魚粥+麵包+烤肉</td><td>W45,000</td></tr>
+      <tr class="total"><td colspan="2">餐費小計</td><td>W210,000（約 NT$5,040）</td></tr>
+    </table>
+  </div>
+
+  <div class="info-box">
+    <h3>交通費估算</h3>
+    <table class="budget-table">
+      <tr><th>項目</th><th>預估費用</th></tr>
+      <tr><td>機場到飯店 Kakao T x2</td><td>W55,000</td></tr>
+      <tr><td>Centum City 到 機張 Kakao T</td><td>W16,000</td></tr>
+      <tr><td>機張 到 海雲台 Kakao T</td><td>W15,000</td></tr>
+      <tr><td>甘川洞 到 廣安里 Kakao T</td><td>W13,000</td></tr>
+      <tr><td>地鐵（約 10 趟 x W1,400）</td><td>W14,000</td></tr>
+      <tr><td>巴士（約 5 趟 x W1,200）</td><td>W6,000</td></tr>
+      <tr><td>T-money 卡費</td><td>W2,500</td></tr>
+      <tr class="total"><td>交通小計</td><td>W121,500（約 NT$2,916）</td></tr>
+    </table>
+  </div>
+
+  <div class="info-box">
+    <h3>總預算（不含住宿、機票）</h3>
+    <table class="budget-table">
+      <tr><th>類別</th><th>韓元</th><th>約台幣</th></tr>
+      <tr><td>釜山 PASS 48hr</td><td>W55,000</td><td>NT$1,320</td></tr>
+      <tr><td>餐費</td><td>W210,000</td><td>NT$5,040</td></tr>
+      <tr><td>交通</td><td>W121,500</td><td>NT$2,916</td></tr>
+      <tr><td>購物預備金</td><td>W100,000</td><td>NT$2,400</td></tr>
+      <tr class="total"><td>合計</td><td>W486,500</td><td>約 NT$11,676</td></tr>
+    </table>
+    <p style="margin-top:8px;font-size:0.85em;color:var(--gray)">建議準備 W500,000~600,000（約 NT$12,000~14,400）較為充裕</p>
+  </div>
+</div>
+
+<!-- ==================== 備案 ==================== -->
+<div class="section" id="backup">
+  <div class="day-header">
+    <h2>備案景點 和 未排入項目</h2>
+    <div class="meta">這些景點因時間限制未排入主行程，可視情況替換</div>
+  </div>
+
+  <div class="info-box">
+    <h3>PASS 可用但未排入</h3>
+    <ul>
+      <li><strong>ClubD Oasis 汗蒸幕水上樂園</strong>（클럽디오아시스）— 可替換 Day 2 Spa Land，規模更大</li>
+      <li><strong>Flipbook Studio 手翻書</strong>（플립북스튜디오 감천）— 甘川洞，需 2 張 PASS 券</li>
+      <li><strong>釜山塔</strong>（부산타워）— Day 3 南浦洞晚上可加，龍頭山公園上</li>
+      <li><strong>釜山 Brick Campus</strong>（브릭캠퍼스 기장）— Day 2 機張可加，樂高迷必去</li>
+      <li><strong>國立釜山科學館</strong>（국립부산과학관）— Day 2 機張可加</li>
+      <li><strong>Arte Museum 釜山</strong>（아르떼뮤지엄 부산）— Day 4 影島可加</li>
+      <li><strong>釜山鑽石灣遊艇</strong>（다이아몬드베이 요트）— Day 4 廣安里可加，需預約</li>
+      <li><strong>釜山電影體驗博物館</strong>（부산영화체험박물관）— Day 3 南浦洞可加</li>
+      <li><strong>甘川洞韓服體驗</strong>（감천로맨틱한복 / 입고가게 / 철수와영채）— Day 4 甘川洞可加，約 W10,000~15,000</li>
+      <li><strong>海雲台 HAEON 韓服</strong>（해운대해온한복）— Day 2 或 5 海雲台可加</li>
+    </ul>
+  </div>
+
+  <div class="info-box">
+    <h3>未排入的餐廳</h3>
+    <ul>
+      <li><strong>松亭 3 代豬肉湯飯</strong>（송정3대국밥）W8,000~10,000 — 西面，可替換 Day 3 午餐</li>
+      <li><strong>水邊最高豬肉湯飯</strong>（물가에최고돼지국밥）W9,000~12,000 — 廣安里，可替換 Day 4 晚餐</li>
+      <li><strong>橋村炸雞</strong>（교촌치킨 해운대점）W18,000~20,000 — 可當任何一天宵夜外送</li>
+    </ul>
+  </div>
+
+  <div class="info-box">
+    <h3>雨天備案</h3>
+    <ul>
+      <li>Spa Land / ClubD Oasis（室內泡湯）</li>
+      <li>Running Man 體驗館（室內）</li>
+      <li>Busan X the SKY（室內觀景）</li>
+      <li>新世界百貨 Centum City 逛街（世界最大百貨公司！）</li>
+      <li>Arte Museum（室內光影展）</li>
+      <li>釜山電影博物館（室內）</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<div class="share-bar">
+  <button class="share-btn secondary" onclick="resetAll()">重置</button>
+  <button class="share-btn secondary" onclick="downloadHTML()">下載</button>
+  <button class="share-btn primary" onclick="shareItinerary()">分享行程</button>
+</div>
+
+<div class="copy-toast" id="toast"></div>
+
+<script>
+// Tab switching
+document.querySelectorAll('.tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+    tab.classList.add('active');
+    document.getElementById(tab.dataset.tab).classList.add('active');
+  });
+});
+
+// Toggle card detail
+function toggleDetail(el) {
+  var detail = el.parentElement.querySelector('.card-detail');
+  var expand = el.querySelector('.card-expand');
+  if (detail) {
+    detail.classList.toggle('open');
+    if (expand) expand.classList.toggle('open');
+  }
+}
+
+// Toggle checkbox
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+  el.closest('.card').classList.toggle('done');
+  var id = el.closest('.card').dataset.id;
+  if (id) {
+    var checks = JSON.parse(localStorage.getItem('busan_checks') || '{}');
+    checks[id] = el.classList.contains('checked');
+    localStorage.setItem('busan_checks', JSON.stringify(checks));
+  }
+  updateProgress();
+}
+
+// Save notes
+function saveNote(el) {
+  var id = el.closest('.card').dataset.id;
+  if (id) {
+    var notes = JSON.parse(localStorage.getItem('busan_notes') || '{}');
+    notes[id] = el.value;
+    localStorage.setItem('busan_notes', JSON.stringify(notes));
+  }
+}
+
+// Load saved state
+function loadState() {
+  var checks = JSON.parse(localStorage.getItem('busan_checks') || '{}');
+  var notes = JSON.parse(localStorage.getItem('busan_notes') || '{}');
+  Object.keys(checks).forEach(function(id) {
+    var card = document.querySelector('[data-id="' + id + '"]');
+    if (card && checks[id]) {
+      card.querySelector('.card-check').classList.add('checked');
+      card.classList.add('done');
+    }
+  });
+  Object.keys(notes).forEach(function(id) {
+    var card = document.querySelector('[data-id="' + id + '"]');
+    if (card) {
+      var input = card.querySelector('.note-input');
+      if (input) input.value = notes[id];
+    }
+  });
+  updateProgress();
+}
+
+// Update progress using safe DOM methods
+function updateProgress() {
+  var total = document.querySelectorAll('.card[data-id]').length;
+  var done = document.querySelectorAll('.card.done').length;
+  var pct = total > 0 ? (done / total * 100) : 0;
+  document.getElementById('totalProgress').style.width = pct + '%';
+
+  var statsEl = document.getElementById('summaryStats');
+  // Clear existing children
+  while (statsEl.firstChild) { statsEl.removeChild(statsEl.firstChild); }
+
+  var doneSpan = document.createElement('span');
+  doneSpan.className = 'stat';
+  doneSpan.textContent = done + '/' + total + ' 完成';
+  statsEl.appendChild(doneSpan);
+
+  var remainSpan = document.createElement('span');
+  remainSpan.className = 'stat';
+  remainSpan.textContent = (total - done) + ' 剩餘';
+  statsEl.appendChild(remainSpan);
+}
+
+// Share
+function shareItinerary() {
+  if (navigator.share) {
+    navigator.share({
+      title: '釜山五天四夜行程表',
+      text: '我的釜山旅行行程表！',
+      url: window.location.href
+    }).catch(function() {});
+  } else {
+    generateTextItinerary();
+  }
+}
+
+function generateTextItinerary() {
+  var text = '釜山五天四夜行程表\n\n' +
+    'Day 1 - 抵達\n' +
+    '  19:55 抵達金海機場 > Kakao T 到 Centum City\n' +
+    '  21:00 puradak 炸雞宵夜\n\n' +
+    'Day 2 - PASS Day 1 機張+海雲台\n' +
+    '  09:00 Skyline Luge\n' +
+    '  10:45 coralani 躺椅咖啡\n' +
+    '  11:30 龍宮海鮮炸醬麵\n' +
+    '  13:30 Busan X the SKY\n' +
+    '  14:30 自然島鹽麵包\n' +
+    '  15:15 海雲台海岸列車\n' +
+    '  16:00 青沙浦天空步道\n' +
+    '  16:45 diart coffee\n' +
+    '  17:30 31cm 海鮮刀削麵\n' +
+    '  19:00 Spa Land\n\n' +
+    'Day 3 - PASS Day 2 西面+松島+南浦洞\n' +
+    '  09:20 egg drop 吐司\n' +
+    '  10:00 Running Man 體驗館\n' +
+    '  11:30 樂天 Outlet\n' +
+    '  12:30 螞蟻家辣炒章魚\n' +
+    '  13:30 田埔咖啡街\n' +
+    '  15:00 松島海上纜車\n' +
+    '  16:00 松島龍宮雲橋\n' +
+    '  17:00 古來思魚糕+元祖糖餅\n' +
+    '  17:30 南浦雪濃湯\n' +
+    '  18:30 BIFF廣場+富平市場\n\n' +
+    'Day 4 - 影島+甘川洞+廣安里\n' +
+    '  09:45 白淺灘文化村\n' +
+    '  11:00 THRILL ON THE MUG\n' +
+    '  12:30 甘川洞文化村\n' +
+    '  15:00 All Sunday 貝果\n' +
+    '  15:30 廣安里海邊散步\n' +
+    '  17:00 83獬豸烤肉\n\n' +
+    'Day 5 - 回程\n' +
+    '  09:30 大海鮑魚粥\n' +
+    '  10:30 Standard Bread\n' +
+    '  12:30 伍班長烤肉\n' +
+    '  16:30 出發去機場\n' +
+    '  21:05 回台北';
+
+  navigator.clipboard.writeText(text).then(function() { showToast('已複製到剪貼簿！'); });
+}
+
+function showToast(msg) {
+  var toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.style.display = 'block';
+  setTimeout(function() { toast.style.display = 'none'; }, 2000);
+}
+
+function downloadHTML() {
+  var html = document.documentElement.outerHTML;
+  var blob = new Blob([html], { type: 'text/html' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '釜山五天四夜行程表.html';
+  a.click();
+}
+
+function resetAll() {
+  if (confirm('確定要重置所有打勾和筆記嗎？')) {
+    localStorage.removeItem('busan_checks');
+    localStorage.removeItem('busan_notes');
+    location.reload();
+  }
+}
+
+// Init
+loadState();
+</script>
+</body>
+</html>
