@@ -61,10 +61,15 @@
     cursor: pointer;
     font-weight: 500;
     font-size: 0.9em;
+    border: none;
     border-bottom: 3px solid transparent;
+    background: none;
+    font-family: inherit;
     transition: all 0.2s;
     white-space: nowrap;
     color: var(--gray);
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+    touch-action: manipulation;
   }
   .tab:hover { color: var(--primary); background: var(--primary-light); }
   .tab.active { color: var(--primary); border-bottom-color: var(--primary); }
@@ -309,6 +314,66 @@
     .card-main { padding: 10px; }
     .card-detail { padding: 0 10px 10px 38px; }
   }
+  /* 完整清單表格 */
+  .list-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85em;
+  }
+  .list-table th {
+    background: var(--gray-light);
+    font-weight: 600;
+    padding: 8px 6px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  .list-table td {
+    padding: 8px 6px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .list-table tr.in-schedule { background: #f0fdf4; }
+  .list-table tr.not-in-schedule { background: #fff; }
+  .status-in {
+    color: #16a34a;
+    font-weight: 600;
+    font-size: 0.85em;
+  }
+  .status-out {
+    color: #dc2626;
+    font-weight: 600;
+    font-size: 0.85em;
+  }
+  .reason {
+    color: var(--gray);
+    font-size: 0.8em;
+    margin-top: 2px;
+  }
+  .filter-bar {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .filter-btn {
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: white;
+    cursor: pointer;
+    font-size: 0.8em;
+    font-family: inherit;
+    transition: all 0.2s;
+    -webkit-tap-highlight-color: rgba(0,0,0,0.1);
+    touch-action: manipulation;
+  }
+  .filter-btn:hover { border-color: var(--primary); }
+  .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+  @media (max-width: 600px) {
+    .list-table { font-size: 0.75em; }
+    .list-table th, .list-table td { padding: 6px 4px; }
+  }
   .copy-toast {
     position: fixed;
     top: 50%;
@@ -334,14 +399,15 @@
 </div>
 
 <div class="tabs" id="tabs">
-  <div class="tab active" data-tab="prep">行前準備</div>
-  <div class="tab" data-tab="day1">D1 抵達</div>
-  <div class="tab" data-tab="day2">D2 PASS 1</div>
-  <div class="tab" data-tab="day3">D3 PASS 2</div>
-  <div class="tab" data-tab="day4">D4 西南區</div>
-  <div class="tab" data-tab="day5">D5 回程</div>
-  <div class="tab" data-tab="budget">預算</div>
-  <div class="tab" data-tab="backup">備案</div>
+  <button type="button" class="tab active" onclick="switchTab(this,'prep')">行前準備</button>
+  <button type="button" class="tab" onclick="switchTab(this,'day1')">D1 抵達</button>
+  <button type="button" class="tab" onclick="switchTab(this,'day2')">D2 PASS 1</button>
+  <button type="button" class="tab" onclick="switchTab(this,'day3')">D3 PASS 2</button>
+  <button type="button" class="tab" onclick="switchTab(this,'day4')">D4 西南區</button>
+  <button type="button" class="tab" onclick="switchTab(this,'day5')">D5 回程</button>
+  <button type="button" class="tab" onclick="switchTab(this,'alllist')">完整清單</button>
+  <button type="button" class="tab" onclick="switchTab(this,'budget')">預算</button>
+  <button type="button" class="tab" onclick="switchTab(this,'backup')">備案</button>
 </div>
 
 <div class="container">
@@ -1241,6 +1307,255 @@
   </div>
 </div>
 
+<!-- ==================== 完整清單 ==================== -->
+<div class="section" id="alllist">
+  <div class="day-header">
+    <h2>📋 原始完整清單</h2>
+    <div class="meta">所有考慮過的景點與餐廳，標示是否排入主行程及原因</div>
+  </div>
+
+  <div class="filter-bar">
+    <button type="button" class="filter-btn active" onclick="filterList('all',this)">全部</button>
+    <button type="button" class="filter-btn" onclick="filterList('in',this)">已排入</button>
+    <button type="button" class="filter-btn" onclick="filterList('out',this)">未排入</button>
+    <button type="button" class="filter-btn" onclick="filterList('food',this)">食物</button>
+    <button type="button" class="filter-btn" onclick="filterList('spot',this)">景點</button>
+  </div>
+
+  <!-- ===== 食物 ===== -->
+  <div class="info-box">
+    <h3>🍽️ 食物清單</h3>
+    <table class="list-table">
+      <thead>
+        <tr><th>志願</th><th>小類別</th><th>名稱</th><th>地區</th><th>狀態</th></tr>
+      </thead>
+      <tbody>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>1</td><td>下午茶</td><td>THRILL ON THE MUG（海景咖啡廳）</td><td>影島</td>
+          <td><span class="status-in">✅ Day 4</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>2</td><td>下午茶</td><td>coralani（躺椅咖啡廳）</td><td>機張</td>
+          <td><span class="status-in">✅ Day 2</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>1</td><td>正餐</td><td>海雲台 31 公分海鮮刀削麵</td><td>海雲台</td>
+          <td><span class="status-in">✅ Day 2</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>1</td><td>正餐</td><td>大海鮑魚粥</td><td>海雲台</td>
+          <td><span class="status-in">✅ Day 5</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>1</td><td>正餐</td><td>螞蟻家辣炒章魚</td><td>西面</td>
+          <td><span class="status-in">✅ Day 3</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>1</td><td>正餐</td><td>83 獬豸烤肉</td><td>廣安里</td>
+          <td><span class="status-in">✅ Day 4</span></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="food" data-status="out">
+          <td>1</td><td>正餐</td><td>松亭 3 代豬肉湯飯</td><td>西面</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">Day 3 西面已排螞蟻家，同區正餐衝突。列為 Day 3/5 備案替換</div></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="food" data-status="out">
+          <td>2</td><td>正餐</td><td>水邊最高豬肉湯飯</td><td>廣安里</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">Day 4 廣安里已排 83 烤肉，同區正餐衝突。列為 Day 4 備案替換</div></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>2</td><td>正餐</td><td>南浦雪濃湯</td><td>南浦洞</td>
+          <td><span class="status-in">✅ Day 3</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>2</td><td>正餐</td><td>釜山龍宮海鮮炸醬麵</td><td>機張</td>
+          <td><span class="status-in">✅ Day 2</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>2</td><td>正餐</td><td>伍班長烤肉</td><td>海雲台</td>
+          <td><span class="status-in">✅ Day 5</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>1</td><td>宵夜</td><td>puradak chicken</td><td>海雲台</td>
+          <td><span class="status-in">✅ Day 1</span></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="food" data-status="out">
+          <td>1</td><td>宵夜</td><td>橋村炸雞</td><td>海雲台</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">Day 1 已排 puradak，同類型宵夜重複。可任何一晚 Coupang Eats 外送替代</div></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>2</td><td>點心</td><td>Busan Bada Sand 奶油餅乾</td><td>海雲台</td>
+          <td><span class="status-in">✅ Day 4</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>2</td><td>點心</td><td>紅豆奶油艾草糕</td><td>南浦洞</td>
+          <td><span class="status-in">✅ Day 3</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>1</td><td>點心</td><td>All Sunday 貝果</td><td>廣安里</td>
+          <td><span class="status-in">✅ Day 4</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>1</td><td>點心</td><td>diart coffee（墨西哥奶油蜂蜜麵包）</td><td>海雲台</td>
+          <td><span class="status-in">✅ Day 2</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>1</td><td>點心</td><td>自然島鹽麵包</td><td>海雲台</td>
+          <td><span class="status-in">✅ Day 2</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>1</td><td>點心</td><td>Standard Bread（法式吐司）</td><td>海雲台</td>
+          <td><span class="status-in">✅ Day 5</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>1</td><td>點心</td><td>古來思魚糕</td><td>南浦洞</td>
+          <td><span class="status-in">✅ Day 3</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>1</td><td>點心</td><td>元祖糖餅</td><td>南浦洞</td>
+          <td><span class="status-in">✅ Day 3</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="food" data-status="in">
+          <td>1</td><td>點心</td><td>egg drop（吐司）</td><td>西面</td>
+          <td><span class="status-in">✅ Day 3</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== 景點 ===== -->
+  <div class="info-box">
+    <h3>📍 景點清單</h3>
+    <table class="list-table">
+      <thead>
+        <tr><th>志願</th><th>小類別</th><th>名稱</th><th>地區</th><th>狀態</th></tr>
+      </thead>
+      <tbody>
+        <tr class="in-schedule" data-type="spot" data-status="in">
+          <td>1</td><td>PASS</td><td>Skyline Luge 斜坡滑車 🔥</td><td>機張</td>
+          <td><span class="status-in">✅ Day 2</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="spot" data-status="in">
+          <td>1</td><td>PASS</td><td>Busan X the SKY 🔥</td><td>海雲台</td>
+          <td><span class="status-in">✅ Day 2</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="spot" data-status="in">
+          <td>1</td><td>PASS</td><td>Spa Land Centum City 汗蒸幕 🔥</td><td>海雲台</td>
+          <td><span class="status-in">✅ Day 2</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="spot" data-status="in">
+          <td>1</td><td>PASS</td><td>海雲台海岸列車 🔥</td><td>海雲台</td>
+          <td><span class="status-in">✅ Day 2</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="spot" data-status="in">
+          <td>1</td><td>PASS</td><td>Running Man 體驗館</td><td>西面</td>
+          <td><span class="status-in">✅ Day 3</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="spot" data-status="in">
+          <td>2</td><td>PASS</td><td>松島海上纜車 🔥</td><td>松島</td>
+          <td><span class="status-in">✅ Day 3</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="spot" data-status="in">
+          <td>2</td><td>PASS</td><td>松島龍宮雲橋</td><td>松島</td>
+          <td><span class="status-in">✅ Day 3</span></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="spot" data-status="out">
+          <td>2</td><td>PASS</td><td>ClubD Oasis 汗蒸幕水上樂園 🔥</td><td>海雲台</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">Day 2 已排 Spa Land，同類型汗蒸幕衝突。可替換 Spa Land（規模更大）</div></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="spot" data-status="out">
+          <td>2</td><td>PASS</td><td>Flipbook Studio 手翻書 🔥</td><td>甘川洞</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">需消耗 2 張 PASS 券，Day 4 到甘川洞時 PASS 已過期（48hr）</div></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="spot" data-status="out">
+          <td>3</td><td>PASS</td><td>釜山 Brick Campus</td><td>機張</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">志願 3 + Day 2 機張行程已滿（Luge + 咖啡 + 午餐），時間不夠</div></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="spot" data-status="out">
+          <td>3</td><td>PASS</td><td>國立釜山科學館</td><td>機張</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">志願 3 + Day 2 機張行程已滿，且下午要趕回海雲台用 PASS</div></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="spot" data-status="out">
+          <td>3</td><td>PASS</td><td>Arte Museum 釜山</td><td>影島</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">志願 3 + Day 4 影島時間有限（白淺灘+咖啡已佔 2hr），可加入若精簡甘川洞</div></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="spot" data-status="out">
+          <td>3</td><td>PASS</td><td>釜山鑽石灣遊艇</td><td>廣安里</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">志願 3 + 需提前預約 + Day 4 廣安里已排烤肉+海邊，時間不足</div></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="spot" data-status="out">
+          <td>3</td><td>PASS</td><td>海雲台 HAEON 韓服租借</td><td>海雲台</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">志願 3 + 海雲台行程已很滿（Day 2 全天、Day 5 半天），可加入 Day 5 早上</div></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="spot" data-status="out">
+          <td>3</td><td>PASS</td><td>釜山塔 🔥</td><td>南浦洞</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">志願 3 + Day 3 南浦洞晚上已排市場+購物，可加入若縮短逛街時間</div></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="spot" data-status="out">
+          <td>3</td><td>PASS</td><td>釜山電影體驗博物館</td><td>南浦洞</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">志願 3 + Day 3 南浦洞時間已滿，優先排了吃的和購物</div></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="spot" data-status="out">
+          <td>3</td><td>PASS</td><td>甘川浪漫韓服 🔥</td><td>甘川洞</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">志願 3 + Day 4 甘川洞已排 2hr 散步，加韓服需額外 1hr 且 PASS 已過期</div></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="spot" data-status="out">
+          <td>3</td><td>PASS</td><td>ibgogage 韓服／制服體驗 🔥</td><td>甘川洞</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">同上，甘川洞韓服三選一即可，且 PASS 已過期需自費</div></td>
+        </tr>
+        <tr class="not-in-schedule" data-type="spot" data-status="out">
+          <td>3</td><td>PASS</td><td>哲秀與英采韓服租借 🔥</td><td>甘川洞</td>
+          <td><span class="status-out">❌ 未排入</span><div class="reason">同上，甘川洞韓服三選一即可，且 PASS 已過期需自費</div></td>
+        </tr>
+        <tr class="in-schedule" data-type="spot" data-status="in">
+          <td>1</td><td>景點</td><td>青沙浦天空步道</td><td>海雲台</td>
+          <td><span class="status-in">✅ Day 2</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="spot" data-status="in">
+          <td>2</td><td>景點</td><td>BIFF 廣場</td><td>南浦洞</td>
+          <td><span class="status-in">✅ Day 3</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="spot" data-status="in">
+          <td>2</td><td>景點</td><td>田埔咖啡街</td><td>西面</td>
+          <td><span class="status-in">✅ Day 3</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="spot" data-status="in">
+          <td>2</td><td>景點</td><td>白淺灘文化村</td><td>影島</td>
+          <td><span class="status-in">✅ Day 4</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="spot" data-status="in">
+          <td>1</td><td>購物</td><td>樂天 Outlet</td><td>西面</td>
+          <td><span class="status-in">✅ Day 3</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="spot" data-status="in">
+          <td>2</td><td>購物</td><td>富平罐頭市場</td><td>南浦洞</td>
+          <td><span class="status-in">✅ Day 3</span></td>
+        </tr>
+        <tr class="in-schedule" data-type="spot" data-status="in">
+          <td>2</td><td>購物</td><td>BIFF 廣場（光復路時尚街）</td><td>南浦洞</td>
+          <td><span class="status-in">✅ Day 3</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ===== 統計 ===== -->
+  <div class="info-box">
+    <h3>📊 排入統計</h3>
+    <table class="budget-table">
+      <tr><th>類別</th><th>總數</th><th>已排入</th><th>未排入</th></tr>
+      <tr><td>🍽️ 食物</td><td>22</td><td>19</td><td>3</td></tr>
+      <tr><td>📍 景點（PASS）</td><td>18</td><td>7</td><td>11</td></tr>
+      <tr><td>📍 景點（一般+購物）</td><td>7</td><td>7</td><td>0</td></tr>
+      <tr class="total"><td>合計</td><td>47</td><td>33</td><td>14</td></tr>
+    </table>
+    <p style="margin-top:10px;font-size:0.85em;color:var(--gray)">
+      💡 食物排入率 86%（僅 3 項因同區同類型衝突未排入）<br>
+      💡 PASS 景點排入率 39%（受 48hr 時間限制，優先排志願 1-2 高價值景點）<br>
+      💡 一般景點+購物排入率 100%
+    </p>
+  </div>
+</div>
+
 <!-- ==================== 預算 ==================== -->
 <div class="section" id="budget">
   <div class="day-header">
@@ -1364,14 +1679,33 @@
 
 <script>
 // Tab switching
-document.querySelectorAll('.tab').forEach(function(tab) {
-  tab.addEventListener('click', function() {
-    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
-    document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.tab).classList.add('active');
-  });
-});
+function switchTab(btn, tabId) {
+  var tabs = document.querySelectorAll('.tab');
+  var sections = document.querySelectorAll('.section');
+  for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
+  for (var j = 0; j < sections.length; j++) { sections[j].classList.remove('active'); }
+  btn.classList.add('active');
+  var target = document.getElementById(tabId);
+  if (target) { target.classList.add('active'); }
+  window.scrollTo(0, 0);
+}
+
+// Filter list items
+function filterList(type, btn) {
+  var btns = document.querySelectorAll('.filter-btn');
+  for (var i = 0; i < btns.length; i++) { btns[i].classList.remove('active'); }
+  btn.classList.add('active');
+  var rows = document.querySelectorAll('.list-table tbody tr');
+  for (var j = 0; j < rows.length; j++) {
+    var row = rows[j];
+    var show = true;
+    if (type === 'in') { show = row.getAttribute('data-status') === 'in'; }
+    else if (type === 'out') { show = row.getAttribute('data-status') === 'out'; }
+    else if (type === 'food') { show = row.getAttribute('data-type') === 'food'; }
+    else if (type === 'spot') { show = row.getAttribute('data-type') === 'spot'; }
+    row.style.display = show ? '' : 'none';
+  }
+}
 
 // Toggle card detail
 function toggleDetail(el) {
