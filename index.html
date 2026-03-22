@@ -44,6 +44,24 @@
   }
   .header h1 { font-size: 1.5em; margin-bottom: 4px; }
   .header .subtitle { opacity: 0.9; font-size: 0.9em; }
+  .trip-info-cards {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .trip-card {
+    background: rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 8px 14px;
+    text-align: center;
+    min-width: 100px;
+    backdrop-filter: blur(4px);
+  }
+  .trip-card-icon { font-size: 1.2em; }
+  .trip-card-label { font-size: 0.7em; opacity: 0.8; margin-top: 2px; }
+  .trip-card-value { font-size: 0.85em; font-weight: 600; margin-top: 2px; }
   .tabs {
     display: flex;
     overflow-x: auto;
@@ -282,32 +300,102 @@
     font-size: 0.85em;
   }
   .optional-box h4 { color: #b45309; margin-bottom: 6px; }
-  .progress-bar {
-    height: 4px;
-    background: rgba(255,255,255,0.3);
-    border-radius: 2px;
-    margin-top: 8px;
-    overflow: hidden;
+  .pass-overview {
+    background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
+    border: 2px solid #f59e0b;
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 16px;
   }
-  .progress-fill {
-    height: 100%;
-    background: white;
-    border-radius: 2px;
-    transition: width 0.3s;
-  }
-  .summary-stat {
+  .pass-header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .pass-title { font-size: 1.1em; font-weight: 700; color: #92400e; }
+  .pass-sub { font-size: 0.8em; color: #b45309; margin-top: 2px; }
+  .pass-savings { text-align: right; }
+  .pass-savings-label { font-size: 0.75em; color: #92400e; }
+  .pass-savings-amount { font-size: 1.5em; font-weight: 800; color: #dc2626; }
+  .pass-savings-ntd { font-size: 0.75em; color: #92400e; }
+  .pass-items { display: flex; flex-direction: column; gap: 6px; }
+  .pass-item {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.85em;
+  }
+  .pass-day {
+    background: #f59e0b;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    font-weight: 600;
+    margin-right: 10px;
+    white-space: nowrap;
+  }
+  .pass-name { flex: 1; }
+  .pass-save { color: #dc2626; font-weight: 600; font-size: 0.85em; white-space: nowrap; }
+  .pass-footer {
+    margin-top: 10px;
+    font-size: 0.8em;
+    color: #92400e;
+    text-align: center;
+    padding-top: 8px;
+    border-top: 1px dashed #f59e0b;
+  }
+  .day-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 12px;
+  }
+  .day-cost {
+    text-align: right;
+    font-weight: 700;
+    font-size: 1em;
+    color: #dc2626;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .day-cost span {
+    display: block;
+    font-size: 0.7em;
+    font-weight: 400;
+    color: var(--gray);
+  }
+  .day-tags {
+    display: flex;
+    gap: 6px;
     flex-wrap: wrap;
     margin-top: 8px;
-    justify-content: center;
   }
-  .stat {
-    background: rgba(255,255,255,0.2);
-    padding: 4px 12px;
-    border-radius: 8px;
-    font-size: 0.8em;
-    color: white;
+  .day-tag {
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: 500;
+  }
+  .card-cost {
+    text-align: right;
+    font-weight: 700;
+    font-size: 0.9em;
+    color: #dc2626;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+  .card-cost small {
+    display: block;
+    font-size: 0.7em;
+    font-weight: 400;
+    color: var(--gray);
   }
   @media (max-width: 480px) {
     .header h1 { font-size: 1.3em; }
@@ -392,28 +480,48 @@
 <body>
 
 <div class="header">
-  <h1>釜山五天四夜</h1>
-  <div class="subtitle">住宿：Centum City 地鐵站 | PASS 48hr</div>
-  <div class="progress-bar"><div class="progress-fill" id="totalProgress" style="width:0%"></div></div>
-  <div class="summary-stat" id="summaryStats"></div>
+  <h1>🇰🇷 釜山五天四夜</h1>
+  <div class="subtitle">부산 5일 4박 여행 플랜</div>
+  <div class="trip-info-cards">
+    <div class="trip-card"><div class="trip-card-icon">📍</div><div class="trip-card-label">住宿</div><div class="trip-card-value">Centum City</div></div>
+    <div class="trip-card"><div class="trip-card-icon">🎫</div><div class="trip-card-label">釜山PASS</div><div class="trip-card-value">48小時 × 2天</div></div>
+    <div class="trip-card"><div class="trip-card-icon">✈️</div><div class="trip-card-label">抵達</div><div class="trip-card-value">19:55</div></div>
+    <div class="trip-card"><div class="trip-card-icon">🛫</div><div class="trip-card-label">返程</div><div class="trip-card-value">21:05</div></div>
+  </div>
 </div>
 
 <div class="tabs" id="tabs">
-  <button type="button" class="tab active" onclick="switchTab(this,'prep')">行前準備</button>
-  <button type="button" class="tab" onclick="switchTab(this,'day1')">D1 抵達</button>
-  <button type="button" class="tab" onclick="switchTab(this,'day2')">D2 PASS 1</button>
-  <button type="button" class="tab" onclick="switchTab(this,'day3')">D3 PASS 2</button>
-  <button type="button" class="tab" onclick="switchTab(this,'day4')">D4 西南區</button>
-  <button type="button" class="tab" onclick="switchTab(this,'day5')">D5 回程</button>
-  <button type="button" class="tab" onclick="switchTab(this,'alllist')">完整清單</button>
-  <button type="button" class="tab" onclick="switchTab(this,'budget')">預算</button>
-  <button type="button" class="tab" onclick="switchTab(this,'backup')">備案</button>
+  <button type="button" class="tab active" onclick="switchTab(this,'prep')">📋 行前準備</button>
+  <button type="button" class="tab" onclick="switchTab(this,'day1')">✈️ D1 抵達</button>
+  <button type="button" class="tab" onclick="switchTab(this,'day2')">🏖️ D2 PASS①</button>
+  <button type="button" class="tab" onclick="switchTab(this,'day3')">🚡 D3 PASS②</button>
+  <button type="button" class="tab" onclick="switchTab(this,'day4')">🎨 D4 西南區</button>
+  <button type="button" class="tab" onclick="switchTab(this,'day5')">🛫 D5 回程</button>
+  <button type="button" class="tab" onclick="switchTab(this,'alllist')">📋 完整清單</button>
+  <button type="button" class="tab" onclick="switchTab(this,'budget')">💰 預算</button>
+  <button type="button" class="tab" onclick="switchTab(this,'backup')">🔄 備案</button>
 </div>
 
 <div class="container">
 
 <!-- ==================== 行前準備 ==================== -->
 <div class="section active" id="prep">
+  <div class="pass-overview">
+    <div class="pass-header">
+      <div><div class="pass-title">🎫 釜山PASS 48小時策略</div><div class="pass-sub">Visit Busan Pass · 建議購買 48小時（2天）</div></div>
+      <div class="pass-savings"><div class="pass-savings-label">預估省下</div><div class="pass-savings-amount">₩70,000</div><div class="pass-savings-ntd">約 NT$1,680</div></div>
+    </div>
+    <div class="pass-items">
+      <div class="pass-item"><span class="pass-day">Day 2</span><span class="pass-name">Skyline Luge 斜坡滑車</span><span class="pass-save">省 ₩28,000</span></div>
+      <div class="pass-item"><span class="pass-day">Day 2</span><span class="pass-name">Busan X the SKY</span><span class="pass-save">省 ₩27,000</span></div>
+      <div class="pass-item"><span class="pass-day">Day 2</span><span class="pass-name">海雲台海岸列車</span><span class="pass-save">省 ₩7,000</span></div>
+      <div class="pass-item"><span class="pass-day">Day 2</span><span class="pass-name">Spa Land 汗蒸幕</span><span class="pass-save">省 ₩20,000</span></div>
+      <div class="pass-item"><span class="pass-day">Day 3</span><span class="pass-name">Running Man 體驗館</span><span class="pass-save">省 ₩18,000</span></div>
+      <div class="pass-item"><span class="pass-day">Day 3</span><span class="pass-name">松島海上纜車</span><span class="pass-save">省 ₩17,000</span></div>
+      <div class="pass-item"><span class="pass-day">Day 3</span><span class="pass-name">松島龍宮雲橋</span><span class="pass-save">省 ₩8,000</span></div>
+    </div>
+    <div class="pass-footer">PASS 售價 ₩55,000 → 使用價值 ₩125,000 → <strong>淨省 ₩70,000</strong></div>
+  </div>
   <div class="info-box">
     <h3>必裝 APP</h3>
     <div class="app-grid">
@@ -488,8 +596,12 @@
 <!-- ==================== DAY 1 ==================== -->
 <div class="section" id="day1">
   <div class="day-header">
-    <h2>Day 1 - 抵達釜山</h2>
-    <div class="meta">19:55 抵達金海機場 到 Centum City | 輕鬆夜晚</div>
+    <div class="day-header-top">
+      <h2>Day 1 ✈️ 抵達釜山</h2>
+      <div class="day-cost">約₩25,000<span>（約NT$600）</span></div>
+    </div>
+    <div class="meta">19:55 抵達金海機場 → Centum City ｜ 輕鬆夜晚</div>
+    <div class="day-tags"><span class="day-tag">機場換匯</span><span class="day-tag">入住飯店</span><span class="day-tag">深夜宵夜</span></div>
   </div>
 
   <div class="transport-card">
@@ -511,6 +623,7 @@
         <div class="card-title">puradak 炸雞 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">宵夜 | 海雲台 | W18,000~22,000/份</div>
       </div>
+      <div class="card-cost">₩20,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -537,8 +650,12 @@
 <!-- ==================== DAY 2 ==================== -->
 <div class="section" id="day2">
   <div class="day-header">
-    <h2>Day 2 PASS Day 1 — 機張 + 海雲台</h2>
-    <div class="meta">啟用 48hr PASS | 高價值景點集中日 | PASS 價值約 W90,000+</div>
+    <div class="day-header-top">
+      <h2>Day 2 🎫 PASS Day① — 機張 + 海雲台</h2>
+      <div class="day-cost">約₩45,000<span>（約NT$1,080）</span></div>
+    </div>
+    <div class="meta">🔥 啟用 48hr PASS ｜ 高價值景點集中日 ｜ PASS 價值約 ₩90,000+</div>
+    <div class="day-tags"><span class="day-tag">Luge滑車</span><span class="day-tag">海景咖啡</span><span class="day-tag">觀景台</span><span class="day-tag">海岸列車</span><span class="day-tag">汗蒸幕</span></div>
   </div>
 
   <div class="transport-card">
@@ -555,6 +672,7 @@
         <div class="card-title">Skyline Luge 斜坡滑車 <span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">機張 | 原價 W28,000 | ~1.5hr（含排隊）</div>
       </div>
+      <div class="card-cost" style="color:#f59e0b">PASS</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -579,6 +697,7 @@
         <div class="card-title">coralani 躺椅咖啡廳 <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">下午茶 | 機張 | W7,000~9,000</div>
       </div>
+      <div class="card-cost">₩8,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -603,6 +722,7 @@
         <div class="card-title">釜山龍宮海鮮炸醬麵 <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">午餐 | 機張 | W9,000~11,000</div>
       </div>
+      <div class="card-cost">₩10,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -632,6 +752,7 @@
         <div class="card-title">Busan X the SKY <span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">世界最高星巴克 | 海雲台 | 原價 W27,000</div>
       </div>
+      <div class="card-cost" style="color:#f59e0b">PASS</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -657,6 +778,7 @@
         <div class="card-title">自然島鹽麵包 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">點心 | 海雲台 | W3,500~5,000</div>
       </div>
+      <div class="card-cost">₩4,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -680,6 +802,7 @@
         <div class="card-title">海雲台海岸列車（藍線公園）<span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">海雲台到青沙浦 | 原價 W7,000（單程）</div>
       </div>
+      <div class="card-cost" style="color:#f59e0b">PASS</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -704,6 +827,7 @@
         <div class="card-title">青沙浦天空步道 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">免費景點 | 海雲台（青沙浦站下車即到）</div>
       </div>
+      <div class="card-cost" style="color:#16a34a">免費</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -727,6 +851,7 @@
         <div class="card-title">diart coffee <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">點心 | 海雲台 | W6,000~9,000</div>
       </div>
+      <div class="card-cost">₩8,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -750,6 +875,7 @@
         <div class="card-title">海雲台 31 公分海鮮刀削麵 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">晚餐 | 海雲台 | W10,000~12,000</div>
       </div>
+      <div class="card-cost">₩11,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -779,6 +905,7 @@
         <div class="card-title">Spa Land 汗蒸幕 <span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">海雲台 Centum City | 原價 W18,000~22,000 | 走一天完美收尾</div>
       </div>
+      <div class="card-cost" style="color:#f59e0b">PASS</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -807,8 +934,12 @@
 <!-- ==================== DAY 3 ==================== -->
 <div class="section" id="day3">
   <div class="day-header">
-    <h2>Day 3 PASS Day 2 — 西面 + 松島 + 南浦洞</h2>
-    <div class="meta">PASS 持續中 | 西南區一日遊 | 美食 + 購物重點日</div>
+    <div class="day-header-top">
+      <h2>Day 3 🎫 PASS Day② — 西面 + 松島 + 南浦洞</h2>
+      <div class="day-cost">約₩50,000<span>（約NT$1,200）</span></div>
+    </div>
+    <div class="meta">🔥 PASS 持續中 ｜ 西南區一日遊 ｜ 美食 + 購物重點日</div>
+    <div class="day-tags"><span class="day-tag">Running Man</span><span class="day-tag">購物</span><span class="day-tag">海上纜車</span><span class="day-tag">南浦美食</span><span class="day-tag">市場</span></div>
   </div>
 
   <div class="transport-card">
@@ -825,6 +956,7 @@
         <div class="card-title">egg drop 吐司 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">點心/早餐 | 西面 | W5,000~7,000</div>
       </div>
+      <div class="card-cost">₩6,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -848,6 +980,7 @@
         <div class="card-title">Running Man 體驗館 <span class="badge badge-pass">PASS</span> <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">西面 | 原價 W18,000 | ~1.5hr</div>
       </div>
+      <div class="card-cost" style="color:#f59e0b">PASS</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -894,6 +1027,7 @@
         <div class="card-title">螞蟻家辣炒章魚 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">午餐 | 西面 | W15,000~18,000/人</div>
       </div>
+      <div class="card-cost">₩16,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -946,6 +1080,7 @@
         <div class="card-title">松島海上纜車 <span class="badge badge-pass">PASS</span> <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">松島 | 原價 W17,000（水晶車廂）</div>
       </div>
+      <div class="card-cost" style="color:#f59e0b">PASS</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -969,6 +1104,7 @@
         <div class="card-title">松島龍宮雲橋 <span class="badge badge-pass">PASS</span> <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">松島 | 纜車下來順遊</div>
       </div>
+      <div class="card-cost" style="color:#f59e0b">PASS</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -997,6 +1133,7 @@
         <div class="card-title">古來思魚糕 + 元祖糖餅 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">點心 | 南浦洞 | W3,000~5,000 each</div>
       </div>
+      <div class="card-cost">₩5,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1023,6 +1160,7 @@
         <div class="card-title">南浦雪濃湯 <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">晚餐 | 南浦洞 | W9,000~11,000</div>
       </div>
+      <div class="card-cost">₩10,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1073,6 +1211,7 @@
         <div class="card-title">紅豆奶油艾草糕 <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">點心 | 南浦洞 | W3,000~4,000</div>
       </div>
+      <div class="card-cost">₩3,500</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1097,8 +1236,12 @@
 <!-- ==================== DAY 4 ==================== -->
 <div class="section" id="day4">
   <div class="day-header">
-    <h2>Day 4 — 影島 + 甘川洞 + 廣安里</h2>
-    <div class="meta">文青路線 | 海景咖啡 + 彩色村莊 + 烤肉收尾</div>
+    <div class="day-header-top">
+      <h2>Day 4 🎨 影島 + 甘川洞 + 廣安里</h2>
+      <div class="day-cost">約₩55,000<span>（約NT$1,320）</span></div>
+    </div>
+    <div class="meta">文青路線 ｜ 海景咖啡 + 彩色村莊 + 烤肉收尾</div>
+    <div class="day-tags"><span class="day-tag">海景咖啡</span><span class="day-tag">白淺灘</span><span class="day-tag">甘川文化村</span><span class="day-tag">廣安里烤肉</span></div>
   </div>
 
   <div class="transport-card">
@@ -1115,6 +1258,7 @@
         <div class="card-title">白淺灘文化村 <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">景點 | 影島 | 免費</div>
       </div>
+      <div class="card-cost" style="color:#16a34a">免費</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1139,6 +1283,7 @@
         <div class="card-title">THRILL ON THE MUG 海景咖啡廳 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">下午茶 | 影島 | W7,000~10,000</div>
       </div>
+      <div class="card-cost">₩8,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1168,6 +1313,7 @@
         <div class="card-title">甘川洞文化村 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">景點 | 甘川洞 | 免費入村（蓋章地圖 W2,000）</div>
       </div>
+      <div class="card-cost">₩2,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1199,6 +1345,7 @@
         <div class="card-title">All Sunday 貝果 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">點心 | 廣安里 | W4,000~6,000</div>
       </div>
+      <div class="card-cost">₩5,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1222,6 +1369,7 @@
         <div class="card-title">廣安里海邊散步</div>
         <div class="card-sub">免費 | 看廣安大橋 | 悠閒時光</div>
       </div>
+      <div class="card-cost" style="color:#16a34a">免費</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1241,6 +1389,7 @@
         <div class="card-title">83 獬豸烤肉 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">晚餐 | 廣安里 | W18,000~25,000/人</div>
       </div>
+      <div class="card-cost">₩22,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1272,6 +1421,7 @@
         <div class="card-title">Busan Bada Sand 奶油餅乾 <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">伴手禮/點心 | 海雲台 | W15,000~20,000/盒</div>
       </div>
+      <div class="card-cost">₩18,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1299,8 +1449,12 @@
 <!-- ==================== DAY 5 ==================== -->
 <div class="section" id="day5">
   <div class="day-header">
-    <h2>Day 5 - 最後巡禮 + 回程</h2>
-    <div class="meta">21:05 飛機 | 海雲台悠閒半日 | 16:30 前出發去機場</div>
+    <div class="day-header-top">
+      <h2>Day 5 ✈️ 最後巡禮 + 回程</h2>
+      <div class="day-cost">約₩45,000<span>（約NT$1,080）</span></div>
+    </div>
+    <div class="meta">21:05 飛機 ｜ 海雲台悠閒半日 ｜ 16:30 前出發去機場</div>
+    <div class="day-tags"><span class="day-tag">鮑魚粥</span><span class="day-tag">烤肉</span><span class="day-tag">伴手禮</span><span class="day-tag">機場退稅</span></div>
   </div>
 
   <div class="card food" data-id="d5-1">
@@ -1311,6 +1465,7 @@
         <div class="card-title">大海鮑魚粥 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">早午餐 | 海雲台 | W12,000~15,000</div>
       </div>
+      <div class="card-cost">₩13,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1334,6 +1489,7 @@
         <div class="card-title">Standard Bread 法式吐司 <span class="badge badge-p1">志願1</span></div>
         <div class="card-sub">點心 | 海雲台 | W5,000~7,000</div>
       </div>
+      <div class="card-cost">₩6,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1357,6 +1513,7 @@
         <div class="card-title">海雲台海邊最後散步</div>
         <div class="card-sub">免費 | 最後看一眼釜山的海</div>
       </div>
+      <div class="card-cost" style="color:#16a34a">免費</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1375,6 +1532,7 @@
         <div class="card-title">伍班長烤肉 <span class="badge badge-p2">志願2</span></div>
         <div class="card-sub">午餐 | 海雲台 | W18,000~22,000/人</div>
       </div>
+      <div class="card-cost">₩20,000</div>
       <span class="card-expand">&#9660;</span>
     </div>
     <div class="card-detail">
@@ -1846,7 +2004,6 @@ function toggleCheck(el) {
     checks[id] = el.classList.contains('checked');
     localStorage.setItem('busan_checks', JSON.stringify(checks));
   }
-  updateProgress();
 }
 
 // Save notes
@@ -1877,29 +2034,6 @@ function loadState() {
       if (input) input.value = notes[id];
     }
   });
-  updateProgress();
-}
-
-// Update progress using safe DOM methods
-function updateProgress() {
-  var total = document.querySelectorAll('.card[data-id]').length;
-  var done = document.querySelectorAll('.card.done').length;
-  var pct = total > 0 ? (done / total * 100) : 0;
-  document.getElementById('totalProgress').style.width = pct + '%';
-
-  var statsEl = document.getElementById('summaryStats');
-  // Clear existing children
-  while (statsEl.firstChild) { statsEl.removeChild(statsEl.firstChild); }
-
-  var doneSpan = document.createElement('span');
-  doneSpan.className = 'stat';
-  doneSpan.textContent = done + '/' + total + ' 完成';
-  statsEl.appendChild(doneSpan);
-
-  var remainSpan = document.createElement('span');
-  remainSpan.className = 'stat';
-  remainSpan.textContent = (total - done) + ' 剩餘';
-  statsEl.appendChild(remainSpan);
 }
 
 // Share
