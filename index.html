@@ -184,18 +184,19 @@ tailwind.config = {
   <div class="pass-overview">
     <div class="pass-header">
       <div><div class="pass-title">🎫 釜山PASS 48小時策略</div><div class="pass-sub">Visit Busan Pass · 建議購買 48小時（2天）</div></div>
-      <div class="pass-savings"><div class="pass-savings-label">預估省下</div><div class="pass-savings-amount">₩70,000</div><div class="pass-savings-ntd">約 NT$1,680</div></div>
+      <div class="pass-savings"><div class="pass-savings-label">預估省下</div><div class="pass-savings-amount">₩114,000</div><div class="pass-savings-ntd">約 NT$2,736</div></div>
     </div>
     <div class="pass-items">
       <div class="pass-item"><span class="pass-day">Day 2</span><span class="pass-name">Skyline Luge 斜坡滑車</span><span class="pass-save">省 ₩28,000</span></div>
       <div class="pass-item"><span class="pass-day">Day 2</span><span class="pass-name">Busan X the SKY</span><span class="pass-save">省 ₩27,000</span></div>
       <div class="pass-item"><span class="pass-day">Day 2</span><span class="pass-name">海雲台海岸列車</span><span class="pass-save">省 ₩7,000</span></div>
+      <div class="pass-item"><span class="pass-day">Day 2</span><span class="pass-name">天空膠囊列車 Sky Capsule</span><span class="pass-save">省 ₩44,000</span></div>
       <div class="pass-item"><span class="pass-day">Day 2</span><span class="pass-name">Spa Land 汗蒸幕</span><span class="pass-save">省 ₩20,000</span></div>
       <div class="pass-item"><span class="pass-day">Day 3</span><span class="pass-name">Running Man 體驗館</span><span class="pass-save">省 ₩18,000</span></div>
       <div class="pass-item"><span class="pass-day">Day 3</span><span class="pass-name">松島海上纜車</span><span class="pass-save">省 ₩17,000</span></div>
       <div class="pass-item"><span class="pass-day">Day 3</span><span class="pass-name">松島龍宮雲橋</span><span class="pass-save">省 ₩8,000</span></div>
     </div>
-    <div class="pass-footer">PASS 售價 ₩55,000 → 使用價值 ₩125,000 → <strong>淨省 ₩70,000</strong></div>
+    <div class="pass-footer">PASS 售價 ₩55,000 → 使用價值 ₩169,000 → <strong>淨省 ₩114,000</strong></div>
   </div>
   <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
     <h3 class="font-black text-mint text-base mb-3">📱 必裝 APP</h3>
@@ -412,7 +413,7 @@ tailwind.config = {
           </div>
         </div>
         <div class="mt-2">
-          <p class="text-sm text-warmgray/70">★ Luge滑車 · 海景咖啡 · 觀景台 · 海岸列車 · 汗蒸幕</p>
+          <p class="text-sm text-warmgray/70">★ Luge滑車 · 海景咖啡 · 觀景台 · 海岸列車 · 膠囊列車 · 汗蒸幕</p>
         </div>
         <div class="flex flex-wrap gap-1 mt-2">
           <span class="px-2 py-0.5 text-xs rounded-full bg-mint-light text-mint font-bold">Luge滑車</span>
@@ -667,6 +668,51 @@ tailwind.config = {
     </div>
   </div>
 </div>
+
+  <!-- Transport: 青沙浦 → 膠囊列車 -->
+  <div class="flex gap-3 mb-2">
+    <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
+    <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
+      <span class="text-sm shrink-0">🚶</span><div><strong>青沙浦步道 → 膠囊列車 青沙浦站</strong><br>步行約 3 分鐘 ｜ 步道出來就是搭乘處</div>
+    </div>
+  </div>
+
+  <!-- D2: 膠囊列車 Sky Capsule -->
+  <div class="flex gap-4 mb-4" data-id="d2-7b">
+  <div class="flex flex-col items-center pt-4">
+    <div class="timeline-dot" style="color: #7db8d4; background: #7db8d4;"></div>
+    <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
+  </div>
+  <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
+    <div class="card-img pass"><span class="card-img-icon">🔮</span><div class="card-img-info"><div class="card-img-title">天空膠囊列車 Sky Capsule</div><div class="card-img-area">16:30 - 17:15 · 青沙浦→松亭 · PASS</div></div><div class="card-img-cost">PASS</div></div>
+    <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
+      <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
+      <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
+    </div>
+    <div class="card-detail hidden px-4 pb-4 text-sm border-t-2 border-dashed border-warmgray/10">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">블루라인파크 스카이캡슐</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">4 人座透明膠囊，在高架軌道上沿海岸線行駛，360度全景視野！比海岸列車更高更開闊</span></div>
+      <div class="detail-row"><span class="detail-label">路線</span><span class="detail-value">青沙浦站 → 松亭站（單程約 30 分鐘）</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">單程約 30 分鐘</span></div>
+      <div class="detail-row"><span class="detail-label">韓文地址</span><span class="detail-value">부산광역시 해운대구 청사포로 116（블루라인파크）</span></div>
+      <div class="detail-row"><span class="detail-label">營業時間</span><span class="detail-value">依季節 09:30~17:00/19:00/21:00（末班比海岸列車早，注意時間）</span></div>
+      <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">⚠️ 強烈建議預約！比海岸列車更熱門，經常秒殺。線上購票：bluelinepark.com</span></div>
+      <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">PASS 免費 ｜ 原價 2人 ₩44,000（NT$1,056）</span></div>
+      <div class="detail-row"><span class="detail-label">💡 攻略</span><span class="detail-value">跟海岸列車是不同設施！海岸列車在地面跑，膠囊在高架上。建議先搭海岸列車到青沙浦，逛完步道再搭膠囊到松亭，一路串起來不走回頭路。日落時段搭最美！</span></div>
+      <a href="https://map.naver.com/v5/search/%EB%B8%94%EB%A3%A8%EB%9D%BC%EC%9D%B8%ED%8C%8C%ED%81%AC%20%EC%8A%A4%EC%B9%B4%EC%9D%B4%EC%BA%A1%EC%8A%90" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-mint text-white hover:bg-mint/80 transition-colors mt-2">📍 Naver Map</a>
+      <a href="https://search.naver.com/search.naver?where=image&query=%EB%B8%94%EB%A3%A8%EB%9D%BC%EC%9D%B8%ED%8C%8C%ED%81%AC+%EC%8A%A4%EC%B9%B4%EC%9D%B4%EC%BA%A1%EC%8A%90" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-lavender text-white hover:bg-lavender/80 transition-colors mt-2 ml-1">📸 Naver 實景</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+</div>
+
+  <!-- Transport: 膠囊列車松亭站 → 返回海雲台 -->
+  <div class="flex gap-3 mb-2">
+    <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
+    <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
+      <span class="text-sm shrink-0">🚕</span><div><strong>松亭 → 海雲台 diart coffee</strong><br>Kakao T 叫車（約 15 分鐘）₩8,000（NT$192）｜ 或公車約 20 分鐘</div>
+    </div>
+  </div>
 
   <div class="flex gap-4 mb-4" data-id="d2-8">
   <div class="flex flex-col items-center pt-4">
