@@ -65,7 +65,8 @@
     border-top: 2px dashed #e0d8d0;
     transform: rotate(45deg);
   }
-  .map-fullwidth { margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); width: 100vw; position: relative; }
+  .map-fullwidth { width: 100%; overflow: hidden; position: relative; }
+  .map-fullwidth svg { transition: all 0.5s ease; }
   .venue-dot { cursor: pointer; transition: opacity 0.3s; }
 
   /* Now indicator */
@@ -2169,7 +2170,7 @@ tailwind.config = {
     <div class="border-b-2 border-dashed border-warmgray/15 mt-4"></div>
   </div>
   <div class="svg-map-container map-fullwidth">
-  <svg viewBox="0 0 1200 700" style="width:100%;height:auto;min-height:500px;background:#f5f3f0;border-radius:16px;" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 1200 700" style="width:100%;height:auto;max-height:70vh;background:#f5f3f0;border-radius:16px;" xmlns="http://www.w3.org/2000/svg">
   <!-- District background labels -->
   <text x="140" y="340" font-size="28" fill="#e0dcd5" font-weight="900">西區、南浦洞</text>
   <text x="480" y="180" font-size="28" fill="#e0dcd5" font-weight="900">東區</text>
@@ -2600,9 +2601,26 @@ function filterMapDots(day, btn) {
     if (day === 'all') {
       dots[j].style.opacity = '1';
     } else {
-      dots[j].style.opacity = dots[j].getAttribute('data-day') === day ? '1' : '0.08';
+      dots[j].style.opacity = dots[j].getAttribute('data-day') === day ? '1' : '0.05';
     }
   }
+
+  // Zoom to day area by changing viewBox
+  var svg = document.querySelector('.map-fullwidth svg');
+  if (!svg) return;
+
+  var views = {
+    'all': '0 0 1200 700',
+    '1': '900 140 350 200',
+    '2': '750 40 500 300',
+    '3': '130 140 600 420',
+    '4': '150 180 700 470',
+    '5': '850 150 300 200'
+  };
+
+  var targetView = views[day] || views['all'];
+  svg.style.transition = 'all 0.5s ease';
+  svg.setAttribute('viewBox', targetView);
 
   // Hide tooltip
   var tooltip = document.getElementById('mapTooltip');
