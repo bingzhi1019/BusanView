@@ -2676,29 +2676,11 @@ tailwind.config = {
 <!-- ==================== 地圖 ==================== -->
 <div class="section hidden" id="mapview">
   <div class="mb-6">
-    <h2 class="text-2xl font-black text-warmgray tracking-tight">🗺️ 地圖</h2>
-    <p class="text-sm text-warmgray/60 mt-2">切換景點地圖與地鐵路線圖</p>
+    <h2 class="text-2xl font-black text-warmgray tracking-tight">🗺️ 景點地圖</h2>
+    <p class="text-sm text-warmgray/60 mt-2">釜山地鐵路線圖 + 行程景點標示，按天數分色</p>
 
-    <!-- Map mode toggle -->
-    <div class="flex gap-2 mt-3 mb-4">
-      <button type="button" id="btnVenueMap" class="px-4 py-2 text-sm font-bold rounded-full bg-mint text-white" onclick="toggleMapMode('venue')">📍 景點地圖</button>
-      <button type="button" id="btnMetroMap" class="px-4 py-2 text-sm font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray" onclick="toggleMapMode('metro')">🚇 地鐵路線圖</button>
-    </div>
-
-    <!-- Metro map (hidden by default) -->
-    <div id="metroMapView" class="hidden mb-4">
-      <div class="rounded-2xl overflow-hidden border-2 border-dashed border-warmgray/15">
-        <img src="https://metro.nuua.travel/image/map-image/nuua_metro_busan_simplified_chinese.png" alt="釜山地鐵路線圖（中文版）" class="w-full" loading="lazy" onerror="this.style.display='none'">
-        <div class="flex gap-3 p-3 bg-warmgray-light/30 text-xs">
-          <a href="https://metro.nuua.travel/image/map-image/nuua_metro_busan_simplified_chinese.png" target="_blank" class="text-mint font-bold hover:underline">🔍 放大查看</a>
-          <a href="https://metro.nuua.travel/image/map-image/nuua_metro_busan_korean.png" target="_blank" class="text-warmgray/60 hover:underline">韓文版</a>
-          <a href="https://metro.nuua.travel/image/map-image/nuua_metro_busan_english.png" target="_blank" class="text-warmgray/60 hover:underline">英文版</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Venue map legend (shown by default) -->
-    <div id="venueMapLegend" class="flex flex-wrap gap-1 mt-3">
+    <!-- Venue map legend -->
+    <div class="flex flex-wrap gap-1 mt-3">
       <span class="px-2 py-0.5 text-xs rounded-full font-bold" style="background:#fef0e8;color:#f5a67d">● D1 수</span>
       <span class="px-2 py-0.5 text-xs rounded-full font-bold" style="background:#e8f2f8;color:#7db8d4">● D2 목</span>
       <span class="px-2 py-0.5 text-xs rounded-full font-bold" style="background:#e8f5ee;color:#7ec8a0">● D3 금</span>
@@ -2708,82 +2690,16 @@ tailwind.config = {
     </div>
     <div class="border-b-2 border-dashed border-warmgray/15 mt-4"></div>
   </div>
-  <div id="venueMapView">
   <div class="svg-map-container map-fullwidth">
   <svg viewBox="0 0 1200 700" style="width:100%;height:auto;max-height:70vh;background:#f5f3f0;border-radius:16px;" xmlns="http://www.w3.org/2000/svg">
+  <!-- Metro map background -->
+  <image href="https://metro.nuua.travel/image/map-image/nuua_metro_busan_simplified_chinese.png" x="0" y="0" width="1200" height="700" opacity="0.25" preserveAspectRatio="xMidYMid slice"/>
   <!-- District background labels -->
-  <text x="140" y="340" font-size="28" fill="#e0dcd5" font-weight="900">西區、南浦洞</text>
-  <text x="480" y="180" font-size="28" fill="#e0dcd5" font-weight="900">東區</text>
-  <text x="700" y="200" font-size="28" fill="#e0dcd5" font-weight="900">南區</text>
-  <text x="920" y="120" font-size="28" fill="#e0dcd5" font-weight="900">海雲台沿海</text>
-  <text x="310" y="580" font-size="28" fill="#e0dcd5" font-weight="900">影島區</text>
-
-  <!-- ===== METRO LINES ===== -->
-
-  <!-- G線 金海輕軌 (purple dashed) -->
-  <path d="M30,180 L120,180 L200,180" fill="none" stroke="#b5a3d4" stroke-width="6" stroke-dasharray="12,6" stroke-linecap="round"/>
-
-  <!-- 2號線 (green, horizontal main line) -->
-  <path d="M200,180 L350,180 L500,180 L580,180 L660,190 L750,195 L850,195 L950,190 L1050,180 L1150,170" fill="none" stroke="#4ecdc4" stroke-width="6" stroke-linecap="round"/>
-
-  <!-- 1號線 (coral/orange, vertical) -->
-  <path d="M350,60 L350,180 L340,250 L320,330 L310,400 L300,460" fill="none" stroke="#f5a67d" stroke-width="6" stroke-linecap="round"/>
-
-  <!-- 東海線 (blue, northeast) -->
-  <path d="M950,190 L1020,170 L1080,140 L1150,100" fill="none" stroke="#7db8d4" stroke-width="6" stroke-linecap="round"/>
-
-  <!-- ===== STATIONS ===== -->
-
-  <!-- 金海國際機場 -->
-  <circle cx="30" cy="180" r="6" fill="white" stroke="#b5a3d4" stroke-width="3"/>
-  <text x="30" y="210" text-anchor="middle" font-size="11" fill="#8a8580" font-weight="500">金海機場 ✈️</text>
-
-  <!-- 沙上 (transfer) -->
-  <circle cx="200" cy="180" r="8" fill="white" stroke="#666" stroke-width="3"/>
-  <circle cx="200" cy="180" r="4" fill="#666"/>
-  <text x="200" y="165" text-anchor="middle" font-size="11" fill="#8a8580" font-weight="600">沙上</text>
-
-  <!-- 西面 (transfer L1+L2) -->
-  <circle cx="350" cy="180" r="9" fill="white" stroke="#333" stroke-width="3"/>
-  <circle cx="350" cy="180" r="4" fill="#333"/>
-  <text x="350" y="165" text-anchor="middle" font-size="12" fill="#5a5550" font-weight="700">西面</text>
-
-  <!-- 田浦 -->
-  <circle cx="500" cy="180" r="5" fill="white" stroke="#4ecdc4" stroke-width="2.5"/>
-  <text x="500" y="168" text-anchor="middle" font-size="10" fill="#8a8580">田浦</text>
-
-  <!-- 大淵 -->
-  <circle cx="580" cy="180" r="5" fill="white" stroke="#4ecdc4" stroke-width="2.5"/>
-  <text x="580" y="168" text-anchor="middle" font-size="10" fill="#8a8580">大淵</text>
-
-  <!-- 金蓮山 -->
-  <circle cx="750" cy="195" r="5" fill="white" stroke="#4ecdc4" stroke-width="2.5"/>
-  <text x="750" y="215" text-anchor="middle" font-size="10" fill="#8a8580">金蓮山</text>
-
-  <!-- Centum City -->
-  <circle cx="850" cy="195" r="7" fill="white" stroke="#333" stroke-width="3"/>
-  <circle cx="850" cy="195" r="3" fill="#333"/>
-  <text x="850" y="183" text-anchor="middle" font-size="11" fill="#5a5550" font-weight="700">Centum City 🏨</text>
-
-  <!-- 海雲台 -->
-  <circle cx="1050" cy="180" r="6" fill="white" stroke="#4ecdc4" stroke-width="2.5"/>
-  <text x="1050" y="168" text-anchor="middle" font-size="11" fill="#8a8580" font-weight="600">海雲台</text>
-
-  <!-- 萇山 (Donghae) -->
-  <circle cx="1150" cy="100" r="5" fill="white" stroke="#7db8d4" stroke-width="2.5"/>
-  <text x="1150" y="90" text-anchor="middle" font-size="10" fill="#8a8580">萇山</text>
-
-  <!-- 南浦 -->
-  <circle cx="320" cy="330" r="5" fill="white" stroke="#f5a67d" stroke-width="2.5"/>
-  <text x="335" y="340" font-size="10" fill="#8a8580">南浦</text>
-
-  <!-- 札嘎其 -->
-  <circle cx="310" cy="400" r="5" fill="white" stroke="#f5a67d" stroke-width="2.5"/>
-  <text x="280" y="410" font-size="10" fill="#8a8580" text-anchor="end">札嘎其</text>
-
-  <!-- 草梁 -->
-  <circle cx="660" cy="190" r="5" fill="white" stroke="#4ecdc4" stroke-width="2.5"/>
-  <text x="660" y="210" text-anchor="middle" font-size="10" fill="#8a8580">草梁</text>
+  <text x="140" y="340" font-size="32" fill="#8a8580" font-weight="900" opacity="0.15">西區、南浦洞</text>
+  <text x="480" y="180" font-size="32" fill="#8a8580" font-weight="900" opacity="0.15">東區</text>
+  <text x="700" y="200" font-size="32" fill="#8a8580" font-weight="900" opacity="0.15">南區</text>
+  <text x="920" y="120" font-size="32" fill="#8a8580" font-weight="900" opacity="0.15">海雲台沿海</text>
+  <text x="310" y="580" font-size="32" fill="#8a8580" font-weight="900" opacity="0.15">影島區</text>
 
   <!-- ===== VENUE MARKERS - FOOD (coral pin) ===== -->
 
@@ -2928,17 +2844,6 @@ tailwind.config = {
     <text x="1045" y="283" font-size="9" fill="#f5a67d" font-weight="600">🥩 伍班長烤肉</text>
   </g>
 
-  <!-- ===== LEGEND ===== -->
-  <g transform="translate(30,560)">
-    <rect x="-10" y="-15" width="175" height="140" rx="10" fill="white" fill-opacity="0.85" stroke="#e0dcd5" stroke-width="1"/>
-    <line x1="0" y1="0" x2="25" y2="0" stroke="#7db8d4" stroke-width="4"/><text x="30" y="4" font-size="10" fill="#8a8580">東海線</text>
-    <line x1="0" y1="20" x2="25" y2="20" stroke="#f5a67d" stroke-width="4"/><text x="30" y="24" font-size="10" fill="#8a8580">1號線</text>
-    <line x1="0" y1="40" x2="25" y2="40" stroke="#4ecdc4" stroke-width="4"/><text x="30" y="44" font-size="10" fill="#8a8580">2號線</text>
-    <line x1="0" y1="60" x2="25" y2="60" stroke="#b5a3d4" stroke-width="4" stroke-dasharray="6,3"/><text x="30" y="64" font-size="10" fill="#8a8580">金海輕軌</text>
-    <circle cx="8" cy="80" r="4" fill="white" stroke="#888" stroke-width="2"/><text x="30" y="84" font-size="10" fill="#8a8580">車站</text>
-    <circle cx="8" cy="100" r="5" fill="#f5a67d"/><text x="30" y="104" font-size="10" fill="#8a8580">🍽️ 美食</text>
-    <circle cx="8" cy="120" r="5" fill="#4ecdc4"/><text x="30" y="124" font-size="10" fill="#8a8580">📍 景點</text>
-  </g>
 </svg>
 
 <div id="mapTooltip" class="map-tooltip hidden">
@@ -2955,6 +2860,13 @@ tailwind.config = {
   <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMapDots('4',this)">D4</button>
   <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMapDots('5',this)">D5</button>
 </div>
+<div class="text-center mt-2">
+  <a href="https://metro.nuua.travel/image/map-image/nuua_metro_busan_simplified_chinese.png" target="_blank" class="text-xs text-mint font-bold hover:underline">🔍 放大查看完整地鐵路線圖</a>
+  <span class="text-warmgray/30 mx-2">|</span>
+  <a href="https://metro.nuua.travel/image/map-image/nuua_metro_busan_korean.png" target="_blank" class="text-xs text-warmgray/50 hover:underline">韓文版</a>
+  <span class="text-warmgray/30 mx-2">|</span>
+  <a href="https://metro.nuua.travel/image/map-image/nuua_metro_busan_english.png" target="_blank" class="text-xs text-warmgray/50 hover:underline">英文版</a>
+</div>
 
   </div>
   <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
@@ -2970,7 +2882,7 @@ tailwind.config = {
       <div class="legend-item"><strong>廣安里（中）</strong>：Day 4 下午 海邊+烤肉</div>
     </div>
   </div>
-  </div><!-- close venueMapView -->
+  </div>
 </div>
 
 
@@ -3540,27 +3452,6 @@ document.addEventListener('touchend', function(e) {
   }
 }, { passive: true });
 
-// Toggle between venue map and metro map
-function toggleMapMode(mode) {
-  var venueMap = document.getElementById('venueMapView');
-  var metroMap = document.getElementById('metroMapView');
-  var venueLegend = document.getElementById('venueMapLegend');
-  var btnVenue = document.getElementById('btnVenueMap');
-  var btnMetro = document.getElementById('btnMetroMap');
-  if (mode === 'metro') {
-    if (venueMap) venueMap.classList.add('hidden');
-    if (venueLegend) venueLegend.classList.add('hidden');
-    if (metroMap) metroMap.classList.remove('hidden');
-    btnVenue.className = 'px-4 py-2 text-sm font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray';
-    btnMetro.className = 'px-4 py-2 text-sm font-bold rounded-full bg-mint text-white';
-  } else {
-    if (venueMap) venueMap.classList.remove('hidden');
-    if (venueLegend) venueLegend.classList.remove('hidden');
-    if (metroMap) metroMap.classList.add('hidden');
-    btnVenue.className = 'px-4 py-2 text-sm font-bold rounded-full bg-mint text-white';
-    btnMetro.className = 'px-4 py-2 text-sm font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray';
-  }
-}
 
 function updateDots(carousel) {
   var wrapper = carousel.parentElement;
