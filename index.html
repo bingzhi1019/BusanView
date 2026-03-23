@@ -40,7 +40,7 @@
   .pass-save { color: #e8882a; font-weight: 700; font-size: 0.85em; white-space: nowrap; }
   .pass-footer { margin-top: 12px; font-size: 0.8em; color: #c08830; text-align: center; padding-top: 10px; border-top: 2px dashed #f5c26b; }
 
-  /* SVG Map */
+  /* Map */
   .svg-map-container { margin-bottom: 16px; position: relative; }
   .map-tooltip {
     position: absolute;
@@ -65,11 +65,53 @@
     border-top: 2px dashed #e0d8d0;
     transform: rotate(45deg);
   }
-  .svg-map { width: 100%; height: auto; border-radius: 16px; border: 2px dashed #d0c8c0; background: #faf8f5; }
-  .map-fullwidth { margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); width: 100vw; }
-  .map-dot { cursor: pointer; transition: all 0.2s; }
-  .map-dot:hover { r: 9; stroke-width: 3; }
-  .map-dot.hidden { opacity: 0.1; }
+  .map-fullwidth { margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); width: 100vw; position: relative; }
+  .area-label {
+    background: white;
+    border: 2px solid;
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 12px;
+    line-height: 1.4;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    max-width: 180px;
+  }
+  .area-label-title {
+    font-weight: 900;
+    font-size: 13px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .area-label-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    color: white;
+    font-size: 12px;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .area-label-list {
+    font-size: 11px;
+    color: #6b6560;
+    line-height: 1.5;
+  }
+  .venue-marker-label {
+    background: white;
+    border: 2px solid;
+    border-radius: 8px;
+    padding: 3px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .leaflet-popup-content-wrapper { border-radius: 12px !important; }
 
   /* Now indicator */
   .now-indicator { text-align: center; padding: 10px 16px; font-size: 0.9em; font-weight: 700; display: none; cursor: pointer; border-radius: 0; }
@@ -126,6 +168,8 @@
   .copy-btn-cute:hover { background: #7db8d4; color: white; }
   .venue-photo { height: 128px; background-size: cover; background-position: center; background-color: #f0ede8; }
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" />
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -2171,130 +2215,21 @@ tailwind.config = {
     </div>
     <div class="border-b-2 border-dashed border-warmgray/15 mt-4"></div>
   </div>
-  <div class="svg-map-container map-fullwidth" style="min-height: 600px">
-  <svg viewBox="0 0 900 600" class="svg-map" xmlns="http://www.w3.org/2000/svg" onclick="if(event.target.tagName!=='circle')document.getElementById('mapTooltip').classList.add('hidden')">
-    <!-- Background -->
-    <rect width="900" height="600" fill="#f8fafc" rx="12"/>
-    
-    <!-- Sea area (bottom) -->
-    <path d="M0,350 Q200,320 450,340 Q700,360 900,330 L900,450 L0,450 Z" fill="#e0f2fe" opacity="0.5"/>
-    
-    <!-- Metro Line 1 (orange, vertical - north to south through Nopo, Seomyeon, Nampo, Jagalchi) -->
-    <path d="M400,30 L400,120 L380,180 L350,240 L320,300 L300,340" fill="none" stroke="#f97316" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
-    
-    <!-- Metro Line 2 (green, horizontal - Haeundae through Centum, Seomyeon to Sasang) -->
-    <path d="M780,180 L700,180 L620,185 L540,190 L460,195 L380,180 L300,170 L220,160 L140,155" fill="none" stroke="#22c55e" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
-    
-    <!-- Metro Line 4 (blue, Minam to Anpyeong) -->
-    <path d="M420,100 L460,130 L500,160 L540,190" fill="none" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
-    
-    <!-- Donghae Line (light blue, to Gijang/Luge area) -->
-    <path d="M700,180 L740,150 L790,120 L840,90" fill="none" stroke="#06b6d4" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
-    
-    <!-- Busan-Gimhae Light Rail (to airport) -->
-    <path d="M220,160 L170,130 L120,100 L70,80" fill="none" stroke="#a855f7" stroke-width="3" stroke-linecap="round" stroke-dasharray="8,4" opacity="0.4"/>
-    
-    <!-- Station dots and labels -->
-    <!-- 金海機場 -->
-    <circle cx="70" cy="80" r="5" fill="#a855f7" stroke="white" stroke-width="2"/>
-    <text x="70" y="70" text-anchor="middle" font-size="9" fill="#6b7280">金海機場 ✈️</text>
-    
-    <!-- 沙上 (transfer) -->
-    <circle cx="220" cy="160" r="6" fill="#666" stroke="white" stroke-width="2"/>
-    <text x="220" y="150" text-anchor="middle" font-size="9" fill="#6b7280">沙上</text>
-    
-    <!-- 西面 Seomyeon (transfer L1+L2) -->
-    <rect x="372" y="172" width="16" height="16" rx="3" fill="#374151" stroke="white" stroke-width="2"/>
-    <text x="380" y="168" text-anchor="middle" font-size="10" font-weight="600" fill="#374151">西面 서면</text>
-    
-    <!-- 南浦 Nampo -->
-    <circle cx="320" cy="300" r="5" fill="#f97316" stroke="white" stroke-width="2"/>
-    <text x="320" y="316" text-anchor="middle" font-size="9" fill="#6b7280">南浦 남포</text>
-    
-    <!-- 자갈치 Jagalchi -->
-    <circle cx="300" cy="340" r="5" fill="#f97316" stroke="white" stroke-width="2"/>
-    <text x="300" y="356" text-anchor="middle" font-size="9" fill="#6b7280">札嘎其</text>
-    
-    <!-- 金蓮山 Geumnyeonsan -->
-    <circle cx="540" cy="190" r="5" fill="#22c55e" stroke="white" stroke-width="2"/>
-    <text x="540" y="210" text-anchor="middle" font-size="9" fill="#6b7280">金蓮山</text>
-    
-    <!-- Centum City 🏨 -->
-    <rect x="612" y="177" width="16" height="16" rx="3" fill="#1e40af" stroke="white" stroke-width="2"/>
-    <text x="620" y="175" text-anchor="middle" font-size="10" font-weight="700" fill="#1e40af">🏨 Centum City</text>
-    
-    <!-- 海雲台 Haeundae -->
-    <circle cx="700" cy="180" r="5" fill="#22c55e" stroke="white" stroke-width="2"/>
-    <text x="700" y="198" text-anchor="middle" font-size="9" fill="#6b7280">海雲台</text>
-    
-    <!-- 機張 area -->
-    <circle cx="840" cy="90" r="5" fill="#06b6d4" stroke="white" stroke-width="2"/>
-    <text x="840" y="80" text-anchor="middle" font-size="9" fill="#6b7280">機張</text>
-    
-    <!-- Line labels -->
-    <text x="410" y="80" font-size="8" fill="#f97316" font-weight="600">1號線</text>
-    <text x="450" y="205" font-size="8" fill="#22c55e" font-weight="600">2號線</text>
-    <text x="760" y="140" font-size="8" fill="#06b6d4" font-weight="600">東海線</text>
-    <text x="100" y="95" font-size="8" fill="#a855f7" font-weight="600">輕軌</text>
-    
-    <!-- ===== VENUE MARKERS ===== -->
-    
-    <!-- Day 1 (slate) -->
-    <circle cx="710" cy="190" r="7" fill="#475569" stroke="white" stroke-width="2" class="map-dot" data-day="1" data-venues="d1-1" onclick="showVenueInfo(this)"><title>D1: puradak 炸雞（海雲台）</title></circle>
-
-    <!-- Day 2 (blue) -->
-    <circle cx="830" cy="75" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2" data-venues="d2-1" onclick="showVenueInfo(this)"><title>D2: Skyline Luge（機張）</title></circle>
-    <circle cx="850" cy="85" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2" data-venues="d2-2" onclick="showVenueInfo(this)"><title>D2: coralani（機張）</title></circle>
-    <circle cx="845" cy="100" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2" data-venues="d2-3" onclick="showVenueInfo(this)"><title>D2: 龍宮炸醬麵（機張）</title></circle>
-    <circle cx="715" cy="170" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2" data-venues="d2-4" onclick="showVenueInfo(this)"><title>D2: X the SKY（海雲台）</title></circle>
-    <circle cx="720" cy="185" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2" data-venues="d2-5,d2-8,d2-9" onclick="showVenueInfo(this)"><title>D2: 自然島+diart+31cm（海雲台）</title></circle>
-    <circle cx="760" cy="165" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2" data-venues="d2-6,d2-7" onclick="showVenueInfo(this)"><title>D2: 海岸列車+青沙浦（海雲台東）</title></circle>
-    <circle cx="625" cy="195" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2" data-venues="d2-10" onclick="showVenueInfo(this)"><title>D2: Spa Land（Centum City）</title></circle>
-
-    <!-- Day 3 (green) -->
-    <circle cx="370" cy="190" r="7" fill="#059669" stroke="white" stroke-width="2" class="map-dot" data-day="3" data-venues="d3-1,d3-2,d3-3,d3-4" onclick="showVenueInfo(this)"><title>D3: egg drop+Running Man+螞蟻家+樂天（西面）</title></circle>
-    <circle cx="355" cy="200" r="7" fill="#059669" stroke="white" stroke-width="2" class="map-dot" data-day="3" data-venues="d3-5" onclick="showVenueInfo(this)"><title>D3: 田埔咖啡街（西面南）</title></circle>
-    <circle cx="260" cy="340" r="7" fill="#059669" stroke="white" stroke-width="2" class="map-dot" data-day="3" data-venues="d3-6,d3-7" onclick="showVenueInfo(this)"><title>D3: 松島纜車+雲橋</title></circle>
-    <circle cx="310" cy="310" r="7" fill="#059669" stroke="white" stroke-width="2" class="map-dot" data-day="3" data-venues="d3-8,d3-9,d3-10,d3-11" onclick="showVenueInfo(this)"><title>D3: 魚糕+糖餅+雪濃湯+BIFF+富平（南浦洞）</title></circle>
-
-    <!-- Day 4 (amber) -->
-    <circle cx="340" cy="360" r="7" fill="#d97706" stroke="white" stroke-width="2" class="map-dot" data-day="4" data-venues="d4-1,d4-2" onclick="showVenueInfo(this)"><title>D4: 白淺灘+THRILL ON THE MUG（影島）</title></circle>
-    <circle cx="270" cy="310" r="7" fill="#d97706" stroke="white" stroke-width="2" class="map-dot" data-day="4" data-venues="d4-3" onclick="showVenueInfo(this)"><title>D4: 甘川文化村</title></circle>
-    <circle cx="550" cy="200" r="7" fill="#d97706" stroke="white" stroke-width="2" class="map-dot" data-day="4" data-venues="d4-4,d4-5,d4-6" onclick="showVenueInfo(this)"><title>D4: All Sunday+83烤肉（廣安里）</title></circle>
-    <circle cx="580" cy="215" r="7" fill="#d97706" stroke="white" stroke-width="2" class="map-dot" data-day="4" data-venues="d4-7" onclick="showVenueInfo(this)"><title>D4: Bada Sand</title></circle>
-
-    <!-- Day 5 (purple) -->
-    <circle cx="705" cy="175" r="7" fill="#7c3aed" stroke="white" stroke-width="2" class="map-dot" data-day="5" data-venues="d5-1,d5-2,d5-3,d5-4" onclick="showVenueInfo(this)"><title>D5: 鮑魚粥+Standard Bread+伍班長（海雲台）</title></circle>
-    
-    <!-- District labels (areas) -->
-    <text x="830" y="115" text-anchor="middle" font-size="11" font-weight="600" fill="#0284c7" opacity="0.5">機張區</text>
-    <text x="680" y="220" text-anchor="middle" font-size="11" font-weight="600" fill="#0284c7" opacity="0.5">海雲台</text>
-    <text x="540" y="230" text-anchor="middle" font-size="11" font-weight="600" fill="#0284c7" opacity="0.5">廣安里</text>
-    <text x="380" y="220" text-anchor="middle" font-size="11" font-weight="600" fill="#0284c7" opacity="0.5">西面</text>
-    <text x="300" y="330" text-anchor="middle" font-size="11" font-weight="600" fill="#0284c7" opacity="0.5">南浦洞</text>
-    <text x="250" cy="350" y="355" text-anchor="middle" font-size="11" font-weight="600" fill="#0284c7" opacity="0.5">松島</text>
-    <text x="350" y="375" text-anchor="middle" font-size="11" font-weight="600" fill="#0284c7" opacity="0.5">影島</text>
-    <text x="250" y="300" text-anchor="middle" font-size="11" font-weight="600" fill="#0284c7" opacity="0.5">甘川洞</text>
-    
-    <!-- Sea label -->
-    <text x="600" y="420" text-anchor="middle" font-size="14" fill="#93c5fd" font-weight="300" letter-spacing="6" opacity="0.6">大 韓 海 峽</text>
-  </svg>
-
+  <div class="svg-map-container map-fullwidth">
+  <div id="leafletMap" style="height: 550px; border-radius: 16px; z-index: 1;"></div>
   <div id="mapTooltip" class="map-tooltip hidden">
     <button onclick="document.getElementById('mapTooltip').classList.add('hidden')" class="absolute top-1 right-2 text-warmgray/50 hover:text-warmgray text-lg leading-none">&times;</button>
     <div id="mapTooltipContent"></div>
   </div>
-
-  <div class="flex gap-1 justify-center mt-3 flex-wrap">
-    <button type="button" class="px-3 py-1 text-xs font-bold rounded-full bg-mint text-white" onclick="filterMapDots('all',this)">全部</button>
-    <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMapDots('1',this)">D1</button>
-    <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMapDots('2',this)">D2</button>
-    <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMapDots('3',this)">D3</button>
-    <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMapDots('4',this)">D4</button>
-    <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMapDots('5',this)">D5</button>
+  <div class="flex gap-2 justify-center mt-3 flex-wrap px-4">
+    <button type="button" class="px-3 py-1 text-xs font-bold rounded-full bg-mint text-white" onclick="filterMap('all',this)">全部景點</button>
+    <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMap('1',this)">D1 抵達</button>
+    <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMap('2',this)">D2 機張+海雲台</button>
+    <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMap('3',this)">D3 西面+松島+南浦</button>
+    <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMap('4',this)">D4 影島+甘川+廣安</button>
+    <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMap('5',this)">D5 海雲台</button>
   </div>
-
-</div>
+  </div>
   <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
     <h3 class="font-black text-mint text-base mb-3">📍 地區分佈</h3>
     <div class="map-legend">
@@ -2466,100 +2401,346 @@ function resetAll() {
 // Init
 loadState();
 
-// Show venue info on dot click
-function showVenueInfo(dot) {
-  var venueIds = dot.getAttribute('data-venues');
-  if (!venueIds) return;
-  var ids = venueIds.split(',');
+// ===== LEAFLET MAP =====
+var busanMap = null;
+var mapMarkers = [];
+var mapLabels = [];
+
+var dayColors = {
+  '1': '#f5a67d',
+  '2': '#7db8d4',
+  '3': '#7ec8a0',
+  '4': '#b5a3d4',
+  '5': '#f5a67d'
+};
+
+// Area definitions with venues
+var areas = [
+  {
+    name: '機張', nameKr: '기장',
+    center: [35.244, 129.222],
+    color: '#7db8d4',
+    venues: [
+      { id: 'd2-1', name: 'Skyline Luge 斜坡滑車', lat: 35.244, lng: 129.220, day: '2' },
+      { id: 'd2-2', name: 'coralani 躺椅咖啡廳', lat: 35.246, lng: 129.223, day: '2' },
+      { id: 'd2-3', name: '龍宮海鮮炸醬麵', lat: 35.243, lng: 129.222, day: '2' }
+    ]
+  },
+  {
+    name: '海雲台', nameKr: '해운대',
+    center: [35.162, 129.165],
+    color: '#7db8d4',
+    venues: [
+      { id: 'd1-1', name: 'puradak 炸雞', lat: 35.163, lng: 129.164, day: '1' },
+      { id: 'd2-4', name: 'Busan X the SKY', lat: 35.160, lng: 129.160, day: '2' },
+      { id: 'd2-5', name: '自然島鹽麵包', lat: 35.163, lng: 129.163, day: '2' },
+      { id: 'd2-8', name: 'diart coffee', lat: 35.157, lng: 129.159, day: '2' },
+      { id: 'd2-9', name: '31cm 海鮮刀削麵', lat: 35.161, lng: 129.164, day: '2' },
+      { id: 'd5-1', name: '大海鮑魚粥', lat: 35.162, lng: 129.163, day: '5' },
+      { id: 'd5-2', name: 'Standard Bread', lat: 35.162, lng: 129.163, day: '5' },
+      { id: 'd5-4', name: '伍班長烤肉', lat: 35.162, lng: 129.163, day: '5' }
+    ]
+  },
+  {
+    name: '海雲台東（青沙浦）', nameKr: '청사포',
+    center: [35.173, 129.201],
+    color: '#7db8d4',
+    venues: [
+      { id: 'd2-6', name: '海岸列車 藍線公園', lat: 35.176, lng: 129.201, day: '2' },
+      { id: 'd2-7', name: '青沙浦天空步道', lat: 35.170, lng: 129.202, day: '2' }
+    ]
+  },
+  {
+    name: 'Centum City', nameKr: '센텀시티 🏨',
+    center: [35.169, 129.131],
+    color: '#374151',
+    venues: [
+      { id: 'd2-10', name: 'Spa Land 汗蒸幕', lat: 35.169, lng: 129.131, day: '2' },
+      { id: 'd4-7', name: 'Busan Bada Sand', lat: 35.161, lng: 129.162, day: '4' }
+    ]
+  },
+  {
+    name: '廣安里', nameKr: '광안리',
+    center: [35.153, 129.119],
+    color: '#b5a3d4',
+    venues: [
+      { id: 'd4-4', name: 'All Sunday 貝果', lat: 35.153, lng: 129.119, day: '4' },
+      { id: 'd4-5', name: '廣安里海邊', lat: 35.153, lng: 129.119, day: '4' },
+      { id: 'd4-6', name: '83 獬豸烤肉', lat: 35.154, lng: 129.119, day: '4' }
+    ]
+  },
+  {
+    name: '西面', nameKr: '서면',
+    center: [35.158, 129.059],
+    color: '#7ec8a0',
+    venues: [
+      { id: 'd3-1', name: 'egg drop 吐司', lat: 35.158, lng: 129.059, day: '3' },
+      { id: 'd3-2', name: 'Running Man 體驗館', lat: 35.157, lng: 129.058, day: '3' },
+      { id: 'd3-3', name: '樂天百貨', lat: 35.156, lng: 129.060, day: '3' },
+      { id: 'd3-4', name: '螞蟻家辣炒章魚', lat: 35.158, lng: 129.059, day: '3' },
+      { id: 'd3-5', name: '田埔咖啡街', lat: 35.154, lng: 129.061, day: '3' }
+    ]
+  },
+  {
+    name: '松島', nameKr: '송도',
+    center: [35.084, 129.019],
+    color: '#7ec8a0',
+    venues: [
+      { id: 'd3-6', name: '松島海上纜車', lat: 35.084, lng: 129.020, day: '3' },
+      { id: 'd3-7', name: '松島龍宮雲橋', lat: 35.082, lng: 129.018, day: '3' }
+    ]
+  },
+  {
+    name: '南浦洞', nameKr: '남포동',
+    center: [35.098, 129.030],
+    color: '#7ec8a0',
+    venues: [
+      { id: 'd3-8', name: '古來思魚糕+元祖糖餅', lat: 35.098, lng: 129.030, day: '3' },
+      { id: 'd3-9', name: '南浦雪濃湯', lat: 35.098, lng: 129.031, day: '3' },
+      { id: 'd3-10', name: 'BIFF廣場+富平市場', lat: 35.098, lng: 129.030, day: '3' },
+      { id: 'd3-11', name: '紅豆奶油艾草糕', lat: 35.098, lng: 129.031, day: '3' }
+    ]
+  },
+  {
+    name: '影島', nameKr: '영도',
+    center: [35.085, 129.022],
+    color: '#b5a3d4',
+    venues: [
+      { id: 'd4-1', name: '白淺灘文化村', lat: 35.087, lng: 129.022, day: '4' },
+      { id: 'd4-2', name: 'THRILL ON THE MUG', lat: 35.084, lng: 129.023, day: '4' }
+    ]
+  },
+  {
+    name: '甘川洞', nameKr: '감천',
+    center: [35.097, 129.010],
+    color: '#b5a3d4',
+    venues: [
+      { id: 'd4-3', name: '甘川洞文化村', lat: 35.098, lng: 129.010, day: '4' }
+    ]
+  }
+];
+
+function initLeafletMap() {
+  if (busanMap) return;
+  var mapEl = document.getElementById('leafletMap');
+  if (!mapEl || typeof L === 'undefined') return;
+
+  busanMap = L.map('leafletMap', {
+    zoomControl: true,
+    scrollWheelZoom: true
+  }).setView([35.14, 129.10], 12);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap',
+    maxZoom: 18
+  }).addTo(busanMap);
+
+  showAllVenuesView();
+}
+
+function clearMapLayers() {
+  for (var i = 0; i < mapMarkers.length; i++) {
+    busanMap.removeLayer(mapMarkers[i]);
+  }
+  for (var j = 0; j < mapLabels.length; j++) {
+    busanMap.removeLayer(mapLabels[j]);
+  }
+  mapMarkers = [];
+  mapLabels = [];
+}
+
+function showAllVenuesView() {
+  if (!busanMap) return;
+  clearMapLayers();
+  busanMap.setView([35.14, 129.10], 12);
+
+  for (var a = 0; a < areas.length; a++) {
+    var area = areas[a];
+    var num = a + 1;
+
+    // Numbered circle marker
+    var numIcon = L.divIcon({
+      className: '',
+      html: '<div style="background:' + area.color + ';color:white;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);">' + num + '</div>',
+      iconSize: [30, 30],
+      iconAnchor: [15, 15]
+    });
+    var marker = L.marker(area.center, { icon: numIcon }).addTo(busanMap);
+    mapMarkers.push(marker);
+
+    // Area label box
+    var venueList = '';
+    for (var v = 0; v < area.venues.length; v++) {
+      venueList += (v + 1) + '. ' + area.venues[v].name + '<br>';
+    }
+
+    var labelHtml = '<div class="area-label" style="border-color:' + area.color + '">' +
+      '<div class="area-label-title">' +
+      '<span class="area-label-num" style="background:' + area.color + '">' + num + '</span>' +
+      '<span style="color:' + area.color + '">▶ ' + area.name + '</span>' +
+      '</div>' +
+      '<div class="area-label-list">' + venueList + '</div>' +
+      '</div>';
+
+    // Position label offset from marker
+    var labelOffset = [0.008, 0.015];
+    if (area.center[1] > 129.15) labelOffset[1] = -0.025; // right side -> label to left
+
+    var labelIcon = L.divIcon({
+      className: '',
+      html: labelHtml,
+      iconSize: null,
+      iconAnchor: [0, 0]
+    });
+    var label = L.marker([area.center[0] + labelOffset[0], area.center[1] + labelOffset[1]], {
+      icon: labelIcon,
+      interactive: false
+    }).addTo(busanMap);
+    mapLabels.push(label);
+
+    // Click marker to show tooltip
+    (function(a2) {
+      marker.on('click', function() {
+        showAreaTooltipLeaflet(a2);
+      });
+    })(area);
+  }
+}
+
+function showDayView(dayNum) {
+  if (!busanMap) return;
+  clearMapLayers();
+
+  var color = dayColors[dayNum] || '#7ec8a0';
+  var bounds = [];
+
+  for (var a = 0; a < areas.length; a++) {
+    var area = areas[a];
+    for (var v = 0; v < area.venues.length; v++) {
+      var venue = area.venues[v];
+      if (venue.day !== dayNum) continue;
+
+      bounds.push([venue.lat, venue.lng]);
+
+      // Venue marker with name label
+      var markerHtml = '<div style="display:flex;align-items:center;gap:4px;">' +
+        '<div style="background:' + color + ';color:white;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.3);flex-shrink:0;">📍</div>' +
+        '<div class="venue-marker-label" style="border-color:' + color + ';color:' + color + '">' + venue.name + '</div>' +
+        '</div>';
+
+      var venueIcon = L.divIcon({
+        className: '',
+        html: markerHtml,
+        iconSize: null,
+        iconAnchor: [12, 12]
+      });
+
+      var marker = L.marker([venue.lat, venue.lng], { icon: venueIcon }).addTo(busanMap);
+      mapMarkers.push(marker);
+
+      // Click to show detail
+      (function(vid) {
+        marker.on('click', function() {
+          showVenueTooltipLeaflet(vid);
+        });
+      })(venue.id);
+    }
+  }
+
+  if (bounds.length > 0) {
+    busanMap.fitBounds(bounds, { padding: [60, 60], maxZoom: 14 });
+  }
+}
+
+function showAreaTooltipLeaflet(area) {
+  var tooltip = document.getElementById('mapTooltip');
+  var content = document.getElementById('mapTooltipContent');
+
+  var html = '<div class="font-black text-base mb-2" style="color:' + area.color + '">▶ ' + area.name + ' <span class="text-xs font-normal text-warmgray/60">' + area.nameKr + '</span></div>';
+
+  for (var v = 0; v < area.venues.length; v++) {
+    var venue = area.venues[v];
+    var card = document.querySelector('[data-id="' + venue.id + '"]');
+    if (!card) continue;
+
+    var photo = card.querySelector('img[loading="lazy"]');
+    var details = card.querySelectorAll('.detail-row');
+    var tip = '';
+    for (var d = 0; d < details.length; d++) {
+      var label = details[d].querySelector('.detail-label');
+      var value = details[d].querySelector('.detail-value');
+      if (label && value && label.textContent.indexOf('攻略') >= 0) {
+        tip = value.textContent.trim();
+        break;
+      }
+    }
+
+    if (v > 0) html += '<div class="border-t border-dashed border-warmgray/15 my-2"></div>';
+    html += '<div class="flex gap-2 items-start">';
+    if (photo) html += '<img src="' + photo.src + '" class="w-14 h-14 rounded-lg object-cover shrink-0" onerror="this.style.display=\'none\'">';
+    html += '<div><div class="font-bold text-sm text-warmgray">' + venue.name + '</div>';
+    html += '<div class="text-xs text-warmgray/60">Day ' + venue.day + '</div>';
+    if (tip) html += '<div class="text-xs text-mint mt-0.5">💡 ' + tip.substring(0, 60) + (tip.length > 60 ? '...' : '') + '</div>';
+    html += '</div></div>';
+  }
+
+  content.innerHTML = html;
+
+  // Position tooltip in center of map
+  var mapEl = document.getElementById('leafletMap');
+  var rect = mapEl.getBoundingClientRect();
+  tooltip.style.left = (rect.width / 2 - 140) + 'px';
+  tooltip.style.top = '20px';
+  tooltip.classList.remove('hidden');
+}
+
+function showVenueTooltipLeaflet(venueId) {
+  var card = document.querySelector('[data-id="' + venueId + '"]');
+  if (!card) return;
 
   var tooltip = document.getElementById('mapTooltip');
   var content = document.getElementById('mapTooltipContent');
 
-  // Position tooltip near the clicked dot
-  var svg = dot.closest('svg');
-  var svgRect = svg.getBoundingClientRect();
-  var dotCx = parseFloat(dot.getAttribute('cx'));
-  var dotCy = parseFloat(dot.getAttribute('cy'));
-  var viewBox = svg.viewBox.baseVal;
+  var imgHeader = card.querySelector('.card-img');
+  var titleEl = imgHeader ? imgHeader.querySelector('.card-img-title') : null;
+  var areaEl = imgHeader ? imgHeader.querySelector('.card-img-area') : null;
+  var costEl = imgHeader ? imgHeader.querySelector('.card-img-cost') : null;
+  var photo = card.querySelector('img[loading="lazy"]');
 
-  // Convert SVG coordinates to pixel position
-  var scaleX = svgRect.width / viewBox.width;
-  var scaleY = svgRect.height / viewBox.height;
-  var pixelX = dotCx * scaleX;
-  var pixelY = dotCy * scaleY;
-
-  // Position tooltip: if dot is on right side, show tooltip to the left; otherwise to the right
-  var tooltipWidth = 280;
-  if (pixelX > svgRect.width * 0.6) {
-    tooltip.style.left = Math.max(8, pixelX - tooltipWidth - 10) + 'px';
-  } else {
-    tooltip.style.left = Math.min(pixelX + 15, svgRect.width - tooltipWidth - 8) + 'px';
+  var details = card.querySelectorAll('.detail-row');
+  var address = '', hours = '', tip = '', reservation = '';
+  for (var d = 0; d < details.length; d++) {
+    var label = details[d].querySelector('.detail-label');
+    var value = details[d].querySelector('.detail-value');
+    if (!label || !value) continue;
+    var lt = label.textContent.trim();
+    if (lt.indexOf('韓文地址') >= 0) address = value.textContent.trim().replace('複製', '');
+    if (lt.indexOf('營業時間') >= 0) hours = value.textContent.trim().replace('複製', '');
+    if (lt.indexOf('攻略') >= 0) tip = value.textContent.trim();
+    if (lt.indexOf('訂位') >= 0) reservation = value.textContent.trim().replace('複製', '');
   }
-  tooltip.style.top = Math.max(8, pixelY - 10) + 'px';
-
-  // Build content
-  var dayColors = {'1': '#f5a67d', '2': '#7db8d4', '3': '#7ec8a0', '4': '#b5a3d4', '5': '#f5a67d'};
-  var dayNum = dot.getAttribute('data-day');
-  var color = dayColors[dayNum] || '#7ec8a0';
 
   var html = '';
-  for (var i = 0; i < ids.length; i++) {
-    var card = document.querySelector('[data-id="' + ids[i].trim() + '"]');
-    if (!card) continue;
-
-    var imgHeader = card.querySelector('.card-img');
-    var titleEl = imgHeader ? imgHeader.querySelector('.card-img-title') : null;
-    var areaEl = imgHeader ? imgHeader.querySelector('.card-img-area') : null;
-    var costEl = imgHeader ? imgHeader.querySelector('.card-img-cost') : null;
-    var photo = card.querySelector('img[loading="lazy"]');
-
-    var details = card.querySelectorAll('.detail-row');
-    var address = '';
-    var hours = '';
-    var tip = '';
-    var naverSearch = '';
-    for (var d = 0; d < details.length; d++) {
-      var label = details[d].querySelector('.detail-label');
-      var value = details[d].querySelector('.detail-value');
-      if (!label || !value) continue;
-      var lt = label.textContent.trim();
-      if (lt.indexOf('韓文地址') >= 0) address = value.textContent.trim().replace('複製', '');
-      if (lt.indexOf('營業時間') >= 0) hours = value.textContent.trim().replace('複製', '');
-      if (lt.indexOf('攻略') >= 0) tip = value.textContent.trim();
-      if (lt.indexOf('韓文搜尋') >= 0) naverSearch = value.textContent.trim().replace('複製', '');
-    }
-
-    if (i > 0) html += '<div class="border-t border-dashed border-warmgray/15 my-2"></div>';
-
-    if (photo && i === 0) {
-      html += '<img src="' + photo.src + '" class="w-full h-24 object-cover rounded-lg mb-2" onerror="this.style.display=\'none\'">';
-    }
-    html += '<div class="font-black text-sm" style="color:' + color + '">' + (titleEl ? titleEl.textContent : '') + '</div>';
-    html += '<div class="text-xs text-warmgray/60">' + (areaEl ? areaEl.textContent : '') + '</div>';
-    if (costEl) {
-      var costText = costEl.textContent.replace(/<[^>]*>/g, ' ').trim();
-      html += '<div class="text-xs font-bold text-peach mt-0.5">' + costText + '</div>';
-    }
-    if (hours) html += '<div class="text-xs text-warmgray/60 mt-1">🕐 ' + hours + '</div>';
-    if (address) html += '<div class="text-xs text-warmgray/60 mt-0.5">📍 ' + address + '</div>';
-    if (tip) html += '<div class="text-xs text-mint mt-1">💡 ' + tip.substring(0, 80) + (tip.length > 80 ? '...' : '') + '</div>';
-  }
+  if (photo) html += '<img src="' + photo.src + '" class="w-full h-28 object-cover rounded-lg mb-2" onerror="this.style.display=\'none\'">';
+  html += '<div class="font-black text-sm text-warmgray">' + (titleEl ? titleEl.textContent : '') + '</div>';
+  html += '<div class="text-xs text-warmgray/60">' + (areaEl ? areaEl.textContent : '') + '</div>';
+  if (costEl) html += '<div class="text-xs font-bold text-peach mt-0.5">' + costEl.textContent.replace(/<[^>]*>/g, ' ').trim() + '</div>';
+  if (hours) html += '<div class="text-xs text-warmgray/60 mt-1">🕐 ' + hours + '</div>';
+  if (address) html += '<div class="text-xs text-warmgray/60 mt-0.5">📍 ' + address + '</div>';
+  if (reservation) html += '<div class="text-xs text-warmgray/60 mt-0.5">📞 ' + reservation + '</div>';
+  if (tip) html += '<div class="text-xs text-mint mt-1">💡 ' + tip.substring(0, 100) + (tip.length > 100 ? '...' : '') + '</div>';
 
   content.innerHTML = html;
-  tooltip.classList.remove('hidden');
 
-  // Highlight clicked dot
-  var allDots = document.querySelectorAll('.map-dot');
-  for (var j = 0; j < allDots.length; j++) {
-    allDots[j].setAttribute('stroke-width', '2');
-    allDots[j].setAttribute('r', '7');
-  }
-  dot.setAttribute('stroke-width', '3');
-  dot.setAttribute('r', '10');
+  var mapEl = document.getElementById('leafletMap');
+  var rect = mapEl.getBoundingClientRect();
+  tooltip.style.left = (rect.width / 2 - 140) + 'px';
+  tooltip.style.top = '20px';
+  tooltip.classList.remove('hidden');
 }
 
-// Map day filter
-function filterMapDots(day, btn) {
+function filterMap(day, btn) {
+  // Update button styles
   var container = btn.closest('.flex');
   var btns = container.querySelectorAll('button');
   for (var i = 0; i < btns.length; i++) {
@@ -2567,15 +2748,30 @@ function filterMapDots(day, btn) {
   }
   btn.className = 'px-3 py-1 text-xs font-bold rounded-full bg-mint text-white';
 
-  var dots = document.querySelectorAll('.map-dot');
-  for (var j = 0; j < dots.length; j++) {
-    if (day === 'all') { dots[j].classList.remove('hidden'); }
-    else { dots[j].classList.toggle('hidden', dots[j].getAttribute('data-day') !== day); }
-  }
-
-  // Hide tooltip when changing day filter
+  // Hide tooltip
   document.getElementById('mapTooltip').classList.add('hidden');
+
+  if (day === 'all') {
+    showAllVenuesView();
+  } else {
+    showDayView(day);
+  }
 }
+
+// Init map when map tab is shown
+var origSwitchTab2 = switchTab;
+switchTab = function(btn, tabId) {
+  origSwitchTab2(btn, tabId);
+  if (tabId === 'mapview') {
+    setTimeout(function() {
+      if (!busanMap) {
+        initLeafletMap();
+      } else {
+        busanMap.invalidateSize();
+      }
+    }, 200);
+  }
+};
 
 // Auto-insert copy buttons for Korean text
 function initCopyButtons() {
