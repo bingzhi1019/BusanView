@@ -43,6 +43,7 @@
   /* SVG Map */
   .svg-map-container { margin-bottom: 16px; }
   .svg-map { width: 100%; height: auto; border-radius: 16px; border: 2px dashed #d0c8c0; background: #faf8f5; }
+  .map-fullwidth { margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); width: 100vw; }
   .map-dot { cursor: pointer; transition: all 0.2s; }
   .map-dot:hover { r: 9; stroke-width: 3; }
   .map-dot.hidden { opacity: 0.1; }
@@ -2147,10 +2148,10 @@ tailwind.config = {
     </div>
     <div class="border-b-2 border-dashed border-warmgray/15 mt-4"></div>
   </div>
-  <div class="svg-map-container" style="min-height: 500px">
-  <svg viewBox="0 0 900 550" class="svg-map" xmlns="http://www.w3.org/2000/svg">
+  <div class="svg-map-container map-fullwidth" style="min-height: 600px">
+  <svg viewBox="0 0 900 600" class="svg-map" xmlns="http://www.w3.org/2000/svg">
     <!-- Background -->
-    <rect width="900" height="550" fill="#f8fafc" rx="12"/>
+    <rect width="900" height="600" fill="#f8fafc" rx="12"/>
     
     <!-- Sea area (bottom) -->
     <path d="M0,350 Q200,320 450,340 Q700,360 900,330 L900,450 L0,450 Z" fill="#e0f2fe" opacity="0.5"/>
@@ -2216,30 +2217,31 @@ tailwind.config = {
     <!-- ===== VENUE MARKERS ===== -->
     
     <!-- Day 1 (slate) -->
-    <circle cx="710" cy="190" r="7" fill="#475569" stroke="white" stroke-width="2" class="map-dot" data-day="1"><title>D1: puradak 炸雞（海雲台）</title></circle>
-    
+    <circle cx="710" cy="190" r="7" fill="#475569" stroke="white" stroke-width="2" class="map-dot" data-day="1" data-venues="d1-1" onclick="showVenueInfo(this)"><title>D1: puradak 炸雞（海雲台）</title></circle>
+
     <!-- Day 2 (blue) -->
-    <circle cx="830" cy="75" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2"><title>D2: Skyline Luge（機張）</title></circle>
-    <circle cx="850" cy="85" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2"><title>D2: coralani（機張）</title></circle>
-    <circle cx="845" cy="100" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2"><title>D2: 龍宮炸醬麵（機張）</title></circle>
-    <circle cx="715" cy="170" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2"><title>D2: X the SKY（海雲台）</title></circle>
-    <circle cx="720" cy="185" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2"><title>D2: 自然島+diart+31cm（海雲台）</title></circle>
-    <circle cx="760" cy="165" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2"><title>D2: 海岸列車+青沙浦（海雲台東）</title></circle>
-    <circle cx="625" cy="195" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2"><title>D2: Spa Land（Centum City）</title></circle>
-    
+    <circle cx="830" cy="75" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2" data-venues="d2-1" onclick="showVenueInfo(this)"><title>D2: Skyline Luge（機張）</title></circle>
+    <circle cx="850" cy="85" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2" data-venues="d2-2" onclick="showVenueInfo(this)"><title>D2: coralani（機張）</title></circle>
+    <circle cx="845" cy="100" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2" data-venues="d2-3" onclick="showVenueInfo(this)"><title>D2: 龍宮炸醬麵（機張）</title></circle>
+    <circle cx="715" cy="170" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2" data-venues="d2-4" onclick="showVenueInfo(this)"><title>D2: X the SKY（海雲台）</title></circle>
+    <circle cx="720" cy="185" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2" data-venues="d2-5,d2-8,d2-9" onclick="showVenueInfo(this)"><title>D2: 自然島+diart+31cm（海雲台）</title></circle>
+    <circle cx="760" cy="165" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2" data-venues="d2-6,d2-7" onclick="showVenueInfo(this)"><title>D2: 海岸列車+青沙浦（海雲台東）</title></circle>
+    <circle cx="625" cy="195" r="7" fill="#2563eb" stroke="white" stroke-width="2" class="map-dot" data-day="2" data-venues="d2-10" onclick="showVenueInfo(this)"><title>D2: Spa Land（Centum City）</title></circle>
+
     <!-- Day 3 (green) -->
-    <circle cx="370" cy="190" r="7" fill="#059669" stroke="white" stroke-width="2" class="map-dot" data-day="3"><title>D3: egg drop+Running Man+螞蟻家+樂天（西面）</title></circle>
-    <circle cx="355" cy="200" r="7" fill="#059669" stroke="white" stroke-width="2" class="map-dot" data-day="3"><title>D3: 田埔咖啡街（西面南）</title></circle>
-    <circle cx="260" cy="340" r="7" fill="#059669" stroke="white" stroke-width="2" class="map-dot" data-day="3"><title>D3: 松島纜車+雲橋</title></circle>
-    <circle cx="310" cy="310" r="7" fill="#059669" stroke="white" stroke-width="2" class="map-dot" data-day="3"><title>D3: 魚糕+糖餅+雪濃湯+BIFF+富平（南浦洞）</title></circle>
-    
+    <circle cx="370" cy="190" r="7" fill="#059669" stroke="white" stroke-width="2" class="map-dot" data-day="3" data-venues="d3-1,d3-2,d3-3,d3-4" onclick="showVenueInfo(this)"><title>D3: egg drop+Running Man+螞蟻家+樂天（西面）</title></circle>
+    <circle cx="355" cy="200" r="7" fill="#059669" stroke="white" stroke-width="2" class="map-dot" data-day="3" data-venues="d3-5" onclick="showVenueInfo(this)"><title>D3: 田埔咖啡街（西面南）</title></circle>
+    <circle cx="260" cy="340" r="7" fill="#059669" stroke="white" stroke-width="2" class="map-dot" data-day="3" data-venues="d3-6,d3-7" onclick="showVenueInfo(this)"><title>D3: 松島纜車+雲橋</title></circle>
+    <circle cx="310" cy="310" r="7" fill="#059669" stroke="white" stroke-width="2" class="map-dot" data-day="3" data-venues="d3-8,d3-9,d3-10,d3-11" onclick="showVenueInfo(this)"><title>D3: 魚糕+糖餅+雪濃湯+BIFF+富平（南浦洞）</title></circle>
+
     <!-- Day 4 (amber) -->
-    <circle cx="340" cy="360" r="7" fill="#d97706" stroke="white" stroke-width="2" class="map-dot" data-day="4"><title>D4: 白淺灘+THRILL ON THE MUG（影島）</title></circle>
-    <circle cx="270" cy="310" r="7" fill="#d97706" stroke="white" stroke-width="2" class="map-dot" data-day="4"><title>D4: 甘川文化村</title></circle>
-    <circle cx="550" cy="200" r="7" fill="#d97706" stroke="white" stroke-width="2" class="map-dot" data-day="4"><title>D4: All Sunday+83烤肉（廣安里）</title></circle>
-    
+    <circle cx="340" cy="360" r="7" fill="#d97706" stroke="white" stroke-width="2" class="map-dot" data-day="4" data-venues="d4-1,d4-2" onclick="showVenueInfo(this)"><title>D4: 白淺灘+THRILL ON THE MUG（影島）</title></circle>
+    <circle cx="270" cy="310" r="7" fill="#d97706" stroke="white" stroke-width="2" class="map-dot" data-day="4" data-venues="d4-3" onclick="showVenueInfo(this)"><title>D4: 甘川文化村</title></circle>
+    <circle cx="550" cy="200" r="7" fill="#d97706" stroke="white" stroke-width="2" class="map-dot" data-day="4" data-venues="d4-4,d4-5,d4-6" onclick="showVenueInfo(this)"><title>D4: All Sunday+83烤肉（廣安里）</title></circle>
+    <circle cx="580" cy="215" r="7" fill="#d97706" stroke="white" stroke-width="2" class="map-dot" data-day="4" data-venues="d4-7" onclick="showVenueInfo(this)"><title>D4: Bada Sand</title></circle>
+
     <!-- Day 5 (purple) -->
-    <circle cx="705" cy="175" r="7" fill="#7c3aed" stroke="white" stroke-width="2" class="map-dot" data-day="5"><title>D5: 鮑魚粥+Standard Bread+伍班長（海雲台）</title></circle>
+    <circle cx="705" cy="175" r="7" fill="#7c3aed" stroke="white" stroke-width="2" class="map-dot" data-day="5" data-venues="d5-1,d5-2,d5-3,d5-4" onclick="showVenueInfo(this)"><title>D5: 鮑魚粥+Standard Bread+伍班長（海雲台）</title></circle>
     
     <!-- District labels (areas) -->
     <text x="830" y="115" text-anchor="middle" font-size="11" font-weight="600" fill="#0284c7" opacity="0.5">機張區</text>
@@ -2442,6 +2444,85 @@ function resetAll() {
 // Init
 loadState();
 
+// Show venue info on dot click
+function showVenueInfo(dot) {
+  var venueIds = dot.getAttribute('data-venues');
+  if (!venueIds) return;
+  var ids = venueIds.split(',');
+  var infoPanel = document.getElementById('mapVenueInfo');
+  var infoTitle = document.getElementById('mapVenueTitle');
+  var infoList = document.getElementById('mapVenueList');
+
+  // Clear existing
+  while (infoList.firstChild) infoList.removeChild(infoList.firstChild);
+
+  var dotTitle = dot.querySelector('title');
+  infoTitle.textContent = dotTitle ? dotTitle.textContent : '景點資訊';
+
+  var dayColors = {'1': '#f5a67d', '2': '#7db8d4', '3': '#7ec8a0', '4': '#b5a3d4', '5': '#f5a67d'};
+  var dayNum = dot.getAttribute('data-day');
+  infoTitle.style.color = dayColors[dayNum] || '#7ec8a0';
+
+  for (var i = 0; i < ids.length; i++) {
+    var card = document.querySelector('[data-id="' + ids[i].trim() + '"]');
+    if (!card) continue;
+
+    var imgHeader = card.querySelector('.card-img');
+    var titleEl = imgHeader ? imgHeader.querySelector('.card-img-title') : null;
+    var areaEl = imgHeader ? imgHeader.querySelector('.card-img-area') : null;
+    var costEl = imgHeader ? imgHeader.querySelector('.card-img-cost') : null;
+    var photo = card.querySelector('img[loading="lazy"]');
+
+    // Get some detail info
+    var details = card.querySelectorAll('.detail-row');
+    var address = '';
+    var hours = '';
+    var tip = '';
+    for (var d = 0; d < details.length; d++) {
+      var label = details[d].querySelector('.detail-label');
+      var value = details[d].querySelector('.detail-value');
+      if (!label || !value) continue;
+      var labelText = label.textContent.trim();
+      if (labelText.indexOf('韓文地址') >= 0) address = value.textContent.trim();
+      if (labelText.indexOf('營業時間') >= 0) hours = value.textContent.trim();
+      if (labelText.indexOf('攻略') >= 0) tip = value.textContent.trim();
+    }
+
+    var venueDiv = document.createElement('div');
+    venueDiv.className = 'border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-3';
+
+    var html = '';
+    if (photo) {
+      html += '<img src="' + photo.src + '" alt="" class="w-full h-36 object-cover" loading="lazy" onerror="this.style.display=\'none\'">';
+    }
+    html += '<div class="p-3">';
+    html += '<div class="flex justify-between items-start">';
+    html += '<div><div class="font-black text-base text-warmgray">' + (titleEl ? titleEl.textContent : '') + '</div>';
+    html += '<div class="text-xs text-warmgray/60 mt-0.5">' + (areaEl ? areaEl.textContent : '') + '</div></div>';
+    if (costEl) html += '<div class="font-black text-peach text-sm">' + costEl.textContent.replace(/<[^>]*>/g, ' ').trim() + '</div>';
+    html += '</div>';
+    if (address) html += '<div class="mt-2 text-xs text-warmgray/70">📍 ' + address + '</div>';
+    if (hours) html += '<div class="text-xs text-warmgray/70 mt-1">🕐 ' + hours + '</div>';
+    if (tip) html += '<div class="text-xs text-mint mt-1">💡 ' + tip + '</div>';
+    html += '</div>';
+
+    venueDiv.innerHTML = html;
+    infoList.appendChild(venueDiv);
+  }
+
+  infoPanel.classList.remove('hidden');
+  infoPanel.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+
+  // Highlight clicked dot
+  var allDots = document.querySelectorAll('.map-dot');
+  for (var j = 0; j < allDots.length; j++) {
+    allDots[j].setAttribute('stroke-width', '2');
+    allDots[j].setAttribute('r', '7');
+  }
+  dot.setAttribute('stroke-width', '3');
+  dot.setAttribute('r', '10');
+}
+
 // Map day filter
 function filterMapDots(day, btn) {
   var container = btn.closest('.flex');
@@ -2582,8 +2663,10 @@ function updateNowIndicator() {
     var diff = tripStart - kst;
     var days = Math.floor(diff / 86400000);
     var hours = Math.floor((diff % 86400000) / 3600000);
+    var mins = Math.floor((diff % 3600000) / 60000);
+    var secs = Math.floor((diff % 60000) / 1000);
     el.className = 'now-indicator countdown';
-    el.textContent = '✈️ 距離出發還有 ' + days + ' 天 ' + hours + ' 小時';
+    el.textContent = '✈️ 距離出發還有 ' + days + ' 天 ' + hours + ' 小時 ' + mins + ' 分 ' + secs + ' 秒';
     el.style.display = 'block';
     return;
   }
@@ -2645,7 +2728,7 @@ function updateNowIndicator() {
 }
 
 updateNowIndicator();
-setInterval(updateNowIndicator, 60000);
+setInterval(updateNowIndicator, 1000);
 
 // Swipe gesture for tab switching
 var touchStartX = 0;
