@@ -2636,7 +2636,104 @@ function filterMapDots(day, btn) {
   // Hide tooltip
   var tooltip = document.getElementById('mapTooltip');
   if (tooltip) tooltip.classList.add('hidden');
+
+  // Store current viewBox for zoom reference
+  window._mapCurrentView = targetView.split(/\s+/).map(Number);
 }
+
+// ===== MAP ZOOM (scroll + pinch) =====
+(function() {
+  var svg = document.querySelector('.map-fullwidth svg');
+  if (!svg) return;
+  window._mapCurrentView = [0, 0, 1200, 700];
+
+  function getView() { return window._mapCurrentView.slice(); }
+  function setView(v) {
+    // Clamp: don't zoom out beyond full map, don't zoom in too far
+    var minW = 150, maxW = 1200, minH = 87.5, maxH = 700;
+    v[2] = Math.max(minW, Math.min(maxW, v[2]));
+    v[3] = Math.max(minH, Math.min(maxH, v[3]));
+    // Keep within bounds
+    v[0] = Math.max(0, Math.min(v[0], 1200 - v[2]));
+    v[1] = Math.max(0, Math.min(v[1], 700 - v[3]));
+    window._mapCurrentView = v;
+    svg.style.transition = 'none';
+    svg.setAttribute('viewBox', v.join(' '));
+  }
+
+  // Mouse wheel zoom
+  svg.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    var v = getView();
+    var factor = e.deltaY > 0 ? 1.15 : 0.87; // scroll down = zoom out
+    var rect = svg.getBoundingClientRect();
+    var mx = (e.clientX - rect.left) / rect.width;
+    var my = (e.clientY - rect.top) / rect.height;
+    var newW = v[2] * factor;
+    var newH = v[3] * factor;
+    var newX = v[0] + (v[2] - newW) * mx;
+    var newY = v[1] + (v[3] - newH) * my;
+    setView([newX, newY, newW, newH]);
+  }, { passive: false });
+
+  // Touch pinch zoom
+  var lastDist = 0;
+  var lastCenter = [0, 0];
+  svg.addEventListener('touchstart', function(e) {
+    if (e.touches.length === 2) {
+      var dx = e.touches[0].clientX - e.touches[1].clientX;
+      var dy = e.touches[0].clientY - e.touches[1].clientY;
+      lastDist = Math.sqrt(dx * dx + dy * dy);
+      lastCenter = [(e.touches[0].clientX + e.touches[1].clientX) / 2,
+                     (e.touches[0].clientY + e.touches[1].clientY) / 2];
+    }
+  }, { passive: true });
+  svg.addEventListener('touchmove', function(e) {
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      var dx = e.touches[0].clientX - e.touches[1].clientX;
+      var dy = e.touches[0].clientY - e.touches[1].clientY;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      if (lastDist === 0) { lastDist = dist; return; }
+      var factor = lastDist / dist;
+      var rect = svg.getBoundingClientRect();
+      var cx = (lastCenter[0] - rect.left) / rect.width;
+      var cy = (lastCenter[1] - rect.top) / rect.height;
+      var v = getView();
+      var newW = v[2] * factor;
+      var newH = v[3] * factor;
+      var newX = v[0] + (v[2] - newW) * cx;
+      var newY = v[1] + (v[3] - newH) * cy;
+      setView([newX, newY, newW, newH]);
+      lastDist = dist;
+      lastCenter = [(e.touches[0].clientX + e.touches[1].clientX) / 2,
+                     (e.touches[0].clientY + e.touches[1].clientY) / 2];
+    }
+  }, { passive: false });
+  svg.addEventListener('touchend', function() { lastDist = 0; }, { passive: true });
+
+  // Drag to pan
+  var dragging = false, dragStart = [0, 0], dragViewStart = [0, 0, 0, 0];
+  svg.addEventListener('mousedown', function(e) {
+    if (e.button !== 0) return;
+    dragging = true;
+    dragStart = [e.clientX, e.clientY];
+    dragViewStart = getView();
+    svg.style.cursor = 'grabbing';
+  });
+  document.addEventListener('mousemove', function(e) {
+    if (!dragging) return;
+    var rect = svg.getBoundingClientRect();
+    var v = dragViewStart.slice();
+    var dx = (e.clientX - dragStart[0]) / rect.width * v[2];
+    var dy = (e.clientY - dragStart[1]) / rect.height * v[3];
+    setView([v[0] - dx, v[1] - dy, v[2], v[3]]);
+  });
+  document.addEventListener('mouseup', function() {
+    dragging = false;
+    if (svg) svg.style.cursor = '';
+  });
+})();
 
 // Click venue dot to show tooltip
 document.addEventListener('click', function(e) {
