@@ -345,14 +345,28 @@ tailwind.config = {
 
   <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
     <h3 class="font-black text-mint text-base mb-3">💳 付款方式</h3>
-    <img src="https://blog.trazy.com/wp-content/uploads/2021/01/tmoney-thumb-blog-scaled-1200x900.jpg" alt="T-money Card" class="w-full h-32 object-cover rounded-xl mb-3" onerror="this.style.display='none'" loading="lazy">
-    <ul>
-      <li><strong>T-money 交通卡</strong>：機場便利商店購買（W2,500 卡費），各便利商店可儲值，搭地鐵/公車/便利商店通用</li>
-      <li><strong>信用卡</strong>：韓國幾乎所有店家都收信用卡（含小吃攤），JCB/Visa/Master 皆可</li>
-      <li><strong>現金</strong>：傳統市場、糖餅攤位建議備少量現金</li>
-      <li><strong>Apple Pay</strong>：部分店家支援，但不穩定，不建議作為主要付款</li>
-      <li><strong>悠遊付（EasyWallet）</strong>：台灣悠遊付可在韓國使用！支援韓國交通卡+消費，出發前先開通 → <a href="https://ephttp.easycard.com.tw/icer_event/EasyWalletGoKorea/index.html" target="_blank" class="text-mint font-bold hover:underline">📱 活動連結</a></li>
-    </ul>
+    <div class="space-y-3">
+      <div class="flex items-start gap-3 p-3 bg-softblue-light/50 rounded-xl border border-dashed border-softblue/20">
+        <div class="w-10 h-10 rounded-lg bg-[#0078b8] flex items-center justify-center text-white text-sm font-black shrink-0">T</div>
+        <div><strong class="text-sm">T-money 交通卡</strong><div class="text-xs text-warmgray/70">機場便利商店購買（₩2,500 卡費），各便利商店可儲值，搭地鐵/公車/便利商店通用</div></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-softblue-light/50 rounded-xl border border-dashed border-softblue/20">
+        <div class="w-10 h-10 rounded-lg bg-[#1a1f71] flex items-center justify-center text-white text-sm font-black shrink-0">💳</div>
+        <div><strong class="text-sm">信用卡</strong><div class="text-xs text-warmgray/70">韓國幾乎所有店家都收信用卡（含小吃攤），JCB/Visa/Master 皆可</div></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-peach-light/50 rounded-xl border border-dashed border-peach/20">
+        <div class="w-10 h-10 rounded-lg bg-[#d4804e] flex items-center justify-center text-white text-sm font-black shrink-0">₩</div>
+        <div><strong class="text-sm">現金</strong><div class="text-xs text-warmgray/70">傳統市場、糖餅攤位建議備少量現金</div></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-warmgray-light/50 rounded-xl border border-dashed border-warmgray/15">
+        <div class="w-10 h-10 rounded-lg bg-[#333] flex items-center justify-center text-white text-sm font-black shrink-0">🍎</div>
+        <div><strong class="text-sm">Apple Pay</strong><div class="text-xs text-warmgray/70">部分店家支援，但不穩定，不建議作為主要付款</div></div>
+      </div>
+      <div class="flex items-start gap-3 p-3 bg-mint-light/50 rounded-xl border border-dashed border-mint/20">
+        <div class="w-10 h-10 rounded-lg bg-[#00a0e9] flex items-center justify-center text-white text-sm font-black shrink-0">悠</div>
+        <div><strong class="text-sm">悠遊付（EasyWallet）</strong><div class="text-xs text-warmgray/70">台灣悠遊付可在韓國使用！支援交通卡+消費，出發前先開通 → <a href="https://ephttp.easycard.com.tw/icer_event/EasyWalletGoKorea/index.html" target="_blank" class="text-mint font-bold hover:underline">📱 活動連結</a></div></div>
+      </div>
+    </div>
   </div>
 
   <div class="text-center text-warmgray/30 my-2">· · ·</div>
