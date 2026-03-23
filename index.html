@@ -43,27 +43,16 @@
   /* Map */
   .svg-map-container { margin-bottom: 16px; position: relative; }
   .map-tooltip {
-    position: absolute;
+    position: relative;
     z-index: 10;
     background: white;
     border: 2px dashed #e0d8d0;
     border-radius: 16px;
     padding: 12px;
-    max-width: 280px;
+    margin: 12px auto 0;
+    max-width: 320px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.12);
     font-size: 0.85em;
-  }
-  .map-tooltip::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: 20px;
-    width: 14px;
-    height: 14px;
-    background: white;
-    border-left: 2px dashed #e0d8d0;
-    border-top: 2px dashed #e0d8d0;
-    transform: rotate(45deg);
   }
   .map-fullwidth { width: 100%; overflow: hidden; position: relative; }
   .map-fullwidth svg { transition: all 0.5s ease; }
@@ -2401,11 +2390,6 @@ tailwind.config = {
   </g>
 </svg>
 
-  <div id="mapTooltip" class="map-tooltip hidden">
-    <button onclick="document.getElementById('mapTooltip').classList.add('hidden')" class="absolute top-1 right-2 text-warmgray/50 hover:text-warmgray text-lg leading-none">&times;</button>
-    <div id="mapTooltipContent"></div>
-  </div>
-
 <!-- Day filter buttons -->
 <div class="flex gap-2 justify-center mt-3 flex-wrap px-4">
   <button type="button" class="px-3 py-1 text-xs font-bold rounded-full bg-mint text-white" onclick="filterMapDots('all',this)">全部景點</button>
@@ -2414,6 +2398,12 @@ tailwind.config = {
   <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMapDots('3',this)">D3</button>
   <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMapDots('4',this)">D4</button>
   <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMapDots('5',this)">D5</button>
+</div>
+
+<!-- Venue info tooltip (below buttons, always visible) -->
+<div id="mapTooltip" class="map-tooltip hidden">
+  <button onclick="document.getElementById('mapTooltip').classList.add('hidden')" class="absolute top-1 right-2 text-warmgray/50 hover:text-warmgray text-lg leading-none">&times;</button>
+  <div id="mapTooltipContent"></div>
 </div>
   </div>
   <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
@@ -2646,22 +2636,7 @@ document.addEventListener('click', function(e) {
   var tooltip = document.getElementById('mapTooltip');
   var content = document.getElementById('mapTooltipContent');
 
-  // Position near the clicked area
-  var svg = dot.closest('svg');
-  var svgRect = svg.getBoundingClientRect();
-  var circle = dot.querySelector('circle');
-  if (!circle) return;
-  var cx = parseFloat(circle.getAttribute('cx'));
-  var cy = parseFloat(circle.getAttribute('cy'));
-  var viewBox = svg.viewBox.baseVal;
-  var scaleX = svgRect.width / viewBox.width;
-  var scaleY = svgRect.height / viewBox.height;
-  var px = cx * scaleX;
-  var py = cy * scaleY;
-
-  var tw = 260;
-  tooltip.style.left = (px > svgRect.width * 0.55 ? Math.max(8, px - tw - 10) : Math.min(px + 15, svgRect.width - tw - 8)) + 'px';
-  tooltip.style.top = Math.max(8, py - 20) + 'px';
+  // Tooltip shows below the map, no positioning needed
 
   var html = '';
   for (var i = 0; i < ids.length; i++) {
