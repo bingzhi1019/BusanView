@@ -181,7 +181,6 @@ tailwind.config = {
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'alllist')">📋 清單</button>
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'budget')">💰 預算</button>
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'mapview')">🗺️ 地圖</button>
-      <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'pact')">🤙 協議書</button>
     </div>
   </div>
 </div>
@@ -282,6 +281,36 @@ tailwind.config = {
 
 <!-- ==================== 行前準備 ==================== -->
 <div class="section" id="prep">
+
+  <!-- 旅遊不吵架協議書 -->
+  <div class="max-w-md mx-auto mb-6">
+    <div class="border-2 border-dashed border-peach/40 rounded-2xl bg-white p-8 text-center">
+      <div class="mb-6">
+        <h2 class="text-3xl font-black text-warmgray tracking-wider">旅遊不吵架協議書</h2>
+        <div class="text-sm text-warmgray/50 mt-2">Travel Peace Agreement 🕊️</div>
+        <div class="border-b-2 border-dashed border-peach/30 mt-4"></div>
+      </div>
+      <div class="text-left space-y-4 mb-8">
+        <div class="flex gap-3 items-start"><span class="w-7 h-7 rounded-full bg-peach text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5">1</span><p class="text-base font-bold text-warmgray">餓肚子要吃飯，不可以不吃飯 🍚</p></div>
+        <div class="flex gap-3 items-start"><span class="w-7 h-7 rounded-full bg-mint text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5">2</span><p class="text-base font-bold text-warmgray">累了就回程休息，不一定要跑完行程 😴</p></div>
+        <div class="flex gap-3 items-start"><span class="w-7 h-7 rounded-full bg-softblue text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5">3</span><p class="text-base font-bold text-warmgray">臨時想加入的行程只要時間允許就去 🗺️</p></div>
+        <div class="flex gap-3 items-start"><span class="w-7 h-7 rounded-full bg-lavender text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5">4</span><p class="text-base font-bold text-warmgray">合理的購物與消費，一天最多塞滿一個袋子的大小 🛍️</p></div>
+        <div class="flex gap-3 items-start"><span class="w-7 h-7 rounded-full bg-peach text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5">5</span><p class="text-base font-bold text-warmgray">不耐煩的人要請吃晚餐 🍽️</p></div>
+        <div class="flex gap-3 items-start"><span class="w-7 h-7 rounded-full bg-mint text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5">6</span><p class="text-base font-bold text-warmgray">要整理外表漂漂亮亮，拍出美美的照片 📸</p></div>
+        <div class="flex gap-3 items-start"><span class="w-7 h-7 rounded-full bg-softblue text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5">7</span><p class="text-base font-bold text-warmgray">迷路也是一種體驗 🧭</p></div>
+      </div>
+      <div class="border-b-2 border-dashed border-peach/30 mb-8"></div>
+      <div class="text-left space-y-5">
+        <div class="flex items-end gap-3"><span class="text-lg font-black text-warmgray shrink-0">出發日期</span><div class="flex-1 border-b-2 border-warmgray/30 pb-1 text-center"><span class="text-lg font-bold text-peach">2026 / 04 / 16</span></div></div>
+        <div class="flex items-end gap-3"><span class="text-lg font-black text-warmgray shrink-0">目的地</span><div class="flex-1 border-b-2 border-warmgray/30 pb-1 text-center"><span class="text-lg font-bold text-peach">韓國 釜山 🇰🇷</span></div></div>
+        <div class="flex items-end gap-3"><span class="text-lg font-black text-warmgray shrink-0">立約人</span><div class="flex-1 border-b-2 border-warmgray/30 pb-1 text-center"><span class="text-warmgray/40 text-sm">（簽名欄）</span></div></div>
+        <div class="flex items-end gap-3"><span class="text-lg font-black text-warmgray shrink-0">立約人</span><div class="flex-1 border-b-2 border-warmgray/30 pb-1 text-center"><span class="text-warmgray/40 text-sm">（簽名欄）</span></div></div>
+      </div>
+      <div class="mt-8 text-6xl">🤙🤙</div>
+      <div class="text-sm text-warmgray/50 mt-2">打勾勾，一百年不許變！</div>
+    </div>
+  </div>
+
   <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
     <h3 class="font-black text-mint text-base mb-3">📱 必裝 APP</h3>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -2921,87 +2950,6 @@ tailwind.config = {
   </div>
 </div>
 
-<!-- ==================== 協議書 ==================== -->
-<div class="section hidden" id="pact">
-  <div class="max-w-md mx-auto">
-    <div class="border-2 border-dashed border-peach/40 rounded-2xl bg-white p-8 text-center">
-
-      <!-- Title -->
-      <div class="mb-6">
-        <h2 class="text-3xl font-black text-warmgray tracking-wider">旅遊不吵架協議書</h2>
-        <div class="text-sm text-warmgray/50 mt-2">Travel Peace Agreement 🕊️</div>
-        <div class="border-b-2 border-dashed border-peach/30 mt-4"></div>
-      </div>
-
-      <!-- Rules -->
-      <div class="text-left space-y-4 mb-8">
-        <div class="flex gap-3 items-start">
-          <span class="w-7 h-7 rounded-full bg-peach text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5">1</span>
-          <p class="text-base font-bold text-warmgray">餓肚子要吃飯，不可以不吃飯 🍚</p>
-        </div>
-        <div class="flex gap-3 items-start">
-          <span class="w-7 h-7 rounded-full bg-mint text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5">2</span>
-          <p class="text-base font-bold text-warmgray">累了就回程休息，不一定要跑完行程 😴</p>
-        </div>
-        <div class="flex gap-3 items-start">
-          <span class="w-7 h-7 rounded-full bg-softblue text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5">3</span>
-          <p class="text-base font-bold text-warmgray">臨時想加入的行程只要時間允許就去 🗺️</p>
-        </div>
-        <div class="flex gap-3 items-start">
-          <span class="w-7 h-7 rounded-full bg-lavender text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5">4</span>
-          <p class="text-base font-bold text-warmgray">合理的購物與消費，一天最多塞滿一個袋子的大小 🛍️</p>
-        </div>
-        <div class="flex gap-3 items-start">
-          <span class="w-7 h-7 rounded-full bg-peach text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5">5</span>
-          <p class="text-base font-bold text-warmgray">不耐煩的人要請吃晚餐 🍽️</p>
-        </div>
-        <div class="flex gap-3 items-start">
-          <span class="w-7 h-7 rounded-full bg-mint text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5">6</span>
-          <p class="text-base font-bold text-warmgray">要整理外表漂漂亮亮，拍出美美的照片 📸</p>
-        </div>
-        <div class="flex gap-3 items-start">
-          <span class="w-7 h-7 rounded-full bg-softblue text-white flex items-center justify-center text-xs font-black shrink-0 mt-0.5">7</span>
-          <p class="text-base font-bold text-warmgray">迷路也是一種體驗 🧭</p>
-        </div>
-      </div>
-
-      <div class="border-b-2 border-dashed border-peach/30 mb-8"></div>
-
-      <!-- Sign fields -->
-      <div class="text-left space-y-5">
-        <div class="flex items-end gap-3">
-          <span class="text-lg font-black text-warmgray shrink-0">出發日期</span>
-          <div class="flex-1 border-b-2 border-warmgray/30 pb-1 text-center">
-            <span class="text-lg font-bold text-peach">2026 / 04 / 16</span>
-          </div>
-        </div>
-        <div class="flex items-end gap-3">
-          <span class="text-lg font-black text-warmgray shrink-0">目的地</span>
-          <div class="flex-1 border-b-2 border-warmgray/30 pb-1 text-center">
-            <span class="text-lg font-bold text-peach">韓國 釜山 🇰🇷</span>
-          </div>
-        </div>
-        <div class="flex items-end gap-3">
-          <span class="text-lg font-black text-warmgray shrink-0">立約人</span>
-          <div class="flex-1 border-b-2 border-warmgray/30 pb-1 text-center">
-            <span class="text-warmgray/40 text-sm">（簽名欄）</span>
-          </div>
-        </div>
-        <div class="flex items-end gap-3">
-          <span class="text-lg font-black text-warmgray shrink-0">立約人</span>
-          <div class="flex-1 border-b-2 border-warmgray/30 pb-1 text-center">
-            <span class="text-warmgray/40 text-sm">（簽名欄）</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pinky promise emoji -->
-      <div class="mt-8 text-6xl">🤙🤙</div>
-      <div class="text-sm text-warmgray/50 mt-2">打勾勾，一百年不許變！</div>
-
-    </div>
-  </div>
-</div>
 
   </main>
 
