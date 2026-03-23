@@ -125,6 +125,15 @@
   /* Copy button (set via JS, needs CSS fallback) */
   .copy-btn-cute { background: #e8f2f8; color: #7db8d4; border-radius: 9999px; font-size: 0.75em; font-weight: 700; padding: 2px 8px; margin-left: 8px; cursor: pointer; border: 0; transition: background 0.15s, color 0.15s; }
   .copy-btn-cute:hover { background: #7db8d4; color: white; }
+
+  /* Image carousel */
+  .img-carousel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .img-carousel::-webkit-scrollbar { display: none; }
+  .img-carousel img { flex-shrink: 0; width: 100%; height: 128px; object-fit: cover; scroll-snap-align: start; }
+  .carousel-wrapper { position: relative; overflow: hidden; }
+  .carousel-dots { display: flex; justify-content: center; gap: 4px; padding: 6px 0; }
+  .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: #e0d8d0; }
+  .carousel-dot.active { background: #7ec8a0; }
 </style>
 <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" />
 <script src="https://cdn.tailwindcss.com"></script>
@@ -470,7 +479,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🍗</span><div class="card-img-info"><div class="card-img-title">puradak 炸雞</div><div class="card-img-area">21:00 - 22:00 · 海雲台 · 宵夜</div></div><div class="card-img-cost">₩20,000<small>NT$480</small></div></div>
-    <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20230707113019_photo1_753fea4c5d8f.webp" alt="puradak 炸雞" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20230707113019_photo1_753fea4c5d8f.webp" alt="puradak 炸雞" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%ED%91%B8%EB%9D%BC%EB%8B%AD%EC%B9%98%ED%82%A8+%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -549,7 +566,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img pass"><span class="card-img-icon">🛷</span><div class="card-img-info"><div class="card-img-title">Skyline Luge 斜坡滑車</div><div class="card-img-area">09:00 - 10:30 · 機張 · PASS</div></div><div class="card-img-cost">PASS</div></div>
-    <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/58a126d1-d2c5-4225-ae3f-590473f489fc.jpeg" alt="Skyline Luge 斜坡滑車" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/58a126d1-d2c5-4225-ae3f-590473f489fc.jpeg" alt="Skyline Luge 斜坡滑車" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%8A%A4%EC%B9%B4%EC%9D%B4%EB%9D%BC%EC%9D%B8%EB%A3%A8%EC%A7%80+%EB%B6%80%EC%82%B0" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -584,7 +609,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img cafe"><span class="card-img-icon">☕</span><div class="card-img-info"><div class="card-img-title">coralani 躺椅咖啡廳</div><div class="card-img-area">10:45 - 11:30 · 機張 · 下午茶</div></div><div class="card-img-cost">₩8,000<small>NT$192</small></div></div>
-    <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20260226054609369_photo_cd0b530dc87f.webp" alt="coralani 躺椅咖啡廳" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20260226054609369_photo_cd0b530dc87f.webp" alt="coralani 躺椅咖啡廳" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%BD%94%EB%9E%84%EB%9D%BC%EB%8B%88+%EA%B8%B0%EC%9E%A5+%EC%B9%B4%ED%8E%98" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -619,7 +652,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🍜</span><div class="card-img-info"><div class="card-img-title">龍宮海鮮炸醬麵</div><div class="card-img-area">11:30 - 12:30 · 機張 · 午餐</div></div><div class="card-img-cost">₩10,000<small>NT$240</small></div></div>
-    <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20260124103736103_photo_f6a496c68e63.webp" alt="龍宮海鮮炸醬麵" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20260124103736103_photo_f6a496c68e63.webp" alt="龍宮海鮮炸醬麵" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%9A%A9%EA%B6%81%ED%95%B4%EB%AC%BC%EC%A7%9C%EC%9E%A5+%EA%B8%B0%EC%9E%A5" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -656,7 +697,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img pass"><span class="card-img-icon">🏙️</span><div class="card-img-info"><div class="card-img-title">Busan X the SKY</div><div class="card-img-area">13:30 - 14:30 · 海雲台 · PASS</div></div><div class="card-img-cost">PASS</div></div>
-    <img src="https://blog.kakaocdn.net/dna/drL57S/btrX6ooaF0k/AAAAAAAAAAAAAAAAAAAAAPkujm7H-UXwd00Xi1Bkmp8o0UzogxVjP-21nmUEFDBa/img.jpg" alt="Busan X the SKY" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://blog.kakaocdn.net/dna/drL57S/btrX6ooaF0k/AAAAAAAAAAAAAAAAAAAAAPkujm7H-UXwd00Xi1Bkmp8o0UzogxVjP-21nmUEFDBa/img.jpg" alt="Busan X the SKY" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EB%B6%80%EC%82%B0%EC%97%91%EC%8A%A4%EB%8D%94%EC%8A%A4%EC%B9%B4%EC%9D%B4" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -692,7 +741,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🍞</span><div class="card-img-info"><div class="card-img-title">自然島鹽麵包</div><div class="card-img-area">14:30 - 15:00 · 海雲台 · 點心</div></div><div class="card-img-cost">₩4,000<small>NT$96</small></div></div>
-    <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20260118074923177_photo_73e7004cd92b.webp" alt="自然島鹽麵包" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20260118074923177_photo_73e7004cd92b.webp" alt="自然島鹽麵包" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%9E%90%EC%97%B0%EB%8F%84%EC%86%8C%EA%B8%88%EB%B9%B5+%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -726,7 +783,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img pass"><span class="card-img-icon">🚂</span><div class="card-img-info"><div class="card-img-title">海雲台海岸列車</div><div class="card-img-area">15:15 - 16:00 · 海雲台 · PASS</div></div><div class="card-img-cost">PASS</div></div>
-    <img src="https://www.bluelinepark.com/images/cont/p_cheongsapo.png" alt="海雲台海岸列車" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://www.bluelinepark.com/images/cont/p_cheongsapo.png" alt="海雲台海岸列車" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EB%B8%94%EB%A3%A8%EB%9D%BC%EC%9D%B8%ED%8C%8C%ED%81%AC+%ED%95%B4%EB%B3%80%EC%97%B4%EC%B0%A8" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -754,7 +819,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img nature"><span class="card-img-icon">📸</span><div class="card-img-info"><div class="card-img-title">青沙浦天空步道</div><div class="card-img-area">16:00 - 16:30 · 海雲台 · 免費</div></div><div class="card-img-cost">免費</div></div>
-    <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/a1a3510f-b9a7-484c-9b8d-018c513d8b39.jpeg" alt="青沙浦天空步道" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/a1a3510f-b9a7-484c-9b8d-018c513d8b39.jpeg" alt="青沙浦天空步道" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%B2%AD%EC%82%AC%ED%8F%AC%EB%8B%A4%EB%A6%BF%EB%8F%8C%EC%A0%84%EB%A7%9D%EB%8C%80" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -826,7 +899,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img cafe"><span class="card-img-icon">☕</span><div class="card-img-info"><div class="card-img-title">diart coffee</div><div class="card-img-area">16:45 - 17:15 · 海雲台 · 海景咖啡</div></div><div class="card-img-cost">₩8,000<small>NT$192</small></div></div>
-    <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20251223064709_photo1_b3250d0fb741.webp" alt="diart coffee" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20251223064709_photo1_b3250d0fb741.webp" alt="diart coffee" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EB%94%94%EC%95%84%ED%8A%B8%EC%BB%A4%ED%94%BC+%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -860,7 +941,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🍜</span><div class="card-img-info"><div class="card-img-title">31cm 海鮮刀削麵</div><div class="card-img-area">17:30 - 18:30 · 海雲台 · 晚餐</div></div><div class="card-img-cost">₩11,000<small>NT$264</small></div></div>
-    <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20251026073038658_photo_e63477a5917c.webp" alt="31cm 海鮮刀削麵" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20251026073038658_photo_e63477a5917c.webp" alt="31cm 海鮮刀削麵" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%ED%95%B4%EC%9A%B4%EB%8C%80+31cm+%ED%95%B4%EB%AC%BC%EC%B9%BC%EA%B5%AD%EC%88%98" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -897,7 +986,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img pass"><span class="card-img-icon">♨️</span><div class="card-img-info"><div class="card-img-title">Spa Land 汗蒸幕</div><div class="card-img-area">19:00 - 21:30 · Centum City · PASS</div></div><div class="card-img-cost">PASS</div></div>
-    <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20250723091002_photo1_238d400424af.webp" alt="Spa Land 汗蒸幕" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20250723091002_photo1_238d400424af.webp" alt="Spa Land 汗蒸幕" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%8A%A4%ED%8C%8C%EB%9E%9C%EB%93%9C+%EC%84%BC%ED%85%80%EC%8B%9C%ED%8B%B0" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1028,7 +1125,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🥪</span><div class="card-img-info"><div class="card-img-title">egg drop 吐司</div><div class="card-img-area">09:20 - 09:50 · 西面 · 早餐</div></div><div class="card-img-cost">₩6,000<small>NT$144</small></div></div>
-    <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20230529094425_photo1_eabbe324fd99.webp" alt="egg drop 吐司" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20230529094425_photo1_eabbe324fd99.webp" alt="egg drop 吐司" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%97%90%EA%B7%B8%EB%93%9C%EB%9E%8D+%EC%84%9C%EB%A9%B4" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1062,7 +1167,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img pass"><span class="card-img-icon">🏃</span><div class="card-img-info"><div class="card-img-title">Running Man 體驗館</div><div class="card-img-area">10:00 - 11:30 · 西面 · PASS</div></div><div class="card-img-cost">PASS</div></div>
-    <img src="https://d2ur7st6jjikze.cloudfront.net/offer_photos/110389/1793465_large_1763612507.jpg" alt="Running Man 體驗館" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d2ur7st6jjikze.cloudfront.net/offer_photos/110389/1793465_large_1763612507.jpg" alt="Running Man 體驗館" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EB%9F%B0%EB%8B%9D%EB%A7%A8%EC%B2%B4%ED%97%98%EA%B4%80+%EB%B6%80%EC%82%B0" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1096,7 +1209,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img shopping"><span class="card-img-icon">🛍️</span><div class="card-img-info"><div class="card-img-title">樂天百貨</div><div class="card-img-area">11:30 - 12:30 · 西面 · 購物</div></div></div>
-    <img src="https://ak-d.tripcdn.com/images/1mi21224x8x5sqj1t2FCE.jpg?proc=source/trip" alt="樂天百貨" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://ak-d.tripcdn.com/images/1mi21224x8x5sqj1t2FCE.jpg?proc=source/trip" alt="樂天百貨" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EB%A1%AF%EB%8D%B0%EB%B0%B1%ED%99%94%EC%A0%90+%EB%B6%80%EC%82%B0%EB%B3%B8%EC%A0%90" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1130,7 +1251,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🐙</span><div class="card-img-info"><div class="card-img-title">螞蟻家辣炒章魚</div><div class="card-img-area">12:30 - 13:30 · 西面 · 午餐</div></div><div class="card-img-cost">₩16,000<small>NT$384</small></div></div>
-    <img src="https://blog.kakaocdn.net/dna/pOD61/btrXBX0puw5/AAAAAAAAAAAAAAAAAAAAAAc1AnbScVpTCsMClmM3ysH_RE8X9DdGEAZi1EdPTFva/img.jpg" alt="螞蟻家辣炒章魚" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://blog.kakaocdn.net/dna/pOD61/btrXBX0puw5/AAAAAAAAAAAAAAAAAAAAAAc1AnbScVpTCsMClmM3ysH_RE8X9DdGEAZi1EdPTFva/img.jpg" alt="螞蟻家辣炒章魚" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EA%B0%9C%EB%AF%B8%EC%A7%91+%EC%84%9C%EB%A9%B4+%EB%82%99%EA%B3%B1%EC%83%88" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1165,7 +1294,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img cafe"><span class="card-img-icon">☕</span><div class="card-img-info"><div class="card-img-title">田埔咖啡街</div><div class="card-img-area">13:30 - 14:00 · 西面 · 散步</div></div></div>
-    <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/c0cc0c4b-656a-492b-a55b-b30c1849fef9.jpeg" alt="田埔咖啡街" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/c0cc0c4b-656a-492b-a55b-b30c1849fef9.jpeg" alt="田埔咖啡街" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%A0%84%ED%8F%AC%EC%B9%B4%ED%8E%98%EA%B1%B0%EB%A6%AC+%EB%B6%80%EC%82%B0" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1201,7 +1338,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img pass"><span class="card-img-icon">🚡</span><div class="card-img-info"><div class="card-img-title">松島海上纜車</div><div class="card-img-area">15:00 - 16:00 · 松島 · PASS</div></div><div class="card-img-cost">PASS</div></div>
-    <img src="https://ak-d.tripcdn.com/images/1mj0512000g6v8tju126E.jpg" alt="松島海上纜車" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://ak-d.tripcdn.com/images/1mj0512000g6v8tju126E.jpg" alt="松島海上纜車" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%86%A1%EB%8F%84%ED%95%B4%EC%83%81%EC%BC%80%EC%9D%B4%EB%B8%94%EC%B9%B4" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1228,7 +1373,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img pass"><span class="card-img-icon">🌉</span><div class="card-img-info"><div class="card-img-title">松島龍宮雲橋</div><div class="card-img-area">16:00 - 16:30 · 松島 · PASS</div></div><div class="card-img-cost">PASS</div></div>
-    <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/fe0c294a-c0eb-41dc-947c-b9c494d2c2ac.jpeg" alt="松島龍宮雲橋" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/fe0c294a-c0eb-41dc-947c-b9c494d2c2ac.jpeg" alt="松島龍宮雲橋" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%86%A1%EB%8F%84%EC%9A%A9%EA%B6%81%EA%B5%AC%EB%A6%84%EB%8B%A4%EB%A6%AC" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1271,7 +1424,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🐟</span><div class="card-img-info"><div class="card-img-title">古來思魚糕 + 元祖糖餅</div><div class="card-img-area">17:00 - 17:20 · 南浦洞 · 點心</div></div><div class="card-img-cost">₩5,000<small>NT$120</small></div></div>
-    <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20250114191831_photo1_a2e1b1990f36.jpg" alt="古來思魚糕 + 元祖糖餅" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20250114191831_photo1_a2e1b1990f36.jpg" alt="古來思魚糕 + 元祖糖餅" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EA%B3%A0%EB%9E%98%EC%82%AC%EC%96%B4%EB%AC%B5+%EB%82%A8%ED%8F%AC%EB%8F%99" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1308,7 +1469,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🍲</span><div class="card-img-info"><div class="card-img-title">南浦雪濃湯</div><div class="card-img-area">17:30 - 18:15 · 南浦洞 · 晚餐</div></div><div class="card-img-cost">₩10,000<small>NT$240</small></div></div>
-    <img src="https://ak-d.tripcdn.com/images/1mi4j224x8yf1qeng7624.jpg?proc=source/trip" alt="南浦雪濃湯" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://ak-d.tripcdn.com/images/1mi4j224x8yf1qeng7624.jpg?proc=source/trip" alt="南浦雪濃湯" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EB%82%A8%ED%8F%AC%EC%84%A4%EB%A0%81%ED%83%95+%EB%B6%80%EC%82%B0" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1343,7 +1512,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img shopping"><span class="card-img-icon">🛍️</span><div class="card-img-info"><div class="card-img-title">BIFF廣場 + 富平市場</div><div class="card-img-area">18:30 - 19:30 · 南浦洞 · 逛街</div></div></div>
-    <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/c5b72c43-e6f7-4325-916e-b91c0ecd087d.jpeg" alt="BIFF廣場 + 富平市場" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/c5b72c43-e6f7-4325-916e-b91c0ecd087d.jpeg" alt="BIFF廣場 + 富平市場" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=BIFF%EA%B4%91%EC%9E%A5+%EB%B6%80%EC%82%B0+%EB%B6%80%ED%8F%89%EA%B9%A1%ED%86%B5%EC%8B%9C%EC%9E%A5" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1374,7 +1551,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🍡</span><div class="card-img-info"><div class="card-img-title">紅豆奶油艾草糕</div><div class="card-img-area">19:30 - 19:45 · 南浦洞 · 甜點</div></div><div class="card-img-cost">₩3,500<small>NT$84</small></div></div>
-    <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/c5b72c43-e6f7-4325-916e-b91c0ecd087d.jpeg" alt="紅豆奶油艾草糕" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/c5b72c43-e6f7-4325-916e-b91c0ecd087d.jpeg" alt="紅豆奶油艾草糕" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%91%A5%ED%81%AC%EB%A6%BC%EB%96%A1+%EB%82%A8%ED%8F%AC%EB%8F%99" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1488,7 +1673,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img nature"><span class="card-img-icon">🏘️</span><div class="card-img-info"><div class="card-img-title">白淺灘文化村</div><div class="card-img-area">09:45 - 10:45 · 影島 · 免費</div></div><div class="card-img-cost">免費</div></div>
-    <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/34f57220-3a01-4e34-a825-83cfb7b970d1.jpeg" alt="白淺灘文化村" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/34f57220-3a01-4e34-a825-83cfb7b970d1.jpeg" alt="白淺灘文化村" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%ED%9D%B0%EC%97%AC%EC%9A%B8%EB%AC%B8%ED%99%94%EB%A7%88%EC%9D%84+%EB%B6%80%EC%82%B0" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1524,7 +1717,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img cafe"><span class="card-img-icon">☕</span><div class="card-img-info"><div class="card-img-title">THRILL ON THE MUG</div><div class="card-img-area">11:00 - 12:00 · 影島 · 海景咖啡</div></div><div class="card-img-cost">₩8,000<small>NT$192</small></div></div>
-    <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20250907102639_photo1_a2e1b1990f36.webp" alt="THRILL ON THE MUG" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20250907102639_photo1_a2e1b1990f36.webp" alt="THRILL ON THE MUG" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%8A%A4%EB%A6%B4%EC%98%A8%EB%8D%94%EB%A8%B8%EA%B7%B8+%EC%98%81%EB%8F%84" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1562,7 +1763,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img attraction"><span class="card-img-icon">🎨</span><div class="card-img-info"><div class="card-img-title">甘川洞文化村</div><div class="card-img-area">12:30 - 14:30 · 甘川洞 · 拍照</div></div><div class="card-img-cost">₩2,000<small>NT$48</small></div></div>
-    <img src="https://ak-d.tripcdn.com/images/1mi6d224x92kh2edh74F6.jpg?proc=source/trip" alt="甘川洞文化村" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://ak-d.tripcdn.com/images/1mi6d224x92kh2edh74F6.jpg?proc=source/trip" alt="甘川洞文化村" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EA%B0%90%EC%B2%9C%EB%AC%B8%ED%99%94%EB%A7%88%EC%9D%84+%EB%B6%80%EC%82%B0" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1602,7 +1811,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🥯</span><div class="card-img-info"><div class="card-img-title">All Sunday 貝果</div><div class="card-img-area">15:00 - 15:30 · 廣安里 · 點心</div></div><div class="card-img-cost">₩5,000<small>NT$120</small></div></div>
-    <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20260219062026_photo1_61306c0a4da6.webp" alt="All Sunday 貝果" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20260219062026_photo1_61306c0a4da6.webp" alt="All Sunday 貝果" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%98%AC%EC%8D%AC%EB%8D%B0%EC%9D%B4+%EA%B4%91%EC%95%88%EB%A6%AC+%EB%B2%A0%EC%9D%B4%EA%B8%80" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1637,7 +1854,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img nature"><span class="card-img-icon">🏖️</span><div class="card-img-info"><div class="card-img-title">廣安里海邊散步</div><div class="card-img-area">15:30 - 16:30 · 廣安里 · 免費</div></div><div class="card-img-cost">免費</div></div>
-    <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/81442898-e992-4be8-9b40-1df1b0ab50e8.jpeg" alt="廣安里海邊散步" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/81442898-e992-4be8-9b40-1df1b0ab50e8.jpeg" alt="廣安里海邊散步" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EA%B4%91%EC%95%88%EB%A6%AC%ED%95%B4%EC%88%98%EC%9A%95%EC%9E%A5+%EC%95%BC%EA%B2%BD" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1667,7 +1892,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🥩</span><div class="card-img-info"><div class="card-img-title">83 獬豸烤肉</div><div class="card-img-area">17:00 - 18:30 · 廣安里 · 晚餐</div></div><div class="card-img-cost">₩22,000<small>NT$528</small></div></div>
-    <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20240902232338_photo1_376c99c8dd30.webp" alt="83 獬豸烤肉" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20240902232338_photo1_376c99c8dd30.webp" alt="83 獬豸烤肉" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=83%ED%95%B4%EC%B9%98+%EA%B4%91%EC%95%88%EB%A6%AC+%EA%B3%A0%EA%B8%B0" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1714,7 +1947,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🍪</span><div class="card-img-info"><div class="card-img-title">Busan Bada Sand</div><div class="card-img-area">19:00 - 19:30 · 海雲台 · 伴手禮</div></div><div class="card-img-cost">₩18,000<small>NT$432</small></div></div>
-    <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20250915030423200_photo_5e416ba8e916.webp" alt="Busan Bada Sand" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20250915030423200_photo_5e416ba8e916.webp" alt="Busan Bada Sand" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EB%B6%80%EC%82%B0%EB%B0%94%EB%8B%A4%EC%83%8C%EB%93%9C+%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1836,7 +2077,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🐚</span><div class="card-img-info"><div class="card-img-title">大海鮑魚粥</div><div class="card-img-area">09:30 - 10:30 · 海雲台 · 早午餐</div></div><div class="card-img-cost">₩13,000<small>NT$312</small></div></div>
-    <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20260321114104_photo1_6c45570ef0ea.webp" alt="大海鮑魚粥" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20260321114104_photo1_6c45570ef0ea.webp" alt="大海鮑魚粥" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%ED%81%B0%EB%B0%94%EB%8B%A4%EC%A0%84%EB%B3%B5%EC%A3%BD+%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1871,7 +2120,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🍞</span><div class="card-img-info"><div class="card-img-title">Standard Bread</div><div class="card-img-area">10:30 - 11:00 · 海雲台 · 點心</div></div><div class="card-img-cost">₩6,000<small>NT$144</small></div></div>
-    <img src="https://blog.kakaocdn.net/dna/XFPkY/btsPhlmdYvU/AAAAAAAAAAAAAAAAAAAAAArCxt9qh-6_2uxxM_vSm2wko-4_t5kClk8n_OJkQLh4/img.jpg" alt="Standard Bread" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://blog.kakaocdn.net/dna/XFPkY/btsPhlmdYvU/AAAAAAAAAAAAAAAAAAAAAArCxt9qh-6_2uxxM_vSm2wko-4_t5kClk8n_OJkQLh4/img.jpg" alt="Standard Bread" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%8A%A4%ED%83%A0%EB%8D%94%EB%93%9C%EB%B8%8C%EB%A0%88%EB%93%9C+%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1906,7 +2163,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img nature"><span class="card-img-icon">🏖️</span><div class="card-img-info"><div class="card-img-title">海雲台最後散步</div><div class="card-img-area">11:00 - 12:00 · 海雲台 · 免費</div></div><div class="card-img-cost">免費</div></div>
-    <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/4e0d012d-48cd-4831-a142-7599a938434c.jpeg" alt="海雲台最後散步" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/4e0d012d-48cd-4831-a142-7599a938434c.jpeg" alt="海雲台最後散步" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EC%88%98%EC%9A%95%EC%9E%A5" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1935,7 +2200,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img food"><span class="card-img-icon">🥩</span><div class="card-img-info"><div class="card-img-title">伍班長烤肉</div><div class="card-img-area">12:30 - 13:30 · 海雲台 · 午餐</div></div><div class="card-img-cost">₩20,000<small>NT$480</small></div></div>
-    <img src="https://img.siksinhot.com/place/1353639241026085.jpg" alt="伍班長烤肉" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://img.siksinhot.com/place/1353639241026085.jpg" alt="伍班長烤肉" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%98%A4%EB%B0%98%EC%9E%A5+%ED%95%B4%EC%9A%B4%EB%8C%80+%EA%B3%A0%EA%B8%B0" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1971,7 +2244,15 @@ tailwind.config = {
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
     <div class="card-img shopping"><span class="card-img-icon">🛍️</span><div class="card-img-info"><div class="card-img-title">最後採購</div><div class="card-img-area">14:00 - 15:30 · Centum City · 購物</div></div></div>
-    <img src="https://ak-d.tripcdn.com/images/1mi21224x8x5sqj1t2FCE.jpg?proc=source/trip" alt="新世界百貨 Centum City" class="w-full h-32 object-cover" onerror="this.style.display='none'" loading="lazy">
+<div class="carousel-wrapper">
+      <div class="img-carousel" onscroll="updateDots(this)">
+        <img src="https://ak-d.tripcdn.com/images/1mi21224x8x5sqj1t2FCE.jpg?proc=source/trip" alt="新世界百貨 Centum City" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
+        <a href="https://search.naver.com/search.naver?where=image&query=%EC%8B%A0%EC%84%B8%EA%B3%84%EB%B0%B1%ED%99%94%EC%A0%90+%EC%84%BC%ED%85%80%EC%8B%9C%ED%8B%B0" target="_blank" style="flex-shrink:0;width:100%;height:128px;display:flex;align-items:center;justify-content:center;background:#f0ede8;scroll-snap-align:start;text-decoration:none;">
+          <span style="color:#7ec8a0;font-weight:700;font-size:14px;">📸 查看更多照片 →</span>
+        </a>
+      </div>
+      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span></div>
+    </div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -3204,6 +3485,17 @@ document.addEventListener('touchend', function(e) {
     if (nextBtn) switchTab(nextBtn, dayTabs[nextIndex]);
   }
 }, { passive: true });
+
+function updateDots(carousel) {
+  var wrapper = carousel.parentElement;
+  var dots = wrapper.querySelectorAll('.carousel-dot');
+  var scrollLeft = carousel.scrollLeft;
+  var width = carousel.offsetWidth;
+  var index = Math.round(scrollLeft / width);
+  for (var i = 0; i < dots.length; i++) {
+    dots[i].classList.toggle('active', i === index);
+  }
+}
 </script>
 </body>
 </html>
