@@ -171,7 +171,6 @@ tailwind.config = {
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'day5')">🛫 D5</button>
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'alllist')">📋 清單</button>
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'budget')">💰 預算</button>
-      <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'backup')">🔄 備案</button>
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'mapview')">🗺️ 地圖</button>
     </div>
   </div>
@@ -273,23 +272,6 @@ tailwind.config = {
 
 <!-- ==================== 行前準備 ==================== -->
 <div class="section" id="prep">
-  <div class="pass-overview">
-    <div class="pass-header">
-      <div><div class="pass-title">🎫 釜山PASS 48小時策略</div><div class="pass-sub">Visit Busan Pass · 建議購買 48小時（2天）</div></div>
-      <div class="pass-savings"><div class="pass-savings-label">預估省下</div><div class="pass-savings-amount">₩114,000</div><div class="pass-savings-ntd">約 NT$2,736</div></div>
-    </div>
-    <div class="pass-items">
-      <div class="pass-item"><span class="pass-day">Day 2</span><span class="pass-name">Skyline Luge 斜坡滑車</span><span class="pass-save">省 ₩28,000</span></div>
-      <div class="pass-item"><span class="pass-day">Day 2</span><span class="pass-name">Busan X the SKY</span><span class="pass-save">省 ₩27,000</span></div>
-      <div class="pass-item"><span class="pass-day">Day 2</span><span class="pass-name">海雲台海岸列車</span><span class="pass-save">省 ₩7,000</span></div>
-      <div class="pass-item"><span class="pass-day">Day 2</span><span class="pass-name">天空膠囊列車 Sky Capsule</span><span class="pass-save">省 ₩44,000</span></div>
-      <div class="pass-item"><span class="pass-day">Day 2</span><span class="pass-name">Spa Land 汗蒸幕</span><span class="pass-save">省 ₩20,000</span></div>
-      <div class="pass-item"><span class="pass-day">Day 3</span><span class="pass-name">Running Man 體驗館</span><span class="pass-save">省 ₩18,000</span></div>
-      <div class="pass-item"><span class="pass-day">Day 3</span><span class="pass-name">松島海上纜車</span><span class="pass-save">省 ₩17,000</span></div>
-      <div class="pass-item"><span class="pass-day">Day 3</span><span class="pass-name">松島龍宮雲橋</span><span class="pass-save">省 ₩8,000</span></div>
-    </div>
-    <div class="pass-footer">PASS 售價 ₩55,000 → 使用價值 ₩169,000 → <strong>淨省 ₩114,000</strong></div>
-  </div>
   <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
     <h3 class="font-black text-mint text-base mb-3">📱 必裝 APP</h3>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -396,6 +378,37 @@ tailwind.config = {
       <li>⬜ 確認護照有效期 > 6 個月</li>
       <li>⬜ K-ETA 或免簽確認</li>
     </ul>
+  </div>
+
+  <div class="text-center text-warmgray/30 my-2">· · ·</div>
+  <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
+    <h3 class="font-black text-mint text-base mb-3">🌧️ 雨天備案（室內景點）</h3>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
+        <span class="text-lg">♨️</span>
+        <div><strong class="text-xs">Spa Land / ClubD Oasis</strong><div class="text-xs text-warmgray/60">室內泡湯</div></div>
+      </div>
+      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
+        <span class="text-lg">🏃</span>
+        <div><strong class="text-xs">Running Man 體驗館</strong><div class="text-xs text-warmgray/60">室內</div></div>
+      </div>
+      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
+        <span class="text-lg">🏙️</span>
+        <div><strong class="text-xs">Busan X the SKY</strong><div class="text-xs text-warmgray/60">室內觀景</div></div>
+      </div>
+      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
+        <span class="text-lg">🏬</span>
+        <div><strong class="text-xs">新世界百貨 Centum City</strong><div class="text-xs text-warmgray/60">世界最大百貨！</div></div>
+      </div>
+      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
+        <span class="text-lg">✨</span>
+        <div><strong class="text-xs">Arte Museum</strong><div class="text-xs text-warmgray/60">室內光影展</div></div>
+      </div>
+      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
+        <span class="text-lg">🎥</span>
+        <div><strong class="text-xs">釜山電影博物館</strong><div class="text-xs text-warmgray/60">室內</div></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -2343,109 +2356,6 @@ tailwind.config = {
       <tr class="total"><td class="p-2 border-b border-warmgray/10 text-warmgray">合計</td><td class="p-2 border-b border-warmgray/10 text-warmgray">W486,500</td><td class="p-2 border-b border-warmgray/10 text-warmgray">約 NT$11,676</td></tr>
     </table>
     <p style="margin-top:8px;font-size:0.85em;color:#6b7280">建議準備 W500,000~600,000（約 NT$12,000~14,400）較為充裕</p>
-  </div>
-</div>
-
-<!-- ==================== 備案 ==================== -->
-<div class="section hidden" id="backup">
-  <div class="mb-6">
-    <h2 class="text-2xl font-black text-warmgray tracking-tight">🔄 備案景點 和 未排入項目</h2>
-    <p class="text-sm text-warmgray/60 mt-2">這些景點因時間限制未排入主行程，可視情況替換</p>
-    <div class="border-b-2 border-dashed border-warmgray/15 mt-4"></div>
-  </div>
-
-  <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
-    <h3 class="font-black text-mint text-base mb-3">🎫 PASS 可用但未排入</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">🏊</span>
-        <div><strong class="text-sm">ClubD Oasis 汗蒸幕水上樂園</strong><div class="text-xs text-warmgray/60">可替換 Day 2 Spa Land，規模更大</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">📖</span>
-        <div><strong class="text-sm">Flipbook Studio 手翻書</strong><div class="text-xs text-warmgray/60">甘川洞，需 2 張 PASS 券</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">🗼</span>
-        <div><strong class="text-sm">釜山塔</strong><div class="text-xs text-warmgray/60">Day 3 南浦洞晚上可加，龍頭山公園上</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">🧱</span>
-        <div><strong class="text-sm">釜山 Brick Campus</strong><div class="text-xs text-warmgray/60">Day 2 機張可加，樂高迷必去</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">🔬</span>
-        <div><strong class="text-sm">國立釜山科學館</strong><div class="text-xs text-warmgray/60">Day 2 機張可加</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">🎨</span>
-        <div><strong class="text-sm">Arte Museum 釜山</strong><div class="text-xs text-warmgray/60">Day 4 影島可加</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">⛵</span>
-        <div><strong class="text-sm">釜山鑽石灣遊艇</strong><div class="text-xs text-warmgray/60">Day 4 廣安里可加，需預約</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">🎬</span>
-        <div><strong class="text-sm">釜山電影體驗博物館</strong><div class="text-xs text-warmgray/60">Day 3 南浦洞可加</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">👘</span>
-        <div><strong class="text-sm">甘川洞韓服體驗</strong><div class="text-xs text-warmgray/60">Day 4 甘川洞可加，約 W10,000~15,000</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">👗</span>
-        <div><strong class="text-sm">海雲台 HAEON 韓服</strong><div class="text-xs text-warmgray/60">Day 2 或 5 海雲台可加</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
-    <h3 class="font-black text-mint text-base mb-3">🍜 未排入的餐廳</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">🍲</span>
-        <div><strong class="text-sm">松亭 3 代豬肉湯飯</strong><div class="text-xs text-warmgray/60">西面，可替換 Day 3 午餐 ₩8,000~10,000</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">🍖</span>
-        <div><strong class="text-sm">水邊最高豬肉湯飯</strong><div class="text-xs text-warmgray/60">廣安里，可替換 Day 4 晚餐 W9,000~12,000</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">🍗</span>
-        <div><strong class="text-sm">橋村炸雞</strong><div class="text-xs text-warmgray/60">可當任何一天宵夜外送 W18,000~20,000</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
-    <h3 class="font-black text-mint text-base mb-3">🌧️ 雨天備案</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">♨️</span>
-        <div><strong class="text-sm">Spa Land / ClubD Oasis</strong><div class="text-xs text-warmgray/60">室內泡湯</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">🏃</span>
-        <div><strong class="text-sm">Running Man 體驗館</strong><div class="text-xs text-warmgray/60">室內</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">🏙️</span>
-        <div><strong class="text-sm">Busan X the SKY</strong><div class="text-xs text-warmgray/60">室內觀景</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">🏬</span>
-        <div><strong class="text-sm">新世界百貨 Centum City 逛街</strong><div class="text-xs text-warmgray/60">世界最大百貨公司！</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">✨</span>
-        <div><strong class="text-sm">Arte Museum</strong><div class="text-xs text-warmgray/60">室內光影展</div></div>
-      </div>
-      <div class="flex items-center gap-2 p-2 bg-warmgray-light/50 rounded-lg">
-        <span class="text-lg">🎥</span>
-        <div><strong class="text-sm">釜山電影博物館</strong><div class="text-xs text-warmgray/60">室內</div></div>
-      </div>
-    </div>
   </div>
 </div>
 
