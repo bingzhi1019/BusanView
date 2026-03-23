@@ -43,16 +43,27 @@
   /* Map */
   .svg-map-container { margin-bottom: 16px; position: relative; }
   .map-tooltip {
-    position: relative;
+    position: absolute;
     z-index: 10;
     background: white;
     border: 2px dashed #e0d8d0;
     border-radius: 16px;
     padding: 12px;
-    margin: 12px auto 0;
-    max-width: 320px;
+    max-width: 260px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.12);
     font-size: 0.85em;
+  }
+  .map-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-left: 2px dashed #e0d8d0;
+    border-top: 2px dashed #e0d8d0;
+    transform: rotate(45deg);
   }
   .map-fullwidth { width: 100%; overflow: hidden; position: relative; }
   .map-fullwidth svg { transition: all 0.5s ease; }
@@ -2390,6 +2401,11 @@ tailwind.config = {
   </g>
 </svg>
 
+<div id="mapTooltip" class="map-tooltip hidden">
+  <button onclick="document.getElementById('mapTooltip').classList.add('hidden')" class="absolute top-1 right-2 text-warmgray/50 hover:text-warmgray text-lg leading-none">&times;</button>
+  <div id="mapTooltipContent"></div>
+</div>
+
 <!-- Day filter buttons -->
 <div class="flex gap-2 justify-center mt-3 flex-wrap px-4">
   <button type="button" class="px-3 py-1 text-xs font-bold rounded-full bg-mint text-white" onclick="filterMapDots('all',this)">全部景點</button>
@@ -2400,11 +2416,6 @@ tailwind.config = {
   <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMapDots('5',this)">D5</button>
 </div>
 
-<!-- Venue info tooltip (below buttons, always visible) -->
-<div id="mapTooltip" class="map-tooltip hidden">
-  <button onclick="document.getElementById('mapTooltip').classList.add('hidden')" class="absolute top-1 right-2 text-warmgray/50 hover:text-warmgray text-lg leading-none">&times;</button>
-  <div id="mapTooltipContent"></div>
-</div>
   </div>
   <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
     <h3 class="font-black text-mint text-base mb-3">📍 地區分佈</h3>
@@ -2636,7 +2647,32 @@ document.addEventListener('click', function(e) {
   var tooltip = document.getElementById('mapTooltip');
   var content = document.getElementById('mapTooltipContent');
 
-  // Tooltip shows below the map, no positioning needed
+  // Position tooltip near clicked dot using current viewBox
+  var svg = dot.closest('svg');
+  var container = svg.parentElement;
+  var svgRect = svg.getBoundingClientRect();
+  var containerRect = container.getBoundingClientRect();
+  var circle = dot.querySelector('circle');
+  if (!circle) return;
+  var cx = parseFloat(circle.getAttribute('cx'));
+  var cy = parseFloat(circle.getAttribute('cy'));
+
+  // Use current viewBox (changes when day is filtered)
+  var vb = svg.getAttribute('viewBox').split(/\s+/).map(Number);
+  var vbX = vb[0], vbY = vb[1], vbW = vb[2], vbH = vb[3];
+
+  // Map SVG coords to pixel position relative to container
+  var px = ((cx - vbX) / vbW) * svgRect.width + (svgRect.left - containerRect.left);
+  var py = ((cy - vbY) / vbH) * svgRect.height + (svgRect.top - containerRect.top);
+
+  // Clamp tooltip within container bounds
+  var tw = 260;
+  var left = px > containerRect.width * 0.55 ? px - tw - 10 : px + 15;
+  left = Math.max(8, Math.min(left, containerRect.width - tw - 8));
+  var top = Math.max(8, Math.min(py + 15, containerRect.height - 200));
+
+  tooltip.style.left = left + 'px';
+  tooltip.style.top = top + 'px';
 
   var html = '';
   for (var i = 0; i < ids.length; i++) {
