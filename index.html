@@ -391,15 +391,7 @@ tailwind.config = {
 
   <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
     <h3 class="font-black text-mint text-base mb-3">🚇 交通概覽（從 Centum City 出發）</h3>
-    <!-- 釜山地鐵路線圖 -->
-    <div class="mb-4 rounded-xl overflow-hidden border-2 border-dashed border-warmgray/15">
-      <img src="https://metro.nuua.travel/image/map-image/nuua_metro_busan_simplified_chinese.png" alt="釜山地鐵路線圖（中文版）" class="w-full" loading="lazy" onerror="this.style.display='none'">
-      <div class="flex gap-2 p-2 bg-warmgray-light/30 text-xs">
-        <a href="https://metro.nuua.travel/image/map-image/nuua_metro_busan_simplified_chinese.png" target="_blank" class="text-mint font-bold hover:underline">🔍 放大查看</a>
-        <a href="https://metro.nuua.travel/image/map-image/nuua_metro_busan_korean.png" target="_blank" class="text-warmgray/60 hover:underline">韓文版</a>
-        <a href="https://metro.nuua.travel/image/map-image/nuua_metro_busan_english.png" target="_blank" class="text-warmgray/60 hover:underline">英文版</a>
-      </div>
-    </div>
+    <div class="text-xs text-warmgray/50 mb-3">💡 完整地鐵路線圖請看「🗺️ 地圖」tab → 「🚇 地鐵路線圖」</div>
     <ul>
       <li><strong>到海雲台海邊</strong>：地鐵 2 號線 1 站（3 分鐘）或步行 15 分鐘</li>
       <li><strong>到西面</strong>：地鐵 2 號線 5 站（約 12 分鐘）W1,400</li>
@@ -2684,9 +2676,29 @@ tailwind.config = {
 <!-- ==================== 地圖 ==================== -->
 <div class="section hidden" id="mapview">
   <div class="mb-6">
-    <h2 class="text-2xl font-black text-warmgray tracking-tight">🗺️ 景點地圖</h2>
-    <p class="text-sm text-warmgray/60 mt-2">所有行程景點標示於地圖上，按天數分色顯示</p>
-    <div class="flex flex-wrap gap-1 mt-3">
+    <h2 class="text-2xl font-black text-warmgray tracking-tight">🗺️ 地圖</h2>
+    <p class="text-sm text-warmgray/60 mt-2">切換景點地圖與地鐵路線圖</p>
+
+    <!-- Map mode toggle -->
+    <div class="flex gap-2 mt-3 mb-4">
+      <button type="button" id="btnVenueMap" class="px-4 py-2 text-sm font-bold rounded-full bg-mint text-white" onclick="toggleMapMode('venue')">📍 景點地圖</button>
+      <button type="button" id="btnMetroMap" class="px-4 py-2 text-sm font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray" onclick="toggleMapMode('metro')">🚇 地鐵路線圖</button>
+    </div>
+
+    <!-- Metro map (hidden by default) -->
+    <div id="metroMapView" class="hidden mb-4">
+      <div class="rounded-2xl overflow-hidden border-2 border-dashed border-warmgray/15">
+        <img src="https://metro.nuua.travel/image/map-image/nuua_metro_busan_simplified_chinese.png" alt="釜山地鐵路線圖（中文版）" class="w-full" loading="lazy" onerror="this.style.display='none'">
+        <div class="flex gap-3 p-3 bg-warmgray-light/30 text-xs">
+          <a href="https://metro.nuua.travel/image/map-image/nuua_metro_busan_simplified_chinese.png" target="_blank" class="text-mint font-bold hover:underline">🔍 放大查看</a>
+          <a href="https://metro.nuua.travel/image/map-image/nuua_metro_busan_korean.png" target="_blank" class="text-warmgray/60 hover:underline">韓文版</a>
+          <a href="https://metro.nuua.travel/image/map-image/nuua_metro_busan_english.png" target="_blank" class="text-warmgray/60 hover:underline">英文版</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Venue map legend (shown by default) -->
+    <div id="venueMapLegend" class="flex flex-wrap gap-1 mt-3">
       <span class="px-2 py-0.5 text-xs rounded-full font-bold" style="background:#fef0e8;color:#f5a67d">● D1 수</span>
       <span class="px-2 py-0.5 text-xs rounded-full font-bold" style="background:#e8f2f8;color:#7db8d4">● D2 목</span>
       <span class="px-2 py-0.5 text-xs rounded-full font-bold" style="background:#e8f5ee;color:#7ec8a0">● D3 금</span>
@@ -2696,6 +2708,7 @@ tailwind.config = {
     </div>
     <div class="border-b-2 border-dashed border-warmgray/15 mt-4"></div>
   </div>
+  <div id="venueMapView">
   <div class="svg-map-container map-fullwidth">
   <svg viewBox="0 0 1200 700" style="width:100%;height:auto;max-height:70vh;background:#f5f3f0;border-radius:16px;" xmlns="http://www.w3.org/2000/svg">
   <!-- District background labels -->
@@ -2957,6 +2970,7 @@ tailwind.config = {
       <div class="legend-item"><strong>廣安里（中）</strong>：Day 4 下午 海邊+烤肉</div>
     </div>
   </div>
+  </div><!-- close venueMapView -->
 </div>
 
 
@@ -3525,6 +3539,28 @@ document.addEventListener('touchend', function(e) {
     if (nextBtn) switchTab(nextBtn, dayTabs[nextIndex]);
   }
 }, { passive: true });
+
+// Toggle between venue map and metro map
+function toggleMapMode(mode) {
+  var venueMap = document.getElementById('venueMapView');
+  var metroMap = document.getElementById('metroMapView');
+  var venueLegend = document.getElementById('venueMapLegend');
+  var btnVenue = document.getElementById('btnVenueMap');
+  var btnMetro = document.getElementById('btnMetroMap');
+  if (mode === 'metro') {
+    if (venueMap) venueMap.classList.add('hidden');
+    if (venueLegend) venueLegend.classList.add('hidden');
+    if (metroMap) metroMap.classList.remove('hidden');
+    btnVenue.className = 'px-4 py-2 text-sm font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray';
+    btnMetro.className = 'px-4 py-2 text-sm font-bold rounded-full bg-mint text-white';
+  } else {
+    if (venueMap) venueMap.classList.remove('hidden');
+    if (venueLegend) venueLegend.classList.remove('hidden');
+    if (metroMap) metroMap.classList.add('hidden');
+    btnVenue.className = 'px-4 py-2 text-sm font-bold rounded-full bg-mint text-white';
+    btnMetro.className = 'px-4 py-2 text-sm font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray';
+  }
+}
 
 function updateDots(carousel) {
   var wrapper = carousel.parentElement;
