@@ -41,7 +41,30 @@
   .pass-footer { margin-top: 12px; font-size: 0.8em; color: #c08830; text-align: center; padding-top: 10px; border-top: 2px dashed #f5c26b; }
 
   /* SVG Map */
-  .svg-map-container { margin-bottom: 16px; }
+  .svg-map-container { margin-bottom: 16px; position: relative; }
+  .map-tooltip {
+    position: absolute;
+    z-index: 10;
+    background: white;
+    border: 2px dashed #e0d8d0;
+    border-radius: 16px;
+    padding: 12px;
+    max-width: 280px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    font-size: 0.85em;
+  }
+  .map-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 20px;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-left: 2px dashed #e0d8d0;
+    border-top: 2px dashed #e0d8d0;
+    transform: rotate(45deg);
+  }
   .svg-map { width: 100%; height: auto; border-radius: 16px; border: 2px dashed #d0c8c0; background: #faf8f5; }
   .map-fullwidth { margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); width: 100vw; }
   .map-dot { cursor: pointer; transition: all 0.2s; }
@@ -2149,7 +2172,7 @@ tailwind.config = {
     <div class="border-b-2 border-dashed border-warmgray/15 mt-4"></div>
   </div>
   <div class="svg-map-container map-fullwidth" style="min-height: 600px">
-  <svg viewBox="0 0 900 600" class="svg-map" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 900 600" class="svg-map" xmlns="http://www.w3.org/2000/svg" onclick="if(event.target.tagName!=='circle')document.getElementById('mapTooltip').classList.add('hidden')">
     <!-- Background -->
     <rect width="900" height="600" fill="#f8fafc" rx="12"/>
     
@@ -2256,7 +2279,12 @@ tailwind.config = {
     <!-- Sea label -->
     <text x="600" y="420" text-anchor="middle" font-size="14" fill="#93c5fd" font-weight="300" letter-spacing="6" opacity="0.6">大 韓 海 峽</text>
   </svg>
-  
+
+  <div id="mapTooltip" class="map-tooltip hidden">
+    <button onclick="document.getElementById('mapTooltip').classList.add('hidden')" class="absolute top-1 right-2 text-warmgray/50 hover:text-warmgray text-lg leading-none">&times;</button>
+    <div id="mapTooltipContent"></div>
+  </div>
+
   <div class="flex gap-1 justify-center mt-3 flex-wrap">
     <button type="button" class="px-3 py-1 text-xs font-bold rounded-full bg-mint text-white" onclick="filterMapDots('all',this)">全部</button>
     <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMapDots('1',this)">D1</button>
@@ -2266,12 +2294,6 @@ tailwind.config = {
     <button type="button" class="px-3 py-1 text-xs font-bold rounded-full border-2 border-dashed border-warmgray/30 text-warmgray hover:bg-warmgray-light" onclick="filterMapDots('5',this)">D5</button>
   </div>
 
-  <div id="mapVenueInfo" class="mt-4 hidden">
-    <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-4 bg-white">
-      <h4 class="font-black text-mint mb-3" id="mapVenueTitle">Day 2 景點</h4>
-      <div id="mapVenueList" class="space-y-2"></div>
-    </div>
-  </div>
 </div>
   <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
     <h3 class="font-black text-mint text-base mb-3">📍 地區分佈</h3>
@@ -2449,20 +2471,38 @@ function showVenueInfo(dot) {
   var venueIds = dot.getAttribute('data-venues');
   if (!venueIds) return;
   var ids = venueIds.split(',');
-  var infoPanel = document.getElementById('mapVenueInfo');
-  var infoTitle = document.getElementById('mapVenueTitle');
-  var infoList = document.getElementById('mapVenueList');
 
-  // Clear existing
-  while (infoList.firstChild) infoList.removeChild(infoList.firstChild);
+  var tooltip = document.getElementById('mapTooltip');
+  var content = document.getElementById('mapTooltipContent');
 
-  var dotTitle = dot.querySelector('title');
-  infoTitle.textContent = dotTitle ? dotTitle.textContent : '景點資訊';
+  // Position tooltip near the clicked dot
+  var svg = dot.closest('svg');
+  var svgRect = svg.getBoundingClientRect();
+  var dotCx = parseFloat(dot.getAttribute('cx'));
+  var dotCy = parseFloat(dot.getAttribute('cy'));
+  var viewBox = svg.viewBox.baseVal;
 
+  // Convert SVG coordinates to pixel position
+  var scaleX = svgRect.width / viewBox.width;
+  var scaleY = svgRect.height / viewBox.height;
+  var pixelX = dotCx * scaleX;
+  var pixelY = dotCy * scaleY;
+
+  // Position tooltip: if dot is on right side, show tooltip to the left; otherwise to the right
+  var tooltipWidth = 280;
+  if (pixelX > svgRect.width * 0.6) {
+    tooltip.style.left = Math.max(8, pixelX - tooltipWidth - 10) + 'px';
+  } else {
+    tooltip.style.left = Math.min(pixelX + 15, svgRect.width - tooltipWidth - 8) + 'px';
+  }
+  tooltip.style.top = Math.max(8, pixelY - 10) + 'px';
+
+  // Build content
   var dayColors = {'1': '#f5a67d', '2': '#7db8d4', '3': '#7ec8a0', '4': '#b5a3d4', '5': '#f5a67d'};
   var dayNum = dot.getAttribute('data-day');
-  infoTitle.style.color = dayColors[dayNum] || '#7ec8a0';
+  var color = dayColors[dayNum] || '#7ec8a0';
 
+  var html = '';
   for (var i = 0; i < ids.length; i++) {
     var card = document.querySelector('[data-id="' + ids[i].trim() + '"]');
     if (!card) continue;
@@ -2473,45 +2513,40 @@ function showVenueInfo(dot) {
     var costEl = imgHeader ? imgHeader.querySelector('.card-img-cost') : null;
     var photo = card.querySelector('img[loading="lazy"]');
 
-    // Get some detail info
     var details = card.querySelectorAll('.detail-row');
     var address = '';
     var hours = '';
     var tip = '';
+    var naverSearch = '';
     for (var d = 0; d < details.length; d++) {
       var label = details[d].querySelector('.detail-label');
       var value = details[d].querySelector('.detail-value');
       if (!label || !value) continue;
-      var labelText = label.textContent.trim();
-      if (labelText.indexOf('韓文地址') >= 0) address = value.textContent.trim();
-      if (labelText.indexOf('營業時間') >= 0) hours = value.textContent.trim();
-      if (labelText.indexOf('攻略') >= 0) tip = value.textContent.trim();
+      var lt = label.textContent.trim();
+      if (lt.indexOf('韓文地址') >= 0) address = value.textContent.trim().replace('複製', '');
+      if (lt.indexOf('營業時間') >= 0) hours = value.textContent.trim().replace('複製', '');
+      if (lt.indexOf('攻略') >= 0) tip = value.textContent.trim();
+      if (lt.indexOf('韓文搜尋') >= 0) naverSearch = value.textContent.trim().replace('複製', '');
     }
 
-    var venueDiv = document.createElement('div');
-    venueDiv.className = 'border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-3';
+    if (i > 0) html += '<div class="border-t border-dashed border-warmgray/15 my-2"></div>';
 
-    var html = '';
-    if (photo) {
-      html += '<img src="' + photo.src + '" alt="" class="w-full h-36 object-cover" loading="lazy" onerror="this.style.display=\'none\'">';
+    if (photo && i === 0) {
+      html += '<img src="' + photo.src + '" class="w-full h-24 object-cover rounded-lg mb-2" onerror="this.style.display=\'none\'">';
     }
-    html += '<div class="p-3">';
-    html += '<div class="flex justify-between items-start">';
-    html += '<div><div class="font-black text-base text-warmgray">' + (titleEl ? titleEl.textContent : '') + '</div>';
-    html += '<div class="text-xs text-warmgray/60 mt-0.5">' + (areaEl ? areaEl.textContent : '') + '</div></div>';
-    if (costEl) html += '<div class="font-black text-peach text-sm">' + costEl.textContent.replace(/<[^>]*>/g, ' ').trim() + '</div>';
-    html += '</div>';
-    if (address) html += '<div class="mt-2 text-xs text-warmgray/70">📍 ' + address + '</div>';
-    if (hours) html += '<div class="text-xs text-warmgray/70 mt-1">🕐 ' + hours + '</div>';
-    if (tip) html += '<div class="text-xs text-mint mt-1">💡 ' + tip + '</div>';
-    html += '</div>';
-
-    venueDiv.innerHTML = html;
-    infoList.appendChild(venueDiv);
+    html += '<div class="font-black text-sm" style="color:' + color + '">' + (titleEl ? titleEl.textContent : '') + '</div>';
+    html += '<div class="text-xs text-warmgray/60">' + (areaEl ? areaEl.textContent : '') + '</div>';
+    if (costEl) {
+      var costText = costEl.textContent.replace(/<[^>]*>/g, ' ').trim();
+      html += '<div class="text-xs font-bold text-peach mt-0.5">' + costText + '</div>';
+    }
+    if (hours) html += '<div class="text-xs text-warmgray/60 mt-1">🕐 ' + hours + '</div>';
+    if (address) html += '<div class="text-xs text-warmgray/60 mt-0.5">📍 ' + address + '</div>';
+    if (tip) html += '<div class="text-xs text-mint mt-1">💡 ' + tip.substring(0, 80) + (tip.length > 80 ? '...' : '') + '</div>';
   }
 
-  infoPanel.classList.remove('hidden');
-  infoPanel.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  content.innerHTML = html;
+  tooltip.classList.remove('hidden');
 
   // Highlight clicked dot
   var allDots = document.querySelectorAll('.map-dot');
@@ -2538,45 +2573,8 @@ function filterMapDots(day, btn) {
     else { dots[j].classList.toggle('hidden', dots[j].getAttribute('data-day') !== day); }
   }
 
-  // Show venue info panel
-  var infoPanel = document.getElementById('mapVenueInfo');
-  var infoTitle = document.getElementById('mapVenueTitle');
-  var infoList = document.getElementById('mapVenueList');
-  if (day === 'all') {
-    infoPanel.classList.add('hidden');
-    return;
-  }
-
-  infoPanel.classList.remove('hidden');
-  var dayNames = {'1': 'Day 1 — 抵達', '2': 'Day 2 — 機張+海雲台', '3': 'Day 3 — 西面+松島+南浦', '4': 'Day 4 — 影島+甘川洞+廣安里', '5': 'Day 5 — 海雲台+回程'};
-  var dayColors = {'1': '#f5a67d', '2': '#7db8d4', '3': '#7ec8a0', '4': '#b5a3d4', '5': '#f5a67d'};
-  infoTitle.textContent = dayNames[day] || 'Day ' + day;
-  infoTitle.style.color = dayColors[day] || '#7ec8a0';
-
-  // Collect venues for this day from visible map dots (data from our own SVG title elements)
-  var venues = [];
-  for (var k = 0; k < dots.length; k++) {
-    if (dots[k].getAttribute('data-day') === day) {
-      var title = dots[k].querySelector('title');
-      if (title) venues.push(title.textContent);
-    }
-  }
-
-  // Clear previous items before adding new ones
-  while (infoList.firstChild) { infoList.removeChild(infoList.firstChild); }
-  for (var v = 0; v < venues.length; v++) {
-    var item = document.createElement('div');
-    item.className = 'flex items-center gap-2 py-1.5 border-b border-dashed border-warmgray/10 last:border-0';
-    var dot = document.createElement('div');
-    dot.className = 'w-3 h-3 rounded-full shrink-0';
-    dot.style.background = dayColors[day] || '#7ec8a0';
-    var text = document.createElement('span');
-    text.className = 'text-sm text-warmgray';
-    text.textContent = venues[v];
-    item.appendChild(dot);
-    item.appendChild(text);
-    infoList.appendChild(item);
-  }
+  // Hide tooltip when changing day filter
+  document.getElementById('mapTooltip').classList.add('hidden');
 }
 
 // Auto-insert copy buttons for Korean text
