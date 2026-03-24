@@ -179,6 +179,7 @@ tailwind.config = {
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'day3')">🚡 D3</button>
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'day4')">🎨 D4</button>
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'day5')">🛫 D5</button>
+      <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'passzone')">🎫 PASS</button>
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'alllist')">📋 清單</button>
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'budget')">💰 預算</button>
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'mapview')">🗺️ 地圖</button>
@@ -571,6 +572,248 @@ tailwind.config = {
       </div>
     </div>
   </div>
+</div>
+
+<!-- ==================== PASS 專區 ==================== -->
+<div class="section hidden" id="passzone">
+  <div class="mb-6">
+    <h2 class="text-2xl font-black text-warmgray tracking-tight">🎫 釜山 PASS 景點總覽</h2>
+    <p class="text-sm text-warmgray/60 mt-2">B 區藍色免費景點（48 小時券可用）· 標 ⭐ 為本次行程已排入</p>
+    <div class="border-b-2 border-dashed border-warmgray/15 mt-4"></div>
+  </div>
+
+  <!-- PASS Map -->
+  <div class="border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden mb-4">
+    <img src="https://i.imgur.com/placeholder.jpg" alt="釜山PASS景點地圖" class="w-full" loading="lazy" onerror="this.style.display='none'">
+  </div>
+
+  <!-- PASS Venue Table -->
+  <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-4 mb-4 bg-white overflow-x-auto">
+    <table class="w-full text-sm border-collapse min-w-[600px]">
+      <thead>
+        <tr>
+          <th class="bg-mint-light text-mint text-left p-2 font-bold border-b-2 border-dashed border-mint/20 text-xs">No</th>
+          <th class="bg-mint-light text-mint text-left p-2 font-bold border-b-2 border-dashed border-mint/20 text-xs">景點名稱</th>
+          <th class="bg-mint-light text-mint text-left p-2 font-bold border-b-2 border-dashed border-mint/20 text-xs">地區</th>
+          <th class="bg-mint-light text-mint text-left p-2 font-bold border-b-2 border-dashed border-mint/20 text-xs">種類</th>
+          <th class="bg-mint-light text-mint text-right p-2 font-bold border-b-2 border-dashed border-mint/20 text-xs">原價</th>
+          <th class="bg-mint-light text-mint text-center p-2 font-bold border-b-2 border-dashed border-mint/20 text-xs">本次</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-mint-light/30">
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">1</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">機張九頭山竹林</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">機張</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-softblue-light text-softblue text-xs">娛樂</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩8,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">2</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">釜山 Brick Campus</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">機張</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-lavender-light text-lavender text-xs">博物館</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩15,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr class="bg-mint-light/30">
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">3</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">國立釜山科學館</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">機張</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-lavender-light text-lavender text-xs">博物館</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩4,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">4</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">海雲台海岸列車 🔥</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">海雲台</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-peach-light text-peach text-xs">觀光</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩16,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"><span class="text-mint font-black">⭐ D2</span></td>
+        </tr>
+        <tr class="bg-mint-light/30">
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">5</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">Museum 1</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">海雲台</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-lavender-light text-lavender text-xs">博物館</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩18,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">6</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">海雲台 HAEON 韓服租借</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">海雲台</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-peach-light text-peach text-xs">體驗</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩22,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"><span class="text-mint font-black">⭐ D5</span></td>
+        </tr>
+        <tr class="bg-mint-light/30">
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">7</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">Hillspa 汗蒸幕</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">海雲台</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-peach-light text-peach text-xs">體驗</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩19,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">8</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">釜山塔 🔥</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">南浦洞</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-softblue-light text-softblue text-xs">娛樂</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩12,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"><span class="text-mint font-black">⭐ D3</span></td>
+        </tr>
+        <tr class="bg-mint-light/30">
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">9</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">釜山電影體驗博物館</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">南浦洞</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-lavender-light text-lavender text-xs">博物館</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩10,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">10</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">Flipbook Studio 手翻書 🔥<br><span class="text-peach text-xs">需兩張 Pass</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">甘川洞</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-softblue-light text-softblue text-xs">娛樂</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩15,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"><span class="text-mint font-black">⭐ D4</span></td>
+        </tr>
+        <tr class="bg-mint-light/30">
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">11</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">甘川浪漫韓服 🔥</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">甘川洞</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-peach-light text-peach text-xs">體驗</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩12,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">12</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">ibgogage 韓服／制服體驗 🔥</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">甘川洞</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-peach-light text-peach text-xs">體驗</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩12,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr class="bg-mint-light/30">
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">13</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">哲秀與英采韓服租借 🔥</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">甘川洞</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-peach-light text-peach text-xs">體驗</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩12,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">14</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">松島海上纜車 🔥</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">松島</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-peach-light text-peach text-xs">觀光</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩22,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"><span class="text-mint font-black">⭐ D3</span></td>
+        </tr>
+        <tr class="bg-mint-light/30">
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">15</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">松島龍宮雲橋</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">松島</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-mint-light text-mint text-xs">自然景觀</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩1,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"><span class="text-mint font-black">⭐ D3</span></td>
+        </tr>
+        <tr>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">16</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">Arte Museum 釜山</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">影島</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-lavender-light text-lavender text-xs">博物館</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩25,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr class="bg-mint-light/30">
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">17</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">國立海洋博物館 4D 影像館</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">影島</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-lavender-light text-lavender text-xs">博物館</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩5,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">18</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">太宗台 Danubi 列車</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">影島</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-peach-light text-peach text-xs">觀光</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩4,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr class="bg-mint-light/30">
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">19</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">Running Man 體驗館</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">西面</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-softblue-light text-softblue text-xs">娛樂</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩19,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"><span class="text-mint font-black">⭐ D3</span></td>
+        </tr>
+        <tr>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">20</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">DiAegg 密室逃脫<br><span class="text-peach text-xs">需預約</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">西面</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-softblue-light text-softblue text-xs">娛樂</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩23,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr class="bg-mint-light/30">
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">21</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">Samjeong Tower 雷射槍競技場</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">西面</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-softblue-light text-softblue text-xs">娛樂</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩14,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">22</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">西面雷射槍競技場</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">西面</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-softblue-light text-softblue text-xs">娛樂</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩14,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+        <tr class="bg-mint-light/30">
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">23</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs font-bold">洛東江生態遊船<br><span class="text-peach text-xs">需預約</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs">下端洞</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-xs"><span class="px-1.5 py-0.5 rounded bg-peach-light text-peach text-xs">觀光</span></td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-warmgray text-xs text-right">₩7,000</td>
+          <td class="p-2 border-b border-dashed border-warmgray/10 text-center text-xs"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Summary -->
+  <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-4 mb-4 bg-white">
+    <h3 class="font-black text-mint text-base mb-3">📊 本次行程 PASS 使用統計</h3>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div class="text-center p-3 bg-mint-light/50 rounded-xl">
+        <div class="text-2xl font-black text-mint">7</div>
+        <div class="text-xs text-warmgray/60">已排入景點</div>
+      </div>
+      <div class="text-center p-3 bg-peach-light/50 rounded-xl">
+        <div class="text-2xl font-black text-peach">₩104,000</div>
+        <div class="text-xs text-warmgray/60">使用原價合計</div>
+      </div>
+      <div class="text-center p-3 bg-softblue-light/50 rounded-xl">
+        <div class="text-2xl font-black text-softblue">₩55,000</div>
+        <div class="text-xs text-warmgray/60">PASS 售價</div>
+      </div>
+      <div class="text-center p-3 bg-lavender-light/50 rounded-xl">
+        <div class="text-2xl font-black text-lavender">₩49,000</div>
+        <div class="text-xs text-warmgray/60">淨省下</div>
+      </div>
+    </div>
+    <div class="text-xs text-warmgray/50 mt-3 text-center">⭐ 已排入：海岸列車 D2 · Running Man D3 · 松島纜車 D3 · 龍宮雲橋 D3 · 釜山塔 D3 · Flipbook D4 · HAEON韓服 D5</div>
+    <div class="text-xs text-warmgray/50 text-center">💡 注意：Skyline Luge、X the SKY、Spa Land 是 A 區景點（另一張表），本表為 B 區</div>
+  </div>
+
 </div>
 
 <!-- ==================== DAY 1 ==================== -->
