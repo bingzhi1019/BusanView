@@ -419,12 +419,19 @@ tailwind.config = {
     </div>
   </li>
   <li class="flex items-start gap-3">
-    <div class="w-16 h-16 rounded-lg bg-softblue-light flex items-center justify-center text-2xl shrink-0">🚂</div>
-    <div>
-      <strong>海岸列車+膠囊列車</strong> <span class="text-xs bg-peach-light text-peach px-1 rounded">PASS ✓</span><br>
-      <span class="text-xs text-warmgray/70">⚠️ 必須預約！膠囊列車超熱門，務必提前在 bluelinepark.com 預約時段</span>
-    </div>
-  </li>
+  <div class="w-16 h-16 rounded-lg bg-softblue-light flex items-center justify-center text-2xl shrink-0">🚂</div>
+  <div>
+    <strong>海岸列車</strong> <span class="text-xs bg-peach-light text-peach px-1 rounded">PASS ✓</span><br>
+    <span class="text-xs text-warmgray/70">⚠️ PASS APP 預約時段，或當天到尾浦站櫃台出示 PASS 換票</span>
+  </div>
+</li>
+<li class="flex items-start gap-3">
+  <div class="w-16 h-16 rounded-lg bg-lavender-light flex items-center justify-center text-2xl shrink-0">🔮</div>
+  <div>
+    <strong>膠囊列車 Sky Capsule</strong> <span class="text-xs bg-warmgray-light text-warmgray px-1 rounded">自費 ₩22,000</span> <span class="text-xs bg-mint-light text-mint px-1 rounded">已預約 ✅</span><br>
+    <span class="text-xs text-warmgray/70">在 bluelinepark.com 官網預約付費（PASS 不含膠囊列車）</span>
+  </div>
+</li>
   <li class="flex items-start gap-3">
     <div class="w-16 h-16 rounded-lg bg-peach-light flex items-center justify-center text-2xl shrink-0">🥩</div>
     <div>
@@ -962,7 +969,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img pass"><span class="card-img-icon">🔮</span><div class="card-img-info"><div class="card-img-title">天空膠囊列車 Sky Capsule</div><div class="card-img-area">15:30 - 16:00 · 青沙浦→松亭 · PASS</div></div><div class="card-img-cost">PASS</div></div>
+    <div class="card-img attraction"><span class="card-img-icon">🔮</span><div class="card-img-info"><div class="card-img-title">天空膠囊列車 Sky Capsule</div><div class="card-img-area">15:30 - 16:00 · 青沙浦→松亭 · 自費</div></div><div class="card-img-cost">₩22,000<small>NT$528</small></div></div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -974,8 +981,8 @@ tailwind.config = {
       <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">單程約 30 分鐘</span></div>
       <div class="detail-row"><span class="detail-label">韓文地址</span><span class="detail-value">부산광역시 해운대구 청사포로 116（블루라인파크）</span></div>
       <div class="detail-row"><span class="detail-label">營業時間</span><span class="detail-value">依季節 09:30~17:00/19:00/21:00（末班比海岸列車早，注意時間）</span></div>
-      <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">⚠️ 強烈建議預約！比海岸列車更熱門，經常秒殺。線上購票：bluelinepark.com</span></div>
-      <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">PASS 免費 ｜ 原價 2人 ₩44,000（NT$1,056）</span></div>
+      <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">已預約 ✅ 官網 bluelinepark.com（15:30 場次）</span></div>
+      <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">自費 ₩22,000/人（已在 bluelinepark.com 官網預約付款）</span></div>
       <div class="detail-row"><span class="detail-label">💡 攻略</span><span class="detail-value">跟海岸列車是不同設施！海岸列車在地面跑，膠囊在高架上。建議先搭海岸列車到青沙浦，逛完步道再搭膠囊到松亭，一路串起來不走回頭路。日落時段搭最美！</span></div>
       <a href="https://map.naver.com/v5/search/%EB%B8%94%EB%A3%A8%EB%9D%BC%EC%9D%B8%ED%8C%8C%ED%81%AC%20%EC%8A%A4%EC%B9%B4%EC%9D%B4%EC%BA%A1%EC%8A%90" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-mint text-white hover:bg-mint/80 transition-colors mt-2">📍 Naver Map</a>
       <a href="https://search.naver.com/search.naver?where=image&query=%EB%B8%94%EB%A3%A8%EB%9D%BC%EC%9D%B8%ED%8C%8C%ED%81%AC+%EC%8A%A4%EC%B9%B4%EC%9D%B4%EC%BA%A1%EC%8A%90" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-lavender text-white hover:bg-lavender/80 transition-colors mt-2 ml-1">📸 Naver 實景</a>
@@ -2827,10 +2834,11 @@ tailwind.config = {
     <table class="w-full text-sm border-collapse">
       <tr><th class="bg-mint-light text-mint text-left p-2 font-bold border-b-2 border-dashed border-mint/20 text-sm">類別</th><th class="bg-mint-light text-mint text-left p-2 font-bold border-b-2 border-dashed border-mint/20 text-sm">韓元</th><th class="bg-mint-light text-mint text-left p-2 font-bold border-b-2 border-dashed border-mint/20 text-sm">約台幣</th></tr>
       <tr><td class="p-2 border-b border-warmgray/10 text-warmgray">釜山 PASS 48hr</td><td class="p-2 border-b border-warmgray/10 text-warmgray">W55,000</td><td class="p-2 border-b border-warmgray/10 text-warmgray">NT$1,320</td></tr>
+      <tr><td class="p-2 border-b border-warmgray/10 text-warmgray">膠囊列車 Sky Capsule（自費）</td><td class="p-2 border-b border-warmgray/10 text-warmgray">W44,000</td><td class="p-2 border-b border-warmgray/10 text-warmgray">NT$1,056</td></tr>
       <tr><td class="p-2 border-b border-warmgray/10 text-warmgray">餐費</td><td class="p-2 border-b border-warmgray/10 text-warmgray">W210,000</td><td class="p-2 border-b border-warmgray/10 text-warmgray">NT$5,040</td></tr>
       <tr><td class="p-2 border-b border-warmgray/10 text-warmgray">交通</td><td class="p-2 border-b border-warmgray/10 text-warmgray">W121,500</td><td class="p-2 border-b border-warmgray/10 text-warmgray">NT$2,916</td></tr>
       <tr><td class="p-2 border-b border-warmgray/10 text-warmgray">購物預備金</td><td class="p-2 border-b border-warmgray/10 text-warmgray">W100,000</td><td class="p-2 border-b border-warmgray/10 text-warmgray">NT$2,400</td></tr>
-      <tr class="total"><td class="p-2 border-b border-warmgray/10 text-warmgray">合計</td><td class="p-2 border-b border-warmgray/10 text-warmgray">W486,500</td><td class="p-2 border-b border-warmgray/10 text-warmgray">約 NT$11,676</td></tr>
+      <tr class="total"><td class="p-2 border-b border-warmgray/10 text-warmgray">合計</td><td class="p-2 border-b border-warmgray/10 text-warmgray">W530,500</td><td class="p-2 border-b border-warmgray/10 text-warmgray">約 NT$12,732</td></tr>
     </table>
     <p style="margin-top:8px;font-size:0.85em;color:#6b7280">建議準備 W500,000~600,000（約 NT$12,000~14,400）較為充裕</p>
   </div>
