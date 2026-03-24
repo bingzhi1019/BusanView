@@ -242,25 +242,6 @@ tailwind.config = {
         <div class="text-xs text-warmgray/60">4 晚（4/16~4/20）</div>
       </div>
 
-      <!-- PASS info card -->
-      <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-4 bg-white">
-        <h3 class="font-black text-amber-500 text-sm mb-2">🎫 釜山 PASS</h3>
-        <div class="text-sm font-bold text-warmgray">48 小時券</div>
-        <div class="text-xs text-warmgray/60 mt-1">Day 2 啟用 → Day 4 早上到期</div>
-        <div class="text-xs text-warmgray/60">使用 8 個景點，省 ₩114,000</div>
-      </div>
-
-      <!-- Quick links -->
-      <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-4 bg-white">
-        <h3 class="font-black text-mint text-sm mb-2">🔗 快速連結</h3>
-        <div class="space-y-1.5">
-          <a href="https://map.naver.com/" target="_blank" class="block text-xs text-mint hover:underline">📍 Naver Map</a>
-          <a href="https://papago.naver.com/" target="_blank" class="block text-xs text-mint hover:underline">🗣️ Papago 翻譯</a>
-          <a href="https://www.bluelinepark.com/" target="_blank" class="block text-xs text-mint hover:underline">🚂 藍線公園預約</a>
-          <a href="https://www.visitbusanpass.com/" target="_blank" class="block text-xs text-mint hover:underline">🎫 PASS 官網</a>
-          <a href="https://www.busanxthesky.com/" target="_blank" class="block text-xs text-mint hover:underline">🏙️ X the SKY 預約</a>
-        </div>
-      </div>
 
       <!-- Emergency info -->
       <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-4 bg-white">
@@ -281,6 +262,43 @@ tailwind.config = {
 
 <!-- ==================== 行前準備 ==================== -->
 <div class="section" id="prep">
+
+  <!-- Mobile-only trip info (sidebar content) -->
+<div class="lg:hidden mb-4">
+  <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-4 bg-white cursor-pointer" onclick="this.querySelector('.mobile-trip-detail').classList.toggle('hidden')">
+    <div class="flex items-center justify-between">
+      <h3 class="font-black text-peach text-sm">✈️ 航班 · 住宿 · 緊急電話</h3>
+      <span class="text-warmgray/40 text-xs">點擊展開 ▼</span>
+    </div>
+    <div class="mobile-trip-detail hidden mt-3 space-y-3">
+      <!-- Flight -->
+      <div class="flex items-center gap-3 text-sm">
+        <div class="text-center"><div class="font-black">16:40</div><div class="text-xs text-warmgray/60">TPE</div></div>
+        <div class="flex-1 text-center"><div class="text-xs font-bold text-peach">IT 606 虎航</div><div class="border-t border-dashed border-warmgray/20 my-1"></div><div class="text-xs text-warmgray/50">2hr15m</div></div>
+        <div class="text-center"><div class="font-black">19:55</div><div class="text-xs text-warmgray/60">PUS</div></div>
+      </div>
+      <div class="flex items-center gap-3 text-sm">
+        <div class="text-center"><div class="font-black">21:05</div><div class="text-xs text-warmgray/60">PUS</div></div>
+        <div class="flex-1 text-center"><div class="text-xs font-bold text-peach">IT 607 虎航</div><div class="border-t border-dashed border-warmgray/20 my-1"></div><div class="text-xs text-warmgray/50">2hr20m</div></div>
+        <div class="text-center"><div class="font-black">22:25</div><div class="text-xs text-warmgray/60">TPE</div></div>
+      </div>
+      <div class="border-t border-dashed border-warmgray/10"></div>
+      <!-- Hotel -->
+      <div>
+        <div class="text-sm font-bold">🏨 Centum City 地鐵站</div>
+        <div class="text-xs text-warmgray/60">2 號線 센텀시티역 · 4 晚（4/16~4/20）</div>
+      </div>
+      <div class="border-t border-dashed border-warmgray/10"></div>
+      <!-- Emergency -->
+      <div class="grid grid-cols-2 gap-1 text-xs text-warmgray/70">
+        <div>🚔 報警：112</div>
+        <div>🚑 急救：119</div>
+        <div>🏥 旅遊諮詢：1330</div>
+        <div>🇹🇼 駐韓代表處：+82-2-6329-6000</div>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- 旅遊不吵架協議書 -->
   <div class="max-w-md mx-auto mb-6">
@@ -345,28 +363,28 @@ tailwind.config = {
 
   <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
     <h3 class="font-black text-mint text-base mb-3">💳 付款方式</h3>
-    <div class="space-y-3">
-      <div class="flex items-start gap-3 p-3 bg-softblue-light/50 rounded-xl border border-dashed border-softblue/20">
-        <img src="https://i.namu.wiki/i/4xGVY8h_9J1U48igcN84wX-QqaW6Wt-niaCkWHwkdFKxvuqeG5R-m2CN9dnD0YT8oZTEUlW_oSTVyAtizGPC1XtVG7yY47sUrN4PcoOF4Sxt2hGI2SWWoOWwDL35rZlSVQviYfx9_hQl476B6mpDFg.webp" alt="T-money" class="w-10 h-10 rounded-lg object-cover shrink-0" onerror="this.outerHTML='<div class=\'w-10 h-10 rounded-lg bg-[#0078b8] flex items-center justify-center text-white text-sm font-black shrink-0\'>T</div>'">
-        <div><strong class="text-sm">T-money 交通卡</strong><div class="text-xs text-warmgray/70">機場便利商店購買（₩2,500 卡費），各便利商店可儲值，搭地鐵/公車/便利商店通用</div></div>
-      </div>
-      <div class="flex items-start gap-3 p-3 bg-softblue-light/50 rounded-xl border border-dashed border-softblue/20">
-        <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/visa-icon.png" alt="Visa" class="w-10 h-10 rounded-lg object-contain shrink-0 bg-white p-1" onerror="this.outerHTML='<div class=\'w-10 h-10 rounded-lg bg-[#1a1f71] flex items-center justify-center text-white text-sm font-black shrink-0\'>💳</div>'">
-        <div><strong class="text-sm">信用卡</strong><div class="text-xs text-warmgray/70">韓國幾乎所有店家都收信用卡（含小吃攤），JCB/Visa/Master 皆可</div></div>
-      </div>
-      <div class="flex items-start gap-3 p-3 bg-peach-light/50 rounded-xl border border-dashed border-peach/20">
-        <img src="https://www.bok.or.kr/static/portal/img/cts/sub1/200372_1.jpg" alt="韓元" class="w-10 h-10 rounded-lg object-cover shrink-0" onerror="this.outerHTML='<div class=\'w-10 h-10 rounded-lg bg-[#d4804e] flex items-center justify-center text-white text-sm font-black shrink-0\'>₩</div>'">
-        <div><strong class="text-sm">現金</strong><div class="text-xs text-warmgray/70">傳統市場、糖餅攤位建議備少量現金</div></div>
-      </div>
-      <div class="flex items-start gap-3 p-3 bg-warmgray-light/50 rounded-xl border border-dashed border-warmgray/15">
-        <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/apple-pay-icon.png" alt="Apple Pay" class="w-10 h-10 rounded-lg object-contain shrink-0 bg-white p-1" onerror="this.outerHTML='<div class=\'w-10 h-10 rounded-lg bg-[#333] flex items-center justify-center text-white text-sm font-black shrink-0\'>🍎</div>'">
-        <div><strong class="text-sm">Apple Pay</strong><div class="text-xs text-warmgray/70">部分店家支援，但不穩定，不建議作為主要付款</div></div>
-      </div>
-      <div class="flex items-start gap-3 p-3 bg-mint-light/50 rounded-xl border border-dashed border-mint/20">
-        <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ae/39/b8/ae39b88a-f142-3b94-b412-7a5c5a046417/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/1200x630wa.png" alt="悠遊付" class="w-10 h-10 rounded-lg object-cover shrink-0" onerror="this.outerHTML='<div class=\'w-10 h-10 rounded-lg bg-[#00a0e9] flex items-center justify-center text-white text-sm font-black shrink-0\'>悠</div>'">
-        <div><strong class="text-sm">悠遊付（EasyWallet）</strong><div class="text-xs text-warmgray/70">台灣悠遊付可在韓國使用！支援交通卡+消費，出發前先開通 → <a href="https://ephttp.easycard.com.tw/icer_event/EasyWalletGoKorea/index.html" target="_blank" class="text-mint font-bold hover:underline">📱 活動連結</a></div></div>
-      </div>
-    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+  <div class="flex items-center gap-3 p-3 bg-softblue-light/50 rounded-xl border border-dashed border-softblue/20">
+    <img src="https://i.namu.wiki/i/4xGVY8h_9J1U48igcN84wX-QqaW6Wt-niaCkWHwkdFKxvuqeG5R-m2CN9dnD0YT8oZTEUlW_oSTVyAtizGPC1XtVG7yY47sUrN4PcoOF4Sxt2hGI2SWWoOWwDL35rZlSVQviYfx9_hQl476B6mpDFg.webp" alt="T-money" class="w-12 h-12 rounded-xl object-cover shrink-0" onerror="this.outerHTML='<div class=\'w-12 h-12 rounded-xl bg-[#0078b8] flex items-center justify-center text-white text-xl font-black shrink-0\'>T</div>'">
+    <div><strong class="text-sm">T-money</strong><div class="text-xs text-warmgray/70">交通卡，機場買 ₩2,500</div></div>
+  </div>
+  <div class="flex items-center gap-3 p-3 bg-softblue-light/50 rounded-xl border border-dashed border-softblue/20">
+    <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/visa-icon.png" alt="Visa" class="w-12 h-12 rounded-xl object-contain shrink-0 bg-white p-1" onerror="this.outerHTML='<div class=\'w-12 h-12 rounded-xl bg-[#1a1f71] flex items-center justify-center text-white text-xl font-black shrink-0\'>💳</div>'">
+    <div><strong class="text-sm">信用卡</strong><div class="text-xs text-warmgray/70">JCB/Visa/Master 皆可</div></div>
+  </div>
+  <div class="flex items-center gap-3 p-3 bg-peach-light/50 rounded-xl border border-dashed border-peach/20">
+    <img src="https://www.bok.or.kr/static/portal/img/cts/sub1/200372_1.jpg" alt="韓元" class="w-12 h-12 rounded-xl object-cover shrink-0" onerror="this.outerHTML='<div class=\'w-12 h-12 rounded-xl bg-[#d4804e] flex items-center justify-center text-white text-xl font-black shrink-0\'>₩</div>'">
+    <div><strong class="text-sm">現金</strong><div class="text-xs text-warmgray/70">市場、攤位需備現金</div></div>
+  </div>
+  <div class="flex items-center gap-3 p-3 bg-warmgray-light/50 rounded-xl border border-dashed border-warmgray/15">
+    <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/apple-pay-icon.png" alt="Apple Pay" class="w-12 h-12 rounded-xl object-contain shrink-0 bg-white p-1" onerror="this.outerHTML='<div class=\'w-12 h-12 rounded-xl bg-[#333] flex items-center justify-center text-white text-xl font-black shrink-0\'>🍎</div>'">
+    <div><strong class="text-sm">Apple Pay</strong><div class="text-xs text-warmgray/70">部分支援，不穩定</div></div>
+  </div>
+  <div class="flex items-center gap-3 p-3 bg-mint-light/50 rounded-xl border border-dashed border-mint/20">
+    <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ae/39/b8/ae39b88a-f142-3b94-b412-7a5c5a046417/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/1200x630wa.png" alt="悠遊付" class="w-12 h-12 rounded-xl object-cover shrink-0">
+    <div><strong class="text-sm">悠遊付</strong><div class="text-xs text-warmgray/70">可在韓國用 <a href="https://ephttp.easycard.com.tw/icer_event/EasyWalletGoKorea/index.html" target="_blank" class="text-mint font-bold">→ 開通</a></div></div>
+  </div>
+</div>
   </div>
 
   <div class="text-center text-warmgray/30 my-2">· · ·</div>
@@ -384,22 +402,38 @@ tailwind.config = {
   <div class="text-center text-warmgray/30 my-2">· · ·</div>
 
   <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
-    <h3 class="font-black text-mint text-base mb-3">📅 需要預約的項目</h3>
-    <ul>
-      <li class="flex items-start gap-3 mb-3">
-  <img src="https://media-cdn.tripadvisor.com/media/photo-w/1d/4b/1d/91/skyline-luge-is-a-fun.jpg" alt="Skyline Luge" class="w-16 h-16 rounded-lg object-cover shrink-0" onerror="this.style.display='none'" loading="lazy">
-  <div>✅ <strong>Skyline Luge</strong>：建議線上預約選時段（PASS APP 可預約）</div>
-</li>
-      <li class="flex items-start gap-3 mb-3">
-  <img src="https://media-cdn.tripadvisor.com/media/photo-w/2b/f7/59/f6/caption.jpg" alt="Busan X the SKY" class="w-16 h-16 rounded-lg object-cover shrink-0" onerror="this.style.display='none'" loading="lazy">
-  <div>✅ <strong>Busan X the SKY</strong>：建議線上預約選時段，平日比較不用</div>
-</li>
-      <li class="flex items-start gap-3 mb-3">
-  <img src="https://i0.wp.com/yonnie.cyou/wp-content/uploads/2023/04/Y.jpg?fit=1900%2C1000&ssl=1" alt="Diamond Bay Yacht" class="w-16 h-16 rounded-lg object-cover shrink-0" onerror="this.style.display='none'" loading="lazy">
-  <div>✅ <strong>釜山鑽石灣遊艇</strong>：<em>必須預約</em>（此行程排為備案）</div>
-</li>
-      <li>其他景點現場出示 PASS QR code 即可入場</li>
-    </ul>
+    <h3 class="font-black text-mint text-base mb-3">📅 需要預約的項目 <span class="text-xs font-normal text-warmgray/60">（有 PASS 仍需預約時段）</span></h3>
+    <ul class="space-y-3">
+  <li class="flex items-start gap-3">
+    <img src="https://media-cdn.tripadvisor.com/media/photo-w/1d/4b/1d/91/skyline-luge-is-a-fun.jpg" alt="Skyline Luge" class="w-16 h-16 rounded-lg object-cover shrink-0" onerror="this.style.display='none'" loading="lazy">
+    <div>
+      <strong>Skyline Luge</strong> <span class="text-xs bg-peach-light text-peach px-1 rounded">PASS ✓</span><br>
+      <span class="text-xs text-warmgray/70">⚠️ 建議線上預約選時段（PASS APP 或 Klook）</span>
+    </div>
+  </li>
+  <li class="flex items-start gap-3">
+    <img src="https://media-cdn.tripadvisor.com/media/photo-w/2b/f7/59/f6/caption.jpg" alt="Busan X the SKY" class="w-16 h-16 rounded-lg object-cover shrink-0" onerror="this.style.display='none'" loading="lazy">
+    <div>
+      <strong>Busan X the SKY</strong> <span class="text-xs bg-peach-light text-peach px-1 rounded">PASS ✓</span><br>
+      <span class="text-xs text-warmgray/70">⚠️ 建議線上預約，平日可現場</span>
+    </div>
+  </li>
+  <li class="flex items-start gap-3">
+    <div class="w-16 h-16 rounded-lg bg-softblue-light flex items-center justify-center text-2xl shrink-0">🚂</div>
+    <div>
+      <strong>海岸列車+膠囊列車</strong> <span class="text-xs bg-peach-light text-peach px-1 rounded">PASS ✓</span><br>
+      <span class="text-xs text-warmgray/70">⚠️ 必須預約！膠囊列車超熱門，務必提前在 bluelinepark.com 預約時段</span>
+    </div>
+  </li>
+  <li class="flex items-start gap-3">
+    <div class="w-16 h-16 rounded-lg bg-peach-light flex items-center justify-center text-2xl shrink-0">🥩</div>
+    <div>
+      <strong>83 獬豸烤肉</strong> <span class="text-xs bg-warmgray-light text-warmgray px-1 rounded">自費</span><br>
+      <span class="text-xs text-warmgray/70">⚠️ 強烈建議用 Catchtable APP 預約！很熱門</span>
+    </div>
+  </li>
+  <li class="text-xs text-warmgray/60 mt-2">💡 其他景點出示 PASS QR code 或現場購票即可，不需預約</li>
+</ul>
   </div>
 
   <div class="text-center text-warmgray/30 my-2">· · ·</div>
@@ -434,6 +468,19 @@ tailwind.config = {
       <li>⬜ K-ETA 或免簽確認</li>
     </ul>
   </div>
+
+  <div class="text-center text-warmgray/30 my-2">· · ·</div>
+<div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
+  <h3 class="font-black text-mint text-base mb-3">🔗 快速連結</h3>
+  <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
+    <a href="https://map.naver.com/" target="_blank" class="flex items-center gap-2 p-2 bg-mint-light/50 rounded-lg hover:bg-mint-light text-sm font-bold text-mint">📍 Naver Map</a>
+    <a href="https://papago.naver.com/" target="_blank" class="flex items-center gap-2 p-2 bg-mint-light/50 rounded-lg hover:bg-mint-light text-sm font-bold text-mint">🗣️ Papago 翻譯</a>
+    <a href="https://www.bluelinepark.com/" target="_blank" class="flex items-center gap-2 p-2 bg-softblue-light/50 rounded-lg hover:bg-softblue-light text-sm font-bold text-softblue">🚂 藍線公園預約</a>
+    <a href="https://www.visitbusanpass.com/" target="_blank" class="flex items-center gap-2 p-2 bg-peach-light/50 rounded-lg hover:bg-peach-light text-sm font-bold text-peach">🎫 PASS 官網</a>
+    <a href="https://www.busanxthesky.com/" target="_blank" class="flex items-center gap-2 p-2 bg-softblue-light/50 rounded-lg hover:bg-softblue-light text-sm font-bold text-softblue">🏙️ X the SKY</a>
+    <a href="https://ephttp.easycard.com.tw/icer_event/EasyWalletGoKorea/index.html" target="_blank" class="flex items-center gap-2 p-2 bg-lavender-light/50 rounded-lg hover:bg-lavender-light text-sm font-bold text-lavender">📱 悠遊付韓國</a>
+  </div>
+</div>
 
   <div class="text-center text-warmgray/30 my-2">· · ·</div>
   <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
