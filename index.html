@@ -3680,49 +3680,6 @@ function updateNowIndicator() {
 updateNowIndicator();
 setInterval(updateNowIndicator, 1000);
 
-// Swipe gesture for tab switching
-var touchStartX = 0;
-var touchEndX = 0;
-var dayTabs = ['day1', 'day2', 'day3', 'day4', 'day5'];
-
-document.addEventListener('touchstart', function(e) {
-  touchStartX = e.changedTouches[0].screenX;
-}, { passive: true });
-
-document.addEventListener('touchend', function(e) {
-  touchEndX = e.changedTouches[0].screenX;
-  var diff = touchStartX - touchEndX;
-  if (Math.abs(diff) < 80) return; // minimum swipe distance
-
-  var currentTab = document.querySelector('.tab.tab-active');
-  if (!currentTab) return;
-  var currentId = null;
-  // Find which tab is active by checking onclick
-  var allTabs = document.querySelectorAll('.tab');
-  for (var i = 0; i < allTabs.length; i++) {
-    if (allTabs[i].classList.contains('tab-active')) {
-      var onclick = allTabs[i].getAttribute('onclick');
-      var match = onclick.match(/'([^']+)'/);
-      if (match) currentId = match[1];
-      break;
-    }
-  }
-
-  var currentDayIndex = dayTabs.indexOf(currentId);
-  if (currentDayIndex < 0) return; // not on a day tab, don't swipe
-
-  var nextIndex;
-  if (diff > 0) { // swipe left = next day
-    nextIndex = Math.min(currentDayIndex + 1, dayTabs.length - 1);
-  } else { // swipe right = prev day
-    nextIndex = Math.max(currentDayIndex - 1, 0);
-  }
-
-  if (nextIndex !== currentDayIndex) {
-    var nextBtn = document.querySelector('.tab[onclick*="' + dayTabs[nextIndex] + '"]');
-    if (nextBtn) switchTab(nextBtn, dayTabs[nextIndex]);
-  }
-}, { passive: true });
 
 
 function updateDots(carousel) {
