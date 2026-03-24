@@ -1119,14 +1119,6 @@ tailwind.config = {
         <div class="text-xs text-peach mt-0.5">↔ 加入機張行程（Luge 後順遊）</div>
       </div>
     </div>
-    <div class="flex items-start gap-3 p-2 bg-white rounded-xl border border-dashed border-warmgray/15">
-      <span class="text-lg">👘</span>
-      <div class="flex-1">
-        <div class="font-bold text-sm text-warmgray">海雲台 HAEON 韓服租借</div>
-        <div class="text-xs text-warmgray/60">海雲台 · PASS · 해운대해온한복</div>
-        <div class="text-xs text-peach mt-0.5">↔ 加入海雲台行程（穿韓服拍海景）</div>
-      </div>
-    </div>
   </div>
 </div>
 </div>
@@ -1648,6 +1640,40 @@ tailwind.config = {
 <div class="flex gap-3 mb-2">
   <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
   <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
+    <span class="text-sm shrink-0">🚶</span><div><strong>BIFF 廣場 → 釜山塔（龍頭山公園）</strong><br>步行約 5 分鐘 ｜ 搭電扶梯上龍頭山公園</div>
+  </div>
+</div>
+
+<div class="flex gap-4 mb-4" data-id="d3-13">
+  <div class="flex flex-col items-center pt-4">
+    <div class="timeline-dot" style="color: #7ec8a0; background: #7ec8a0;"></div>
+    <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
+  </div>
+  <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
+    <div class="card-img attraction"><span class="card-img-icon">🗼</span><div class="card-img-info"><div class="card-img-title">釜山塔（龍頭山公園）</div><div class="card-img-area">20:15 - 20:45 · 南浦洞 · 可跳過</div></div><div class="card-img-cost">免費<small>塔內 ₩8,000</small></div></div>
+    <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
+      <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
+      <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
+    </div>
+    <div class="card-detail hidden px-4 pb-4 text-sm border-t-2 border-dashed border-warmgray/10">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">부산타워 용두산공원</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">龍頭山公園上的觀景塔，120m 高可俯瞰釜山港和影島。公園免費入場，上塔需門票</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~30 分鐘（公園散步+看夜景。上塔另加 20 分鐘）</span></div>
+      <div class="detail-row"><span class="detail-label">韓文地址</span><span class="detail-value">부산광역시 중구 용두산길 37-55</span></div>
+      <div class="detail-row"><span class="detail-label">營業時間</span><span class="detail-value">10:00~22:00（最後入場 21:30）全年無休</span></div>
+      <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要</span></div>
+      <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">公園免費 ｜ 上塔 ₩8,000（NT$192）可刷卡</span></div>
+      <div class="detail-row"><span class="detail-label">💡 攻略</span><span class="detail-value">晚上去看夜景最美！不一定要花錢上塔，公園的觀景平台就能看到不錯的夜景。從 BIFF 廣場搭電扶梯上去很方便。時間不夠可以跳過</span></div>
+      <a href="https://map.naver.com/v5/search/%EB%B6%80%EC%82%B0%ED%83%80%EC%9B%8C%20%EC%9A%A9%EB%91%90%EC%82%B0%EA%B3%B5%EC%9B%90" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-mint text-white hover:bg-mint/80 transition-colors mt-2">📍 Naver Map</a>
+      <a href="https://search.naver.com/search.naver?where=image&query=%EB%B6%80%EC%82%B0%ED%83%80%EC%9B%8C+%EC%95%BC%EA%B2%BD" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-lavender text-white hover:bg-lavender/80 transition-colors mt-2 ml-1">📸 Naver 實景</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="flex gap-3 mb-2">
+  <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
+  <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
     <span class="text-sm shrink-0">🚇</span><div><strong>南浦洞 → 西面（松亭3代）</strong><br>地鐵 1 號線 남포→서면（約 15 分鐘）₩1,400（NT$34）</div>
   </div>
 </div>
@@ -1692,15 +1718,6 @@ tailwind.config = {
     <span class="text-peach/50 text-xs">點擊展開 ▼</span>
   </div>
   <div class="hidden mt-3 space-y-2">
-    <div class="flex items-start gap-3 p-2 bg-white rounded-xl border border-dashed border-warmgray/15">
-      <span class="text-lg">🗼</span>
-      <div class="flex-1">
-        <div class="font-bold text-sm text-warmgray">釜山塔</div>
-        <div class="text-xs text-warmgray/60">南浦洞 · PASS · 부산타워 · 龍頭山公園</div>
-        <div class="text-xs text-peach mt-0.5">↔ 加入南浦洞晚間行程（看夜景）</div>
-        <div class="text-xs text-mint mt-0.5">💡 縮短逛街時間就能加入，10:00~22:00 營業</div>
-      </div>
-    </div>
     <div class="flex items-start gap-3 p-2 bg-white rounded-xl border border-dashed border-warmgray/15">
       <span class="text-lg">🎬</span>
       <div class="flex-1">
@@ -2297,7 +2314,41 @@ tailwind.config = {
 <div class="flex gap-3 mb-2">
   <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
   <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
-    <span class="text-sm shrink-0">🚕</span><div><strong>海雲台 → 青沙浦</strong><br>Kakao T 叫車（約 10 分鐘）₩7,000（NT$168）</div>
+    <span class="text-sm shrink-0">🚶</span><div><strong>Standard Bread → HAEON 韓服</strong><br>步行約 5 分鐘 ｜ 都在海雲台商圈</div>
+  </div>
+</div>
+
+<div class="flex gap-4 mb-4" data-id="d5-8">
+  <div class="flex flex-col items-center pt-4">
+    <div class="timeline-dot" style="color: #f5a67d; background: #f5a67d;"></div>
+    <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
+  </div>
+  <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
+    <div class="card-img shopping"><span class="card-img-icon">👘</span><div class="card-img-info"><div class="card-img-title">HAEON 韓服租借</div><div class="card-img-area">10:45 - 11:45 · 海雲台 · 可跳過</div></div><div class="card-img-cost">₩15,000<small>NT$360</small></div></div>
+    <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
+      <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
+      <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
+    </div>
+    <div class="card-detail hidden px-4 pb-4 text-sm border-t-2 border-dashed border-warmgray/10">
+      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">해운대해온한복</span></div>
+      <div class="detail-row"><span class="detail-label">特色</span><span class="detail-value">在海雲台海邊穿韓服拍照！提供多種韓服+髮飾+配件，工作人員幫穿幫拍</span></div>
+      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~1 小時（含換裝+拍照+歸還）</span></div>
+      <div class="detail-row"><span class="detail-label">韓文地址</span><span class="detail-value">부산광역시 해운대구 해운대해변로 일대</span></div>
+      <div class="detail-row"><span class="detail-label">營業時間</span><span class="detail-value">10:00~18:00（依季節調整）</span></div>
+      <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要，現場租借</span></div>
+      <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">約 ₩15,000~20,000（NT$360~480）· 現金或信用卡</span></div>
+      <div class="detail-row"><span class="detail-label">💡 攻略</span><span class="detail-value">穿韓服在海雲台海邊拍照超特別！早上光線好適合拍照。最後一天的特別回憶。時間不夠可以跳過直接去青沙浦</span></div>
+      <a href="https://map.naver.com/v5/search/%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EC%98%A8%ED%95%9C%EB%B3%B5" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-mint text-white hover:bg-mint/80 transition-colors mt-2">📍 Naver Map</a>
+      <a href="https://search.naver.com/search.naver?where=image&query=%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EC%98%A8%ED%95%9C%EB%B3%B5" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-lavender text-white hover:bg-lavender/80 transition-colors mt-2 ml-1">📸 Naver 實景</a>
+      <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
+    </div>
+  </div>
+</div>
+
+<div class="flex gap-3 mb-2">
+  <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
+  <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
+    <span class="text-sm shrink-0">🚕</span><div><strong>韓服歸還 → 青沙浦</strong><br>Kakao T 叫車（約 10 分鐘）₩7,000（NT$168）｜ 從 HAEON 門口叫車</div>
   </div>
 </div>
 
@@ -2307,7 +2358,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img nature"><span class="card-img-icon">📸</span><div class="card-img-info"><div class="card-img-title">青沙浦天空步道</div><div class="card-img-area">11:15 - 11:45 · 青沙浦 · 免費</div></div><div class="card-img-cost">免費</div></div>
+    <div class="card-img nature"><span class="card-img-icon">📸</span><div class="card-img-info"><div class="card-img-title">青沙浦天空步道</div><div class="card-img-area">12:00 - 12:30 · 青沙浦 · 免費</div></div><div class="card-img-cost">免費</div></div>
     <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/a1a3510f-b9a7-484c-9b8d-018c513d8b39.jpeg" alt="青沙浦天空步道" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -2349,7 +2400,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img attraction"><span class="card-img-icon">🏀</span><div class="card-img-info"><div class="card-img-title">韓版灌籃高手平交道</div><div class="card-img-area">11:55 - 12:10 · 海雲台尾浦 · 免費</div></div><div class="card-img-cost">免費</div></div>
+    <div class="card-img attraction"><span class="card-img-icon">🏀</span><div class="card-img-info"><div class="card-img-title">韓版灌籃高手平交道</div><div class="card-img-area">12:40 - 12:55 · 海雲台尾浦 · 免費</div></div><div class="card-img-cost">免費</div></div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -2383,7 +2434,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img nature"><span class="card-img-icon">🏖️</span><div class="card-img-info"><div class="card-img-title">海雲台最後散步</div><div class="card-img-area">12:15 - 12:30 · 海雲台 · 免費</div></div><div class="card-img-cost">免費</div></div>
+    <div class="card-img nature"><span class="card-img-icon">🏖️</span><div class="card-img-info"><div class="card-img-title">海雲台最後散步</div><div class="card-img-area">13:05 - 13:15 · 海雲台 · 免費</div></div><div class="card-img-cost">免費</div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/4e0d012d-48cd-4831-a142-7599a938434c.jpeg" alt="海雲台最後散步" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -2420,7 +2471,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img food"><span class="card-img-icon">🥩</span><div class="card-img-info"><div class="card-img-title">伍班長烤肉</div><div class="card-img-area">12:30 - 13:30 · 海雲台 · 午餐</div></div><div class="card-img-cost">₩20,000<small>NT$480</small></div></div>
+    <div class="card-img food"><span class="card-img-icon">🥩</span><div class="card-img-info"><div class="card-img-title">伍班長烤肉</div><div class="card-img-area">13:15 - 14:15 · 海雲台 · 午餐</div></div><div class="card-img-cost">₩20,000<small>NT$480</small></div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://img.siksinhot.com/place/1353639241026085.jpg" alt="伍班長烤肉" style="flex-shrink:0;width:100%;height:128px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
