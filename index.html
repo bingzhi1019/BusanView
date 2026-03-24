@@ -397,6 +397,48 @@ tailwind.config = {
   </div>
 
   <div class="text-center text-warmgray/30 my-2">· · ·</div>
+<div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
+  <h3 class="font-black text-mint text-base mb-3">🧾 退稅攻略（Tax Refund）</h3>
+  <div class="space-y-3 text-sm text-warmgray">
+    <div class="p-3 bg-peach-light/50 rounded-xl border border-dashed border-peach/20">
+      <strong class="text-peach">退稅條件</strong>
+      <ul class="mt-1 text-xs space-y-1 text-warmgray/70">
+        <li>• 單筆消費 <strong>₩15,000 以上</strong>（含稅）即可退稅</li>
+        <li>• 商品需在購買日起 <strong>3 個月內帶出韓國</strong></li>
+        <li>• 退稅金額約為消費金額的 <strong>5~7%</strong></li>
+      </ul>
+    </div>
+    <div class="p-3 bg-mint-light/50 rounded-xl border border-dashed border-mint/20">
+      <strong class="text-mint">購物時怎麼做</strong>
+      <ul class="mt-1 text-xs space-y-1 text-warmgray/70">
+        <li>• 找有 <strong>Tax Free / TAX REFUND</strong> 標示的店家</li>
+        <li>• 結帳時跟店員說 <strong>「택스프리（Tax Free）」</strong> <button type="button" class="copy-btn-cute inline-flex items-center px-1.5 py-0.5 text-xs font-bold rounded-full bg-softblue-light text-softblue hover:bg-softblue hover:text-white transition-colors ml-1 cursor-pointer border-0" onclick="navigator.clipboard.writeText('택스프리');showToast('已複製：택스프리')">複製</button></li>
+        <li>• 店員會給你<strong>退稅單據</strong>（紙本或電子），務必保留！</li>
+        <li>• 出示<strong>護照</strong>讓店員登記</li>
+      </ul>
+    </div>
+    <div class="p-3 bg-softblue-light/50 rounded-xl border border-dashed border-softblue/20">
+      <strong class="text-softblue">機場退稅流程（Day 5）</strong>
+      <ul class="mt-1 text-xs space-y-1 text-warmgray/70">
+        <li>🅰️ <strong>自動退稅機（KIOSK）</strong>：掃護照 → 掃退稅單條碼 → 選退稅方式（信用卡/現金）→ 完成</li>
+        <li>🅱️ <strong>單筆超過 ₩75,000</strong> 的商品：需過安檢前在海關蓋章，可能需要出示商品</li>
+        <li>💡 退稅公司有三家：<strong>KT Tourist Reward</strong>（藍色）、<strong>Global Tax Free</strong>（橘色）、<strong>Easy Tax Refund</strong>（綠色），每家的退稅單去對應的機器</li>
+        <li>💰 退到<strong>信用卡</strong>最方便（1-2 個月入帳），退<strong>現金</strong>要去專屬櫃台排隊</li>
+      </ul>
+    </div>
+    <div class="p-3 bg-lavender-light/50 rounded-xl border border-dashed border-lavender/20">
+      <strong class="text-lavender">⚠️ 注意事項</strong>
+      <ul class="mt-1 text-xs space-y-1 text-warmgray/70">
+        <li>• 食品、消耗品通常<strong>不能退稅</strong>（化妝品可以！）</li>
+        <li>• 百貨公司通常可以<strong>現場即時退稅</strong>（結帳時直接扣掉，不用去機場）</li>
+        <li>• 退稅單據不要弄丟！沒單據就不能退</li>
+        <li>• 機場退稅機有時排隊，<strong>預留 20 分鐘</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  <div class="text-center text-warmgray/30 my-2">· · ·</div>
 
   <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-5 mb-4 bg-white">
     <h3 class="font-black text-mint text-base mb-3">💱 換匯攻略</h3>
@@ -1327,6 +1369,7 @@ tailwind.config = {
       <div class="detail-row"><span class="detail-label">營業時間</span><span class="detail-value">平日 10:30~20:00 / 週末 10:30~20:30</span></div>
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">信用卡、現金、行動支付</span></div>
+      <div class="detail-row"><span class="detail-label">🧾 退稅</span><span class="detail-value">百貨公司可現場即時退稅！結帳時出示護照說「택스프리」，直接扣掉稅金不用去機場退。單筆 ₩15,000 以上</span></div>
       <a href="https://map.naver.com/v5/search/%EB%A1%AF%EB%8D%B0%EC%95%84%EC%9A%B8%EB%A0%9B%20%EC%84%9C%EB%A9%B4" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-mint text-white hover:bg-mint/80 transition-colors mt-2">📍 Naver Map</a>
             <a href="https://search.naver.com/search.naver?where=image&query=%EB%A1%AF%EB%8D%B0%EB%B0%B1%ED%99%94%EC%A0%90+%EB%B6%80%EC%82%B0%EB%B3%B8%EC%A0%90" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-lavender text-white hover:bg-lavender/80 transition-colors mt-2 ml-1">📸 Naver 實景</a>
 <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
@@ -1633,6 +1676,7 @@ tailwind.config = {
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">市場以現金為主，部分攤位可刷卡</span></div>
       <div class="detail-row"><span class="detail-label">💡 攻略</span><span class="detail-value">BIFF 廣場有電影手印可以找，富平夜市 19:30 才開！白天是一般市場，晚上變身美食夜市。市場以現金為主，記得帶夠零錢</span></div>
+      <div class="detail-row"><span class="detail-label">🧾 退稅</span><span class="detail-value">傳統市場和路邊攤通常不能退稅。光復路時尚街的連鎖店（如 olive young）可以退稅</span></div>
       <a href="https://map.naver.com/v5/search/BIFF%EA%B4%91%EC%9E%A5" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-mint text-white hover:bg-mint/80 transition-colors mt-2">📍 BIFF 導航</a>
       <a href="https://map.naver.com/v5/search/%EB%B6%80%ED%8F%89%EA%B9%A1%ED%86%B5%EC%8B%9C%EC%9E%A5" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-mint text-white hover:bg-mint/80 transition-colors mt-2">📍 罐頭市場導航</a>
             <a href="https://search.naver.com/search.naver?where=image&query=BIFF%EA%B4%91%EC%9E%A5+%EB%B6%80%EC%82%B0+%EB%B6%80%ED%8F%89%EA%B9%A1%ED%86%B5%EC%8B%9C%EC%9E%A5" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-lavender text-white hover:bg-lavender/80 transition-colors mt-2 ml-1">📸 Naver 實景</a>
@@ -2580,7 +2624,7 @@ tailwind.config = {
     <div class="card-detail hidden px-4 pb-4 text-sm border-t-2 border-dashed border-warmgray/10">
       <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">신세계백화점 센텀시티</span></div>
       <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">B1 超市買零食伴手禮、樂天/CU/GS25 便利商店買泡麵餅乾</span></div>
-      <div class="detail-row"><span class="detail-label">退稅</span><span class="detail-value">百貨公司可辦退稅，記得帶護照</span></div>
+      <div class="detail-row"><span class="detail-label">🧾 退稅</span><span class="detail-value">新世界百貨支援現場即時退稅！B1 超市的食品不能退稅，但化妝品、服飾可以。記得帶護照</span></div>
       <a href="https://map.naver.com/v5/search/%EC%8B%A0%EC%84%B8%EA%B3%84%EB%B0%B1%ED%99%94%EC%A0%90%20%EC%84%BC%ED%85%80%EC%8B%9C%ED%8B%B0" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-mint text-white hover:bg-mint/80 transition-colors mt-2">📍 Naver Map</a>
       <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
     </div>
@@ -2636,7 +2680,8 @@ tailwind.config = {
         <div class="mt-1 p-2 bg-white rounded-lg border border-dashed border-warmgray/15">
           <strong>託運行李退稅：</strong>報到前先到退稅機（KIOSK）掃描退稅單據，確認退稅金額<br>
           <strong>手提行李退稅：</strong>過安檢後，在免稅區內的退稅櫃台辦理<br>
-          <span class="text-xs text-warmgray/60">💡 百貨公司買的東西記得當場開退稅單！單筆 ₩30,000 以上才能退稅</span>
+          <span class="text-xs text-warmgray/60">💡 退稅公司有三家：<strong>KT Tourist Reward</strong>（藍色）、<strong>Global Tax Free</strong>（橘色）、<strong>Easy Tax Refund</strong>（綠色），每家退稅單去對應顏色的機器掃描</span><br>
+          <span class="text-xs text-warmgray/60">💡 百貨公司買的東西記得當場開退稅單！單筆 ₩15,000 以上即可退稅，預留 20 分鐘排隊</span>
         </div>
       </div>
     </div>
