@@ -232,13 +232,17 @@ tailwind.config = {
           </div>
         </div>
         <div class="text-xs text-warmgray/50 mt-2">4/16（三）去程 → 4/20（日）回程</div>
+        <div class="text-xs text-warmgray/50">2人含20kg行李 NT$16,818</div>
       </div>
 
       <!-- Hotel info card -->
       <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-4 bg-white">
         <h3 class="font-black text-softblue text-sm mb-2">🏨 住宿</h3>
-        <div class="text-sm font-bold text-warmgray">Centum City 地鐵站</div>
-        <div class="text-xs text-warmgray/60 mt-1">地鐵 2 號線 센텀시티역</div>
+        <div class="text-sm font-bold text-warmgray">海雲臺中心飯店 <button type="button" class="copy-btn-cute inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-full bg-softblue-light text-softblue hover:bg-softblue hover:text-white transition-colors ml-1 cursor-pointer border-0" onclick="navigator.clipboard.writeText('해운대센텀호텔 Haeundae Centum Hotel');showToast('已複製：해운대센텀호텔')">複製</button></div>
+        <div class="text-xs text-warmgray/70 mt-0.5">Haeundae Centum Hotel</div>
+        <div class="text-xs text-warmgray/60 mt-1">📍 20 Centum 3-ro, Haeundae-gu, Busan <button type="button" class="copy-btn-cute inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-full bg-softblue-light text-softblue hover:bg-softblue hover:text-white transition-colors ml-1 cursor-pointer border-0" onclick="navigator.clipboard.writeText('부산광역시 해운대구 센텀3로 20');showToast('已複製：韓文地址')">複製韓文</button></div>
+        <div class="text-xs text-warmgray/60">📞 +82 51-720-9000 <button type="button" class="copy-btn-cute inline-flex items-center px-2 py-0.5 text-xs font-bold rounded-full bg-softblue-light text-softblue hover:bg-softblue hover:text-white transition-colors ml-1 cursor-pointer border-0" onclick="navigator.clipboard.writeText('+82 51-720-9000');showToast('已複製：電話')">複製</button></div>
+        <div class="text-xs text-warmgray/60">🚇 地鐵 2 號線 센텀시티역</div>
         <div class="text-xs text-warmgray/60">4 晚（4/16~4/20）</div>
       </div>
 
@@ -285,8 +289,9 @@ tailwind.config = {
       <div class="border-t border-dashed border-warmgray/10"></div>
       <!-- Hotel -->
       <div>
-        <div class="text-sm font-bold">🏨 Centum City 地鐵站</div>
-        <div class="text-xs text-warmgray/60">2 號線 센텀시티역 · 4 晚（4/16~4/20）</div>
+        <div class="text-sm font-bold">🏨 海雲臺中心飯店</div>
+        <div class="text-xs text-warmgray/60">📍 20 Centum 3-ro, Haeundae-gu · 📞 +82 51-720-9000</div>
+        <div class="text-xs text-warmgray/60">🚇 2 號線 센텀시티역 · 4 晚（4/16~4/20）</div>
       </div>
       <div class="border-t border-dashed border-warmgray/10"></div>
       <!-- Emergency -->
