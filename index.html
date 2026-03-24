@@ -482,6 +482,7 @@ tailwind.config = {
       <li>⬜ 購買韓國 eSIM 或 WiFi 分享器</li>
       <li>⬜ 確認護照有效期 > 6 個月</li>
       <li>⬜ K-ETA 或免簽確認</li>
+      <li>⬜ 申請韓國 SES 自動通關 → <a href="https://ses.go.kr" target="_blank" class="text-mint font-bold hover:underline">ses.go.kr</a>（審核約 3-5 天）</li>
     </ul>
   </div>
 
@@ -562,24 +563,53 @@ tailwind.config = {
     <div class="border-b-2 border-dashed border-warmgray/15 mt-4"></div>
   </div>
 
-  <div class="flex gap-4 mb-2">
-  <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
-  <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
-    <span class="text-sm shrink-0">✈️</span>
-    <div><strong>IT 606 台灣虎航 tigersmart</strong><br>TPE 16:40 → PUS 19:55 抵達金海機場<br>預計 20:20 完成入境 + 領行李
-  </div>
-</div>
-  </div>
+<!-- 金海機場抵達流程 -->
+<div class="border-2 border-dashed border-peach/30 rounded-2xl p-4 mb-4 bg-peach-light/30">
+  <h4 class="font-black text-peach text-base mb-3">✈️ 金海機場抵達流程</h4>
+  <div class="space-y-3 text-sm text-warmgray">
 
-  <div class="flex gap-4 mb-2">
-  <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
-  <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
-    <span class="text-sm shrink-0">🚕</span>
-    <div><strong>機場 到 Centum City 飯店</strong><br>推薦 Kakao T 叫車（約 30 分鐘）₩25,000~30,000（NT$600~720）<br>
-    <small>第一天拖行李，叫車最方便。地鐵需轉車，約 50 分鐘</small>
+    <div class="flex gap-3">
+      <div class="w-7 h-7 rounded-full bg-peach text-white flex items-center justify-center text-xs font-black shrink-0">1</div>
+      <div><strong>下飛機 → 入境審查</strong><br>跟著「입국심사 / Arrival」指標走。有申請 SES 走<strong>自動通關閘門</strong>（超快！），沒有走人工櫃台（可能排 20-40 分鐘）<br><span class="text-mint font-bold">💡 建議出發前先申請 SES → <a href="https://ses.go.kr" target="_blank" class="underline">ses.go.kr</a></span></div>
+    </div>
+
+    <div class="flex gap-3">
+      <div class="w-7 h-7 rounded-full bg-peach text-white flex items-center justify-center text-xs font-black shrink-0">2</div>
+      <div><strong>領行李</strong><br>過完入境審查後，到行李轉盤等行李。螢幕上找航班 <strong>IT 606</strong> 對應的轉盤號碼</div>
+    </div>
+
+    <div class="flex gap-3">
+      <div class="w-7 h-7 rounded-full bg-peach text-white flex items-center justify-center text-xs font-black shrink-0">3</div>
+      <div><strong>過海關</strong><br>沒有要申報的東西直接走綠色通道（免申報）通過</div>
+    </div>
+
+    <div class="flex gap-3">
+      <div class="w-7 h-7 rounded-full bg-peach text-white flex items-center justify-center text-xs font-black shrink-0">4</div>
+      <div><strong>買 T-money 卡 + 換少量韓元</strong><br>出關後大廳有便利商店（CU/GS25），買 T-money 卡 ₩2,500 並儲值 ₩20,000<br>如果換匯處還開（Money Box 到 21:00），先換 ₩50,000 備用，大量的到南浦洞再換</div>
+    </div>
+
+    <div class="flex gap-3">
+      <div class="w-7 h-7 rounded-full bg-peach text-white flex items-center justify-center text-xs font-black shrink-0">5</div>
+      <div><strong>搭車去飯店</strong><br>
+        <div class="mt-1 p-2 bg-white rounded-lg border border-dashed border-warmgray/15">
+          <strong class="text-peach">推薦：Kakao T 叫車</strong>（約 30 分鐘）₩25,000~30,000（NT$600~720）<br>
+          <span class="text-xs text-warmgray/60">第一天拖行李最輕鬆！出關後往右走到計程車搭乘處，或在 APP 叫車</span>
+        </div>
+        <div class="mt-1 p-2 bg-white rounded-lg border border-dashed border-warmgray/15">
+          <strong class="text-warmgray/70">備案：地鐵</strong>（約 50 分鐘）₩2,800（NT$67）<br>
+          <span class="text-xs text-warmgray/60">金海輕軌 → 沙上站轉地鐵 2 號線 → 센텀시티역。但拖行李轉車不方便</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex gap-3">
+      <div class="w-7 h-7 rounded-full bg-peach text-white flex items-center justify-center text-xs font-black shrink-0">6</div>
+      <div><strong>Check in 飯店</strong><br>海雲臺中心飯店（해운대센텀호텔）<br>
+      <span class="text-xs text-warmgray/60">地址：부산광역시 해운대구 센텀3로 20 ｜ 電話：+82 51-720-9000</span></div>
+    </div>
+
   </div>
 </div>
-  </div>
 
   <div class="flex gap-4 mb-4" data-id="d1-1">
   <div class="flex flex-col items-center pt-4">
@@ -2555,28 +2585,68 @@ tailwind.config = {
 </div>
   </div>
 
-  <div class="flex gap-4 mb-2">
-  <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
-  <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
-    <span class="text-sm shrink-0">🚕</span>
-    <div><strong>16:30 Centum City 到 金海機場</strong><br>
-    推薦 Kakao T 叫車（約 30 分鐘）₩25,000~30,000（NT$600~720）<br>
-    地鐵備案：2 號線到沙上轉釜山金海輕軌（約 50 分鐘）₩2,800（NT$67）<br>
-    <small>最後一天拖行李，叫車最輕鬆</small>
-  </div>
-</div>
-  </div>
+<!-- 金海機場出發流程 -->
+<div class="border-2 border-dashed border-peach/30 rounded-2xl p-4 mb-4 bg-peach-light/30">
+  <h4 class="font-black text-peach text-base mb-3">✈️ 金海機場出發流程</h4>
+  <div class="space-y-3 text-sm text-warmgray">
 
-  <div class="flex gap-4 mb-2">
-  <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
-  <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
-    <span class="text-sm shrink-0">✈️</span>
-    <div><strong>17:00~17:30 抵達金海機場</strong><br>
-    辦理報到 + 退稅（機場自動退稅機）+ 過安檢 + 免稅店<br>
-    <strong>IT 607 台灣虎航 — PUS 21:05 起飛 → TPE 22:25 抵達</strong>
+    <div class="flex gap-3">
+      <div class="w-7 h-7 rounded-full bg-softblue text-white flex items-center justify-center text-xs font-black shrink-0">1</div>
+      <div><strong>15:30 收行李、Check out</strong><br>整理行李，確認沒有遺漏物品。護照、機票、退稅單據帶好</div>
+    </div>
+
+    <div class="flex gap-3">
+      <div class="w-7 h-7 rounded-full bg-softblue text-white flex items-center justify-center text-xs font-black shrink-0">2</div>
+      <div><strong>16:30 出發去金海機場</strong><br>
+        <div class="mt-1 p-2 bg-white rounded-lg border border-dashed border-warmgray/15">
+          <strong class="text-peach">推薦：Kakao T 叫車</strong>（約 30 分鐘）₩25,000~30,000（NT$600~720）<br>
+          <span class="text-xs text-warmgray/60">最後一天拖行李叫車最輕鬆</span>
+        </div>
+        <div class="mt-1 p-2 bg-white rounded-lg border border-dashed border-warmgray/15">
+          <strong class="text-warmgray/70">備案：地鐵</strong>（約 50 分鐘）₩2,800（NT$67）<br>
+          <span class="text-xs text-warmgray/60">地鐵 2 號線 센텀시티→沙上 轉金海輕軌→機場</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex gap-3">
+      <div class="w-7 h-7 rounded-full bg-softblue text-white flex items-center justify-center text-xs font-black shrink-0">3</div>
+      <div><strong>17:00 抵達金海機場國際線航廈</strong><br>虎航在國際線航廈（국제선）。注意金海機場國際線和國內線是不同棟！</div>
+    </div>
+
+    <div class="flex gap-3">
+      <div class="w-7 h-7 rounded-full bg-softblue text-white flex items-center justify-center text-xs font-black shrink-0">4</div>
+      <div><strong>辦理報到（Check in）</strong><br>找虎航 tigersmart 櫃台，出示護照辦理登機。託運行李（2人共 20kg）<br><span class="text-xs text-warmgray/60">💡 也可以先在虎航 APP 線上報到，現場只託運行李</span></div>
+    </div>
+
+    <div class="flex gap-3">
+      <div class="w-7 h-7 rounded-full bg-softblue text-white flex items-center justify-center text-xs font-black shrink-0">5</div>
+      <div><strong>退稅（Tax Refund）</strong><br>
+        <div class="mt-1 p-2 bg-white rounded-lg border border-dashed border-warmgray/15">
+          <strong>託運行李退稅：</strong>報到前先到退稅機（KIOSK）掃描退稅單據，確認退稅金額<br>
+          <strong>手提行李退稅：</strong>過安檢後，在免稅區內的退稅櫃台辦理<br>
+          <span class="text-xs text-warmgray/60">💡 百貨公司買的東西記得當場開退稅單！單筆 ₩30,000 以上才能退稅</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex gap-3">
+      <div class="w-7 h-7 rounded-full bg-softblue text-white flex items-center justify-center text-xs font-black shrink-0">6</div>
+      <div><strong>過安檢 + 出境審查</strong><br>有 SES 走自動通關（快！），沒有走人工櫃台。<br>過完出境後就是免稅區，可以逛免稅店</div>
+    </div>
+
+    <div class="flex gap-3">
+      <div class="w-7 h-7 rounded-full bg-softblue text-white flex items-center justify-center text-xs font-black shrink-0">7</div>
+      <div><strong>逛免稅店 + 候機</strong><br>金海機場免稅店不大但有基本品牌。韓國零食、化妝品可以最後補貨<br><span class="text-xs text-warmgray/60">記得留意登機門號碼和登機時間</span></div>
+    </div>
+
+    <div class="flex gap-3">
+      <div class="w-7 h-7 rounded-full bg-mint text-white flex items-center justify-center text-xs font-black shrink-0">✈️</div>
+      <div><strong>21:05 起飛 → 22:25 抵達桃園</strong><br>IT 607 虎航 ｜ PUS → TPE ｜ 2hr20m<br><span class="text-mint font-bold">🎉 釜山之旅完美結束！</span></div>
+    </div>
+
   </div>
 </div>
-  </div>
 
   <div class="border-2 border-dashed border-peach/30 rounded-2xl p-4 mt-4 mb-2 bg-peach-light/30">
   <div class="cursor-pointer flex items-center justify-between" onclick="this.nextElementSibling.classList.toggle('hidden')">
