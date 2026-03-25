@@ -174,6 +174,7 @@ tailwind.config = {
   <div class="max-w-3xl mx-auto overflow-x-auto scrollbar-none py-2 px-4">
     <div class="flex gap-2 min-w-max">
       <button type="button" class="tab tab-active px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'prep')">📋 行前</button>
+      <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'overview')">📅 總覽</button>
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'day1')">✈️ D1</button>
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'day2')">🏖️ D2</button>
       <button type="button" class="tab px-3 py-1.5 text-sm font-bold whitespace-nowrap rounded-full transition-all" onclick="switchTab(this,'day3')">🚡 D3</button>
@@ -575,6 +576,153 @@ tailwind.config = {
 </div>
 
 <!-- ==================== PASS 專區 ==================== -->
+
+<div class="section hidden" id="overview">
+  <div class="mb-6">
+    <h2 class="text-2xl font-black text-warmgray tracking-tight">📅 五天行程總覽</h2>
+    <p class="text-sm text-warmgray/60 mt-2">完整時間表 · 景點 · 移動方式 · 營業時間</p>
+    <div class="border-b-2 border-dashed border-warmgray/15 mt-4"></div>
+  </div>
+
+  <!-- D1 -->
+  <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-4 mb-4 bg-white">
+    <h3 class="font-black text-peach text-base mb-3">Day 1（三）✈️ 抵達 ｜ ₩25,000</h3>
+    <table class="w-full text-xs border-collapse">
+      <thead><tr>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-16">時間</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60">景點</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-28">移動</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-32">營業時間</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">19:55</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">✈️ 抵達金海機場</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">20:55</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">入境+行李+T-money+換匯</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">Money Box ~21:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">21:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ 飯店</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚕 30min ₩25,000</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">22:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🍗 puradak 炸雞（外送）</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">Coupang Eats</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">12:00~24:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- D2 -->
+  <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-4 mb-4 bg-white">
+    <h3 class="font-black text-softblue text-base mb-3">Day 2（四）🎫 PASS① 機張+海雲台 ｜ ₩45,000</h3>
+    <table class="w-full text-xs border-collapse">
+      <thead><tr>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-16">時間</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60">景點</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-28">移動</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-32">營業時間</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">09:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ 機張</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚕 25min ₩15,000</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">10:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">☕ coralani 躺椅咖啡</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">10:00~22:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">11:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🛷 Luge ⭐PASS啟用</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 5min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">10:00~19:00</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">12:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🍜 龍宮炸醬麵</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 5min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">10:00~21:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">13:45</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">♨️ ClubD Oasis PASS</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚕 25min ₩15,000</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">09:00~22:00</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">15:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🚂 海岸列車 PASS</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚕 10min ₩5,000</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">09:30~(季節)</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">15:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🔮 膠囊列車（自費已預約）</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 3min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">09:30~(季節)</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">16:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🍞 自然島鹽麵包</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚕 15min ₩8,000</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">10:00~20:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">17:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🌅 海雲台海邊等日落</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">日落 ~18:45</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">19:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🏙️ X the SKY+星巴克 PASS</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 10min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">10:00~21:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">20:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🍜 31cm 刀削麵</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 10min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">火~日 10:50~21:30 週一休</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- D3 -->
+  <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-4 mb-4 bg-white">
+    <h3 class="font-black text-mint text-base mb-3">Day 3（五）🎫 PASS② 西面+松島+甘川+南浦 ｜ ₩60,000</h3>
+    <table class="w-full text-xs border-collapse">
+      <thead><tr>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-16">時間</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60">景點</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-28">移動</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-32">營業時間</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">09:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ 西面</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚇 12min ₩1,400</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">09:20</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🥪 egg drop</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">08:00~</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">10:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60 italic">🚶 自由時間（地下街/釜田市場）</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">11:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🏃 Running Man PASS</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 5min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">11:00~20:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">12:45</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🐙 螞蟻家</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 8min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">10:00~23:00</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">13:45</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">☕ 田埔咖啡街</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 8min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">各店~22:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">14:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ 松島</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚇+🚌 30min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">15:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🚡 松島纜車 PASS</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">09:00~(季節)</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">16:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🌉 龍宮雲橋 PASS</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">09:00~18:00</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">16:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ 甘川洞</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚌 25min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">17:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🎨 甘川洞文化村</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">09:00~18:00</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">18:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">📖 Flipbook（自費₩25,000）</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 5min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">10:00~18:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">19:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ 南浦洞</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚌 25min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">20:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🐟 魚糕+🥞 糖餅</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">~19:00/~21:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">20:20</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🍲 南浦雪濃湯</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 5min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">24hr</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">21:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🛍️ BIFF+富平</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 3min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">夜市 19:30~24:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">21:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🍡 紅豆艾草糕</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">21:40</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🗼 釜山塔 PASS（可跳過）</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 5min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">~22:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">22:15</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🍲 松亭豬肉湯飯</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚇 15min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">24hr</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">23:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ Centum City</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚇 12min ₩1,400</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- D4 -->
+  <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-4 mb-4 bg-white">
+    <h3 class="font-black text-lavender text-base mb-3">Day 4（六）🎨 Spa Land+影島+廣安里 ｜ ₩55,000</h3>
+    <table class="w-full text-xs border-collapse">
+      <thead><tr>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-16">時間</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60">景點</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-28">移動</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-32">營業時間</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">09:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">♨️ Spa Land PASS⏰</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 3min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">09:00~22:00</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">10:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ 影島</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚇🚌 40min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">11:15</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🏘️ 白淺灘（免費）</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">戶外全天</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">12:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">☕ THRILL ON THE MUG</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 15min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">10:00~21:30</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">13:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ 廣安里</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚕 25min ₩15,000</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">14:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🥯 All Sunday</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">08:00~22:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">14:15</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🏖️ 廣安里海邊（自由時間）</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">24hr</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">17:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🥩 83 烤肉</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 5min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">15:30~01:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">18:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ Centum City</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚇 8min ₩1,400</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">19:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🍪 Bada Sand 伴手禮</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">11:00~19:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">20:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🍗 橋村炸雞（外送）</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">Coupang Eats</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">~24:00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- D5 -->
+  <div class="border-2 border-dashed border-warmgray/15 rounded-2xl p-4 mb-4 bg-white">
+    <h3 class="font-black text-peach text-base mb-3">Day 5（日）🛫 最後巡禮+回程 ｜ ₩45,000</h3>
+    <table class="w-full text-xs border-collapse">
+      <thead><tr>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-16">時間</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60">景點</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-28">移動</th>
+        <th class="text-left p-1.5 border-b-2 border-dashed border-warmgray/15 text-warmgray/60 w-32">營業時間</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">09:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🐚 大海鮑魚粥</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">07:00~20:30 週三休</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">09:45</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🍞 Standard Bread</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 8min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">09:00~21:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">10:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ 西面</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚇 20min ₩1,400</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">10:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🛍️ 樂天百貨</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">週末 10:30~20:30</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">11:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ 海雲台</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚇 20min ₩1,400</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">12:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">👘 韓服（可跳過）</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">10:00~18:00</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">13:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ 青沙浦</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚕 10min ₩7,000</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">13:15</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">📸 青沙浦天空步道</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">09:00~(季節)</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">13:55</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🏀 灌籃高手平交道</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶 10min</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">戶外 24hr</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">14:15</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ 海雲台</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚕 5min ₩5,000</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">14:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🥩 伍班長烤肉</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">11:00~04:00</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">15:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray font-bold">🛍️ 新世界百貨+退稅</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚶</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">16:00</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">📦 Check out</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-warmgray-light/30"><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">16:30</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">→ 金海機場</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">🚕 45min ₩25,000</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray">17:15</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">SES+報到+退稅+安檢</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td><td class="p-1.5 border-b border-dashed border-warmgray/10 text-warmgray/60">—</td></tr>
+        <tr class="bg-peach-light/30"><td class="p-1.5 text-peach font-black">21:05</td><td class="p-1.5 text-peach font-black">✈️ IT607 → 22:25 TPE</td><td class="p-1.5"></td><td class="p-1.5"></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
 <div class="section hidden" id="passzone">
   <div class="mb-6">
     <h2 class="text-2xl font-black text-warmgray tracking-tight">🎫 釜山 PASS 景點總覽</h2>
@@ -916,12 +1064,12 @@ tailwind.config = {
 
     <div class="flex gap-3">
       <div class="w-7 h-7 rounded-full bg-peach text-white flex items-center justify-center text-xs font-black shrink-0">5</div>
-      <div><strong>買 T-money 卡 + 換少量韓元</strong><br>出關後大廳有便利商店（CU/GS25），買 T-money 卡 ₩2,500 並儲值 ₩20,000<br>如果換匯處還開（Money Box 到 21:00），先換 ₩50,000 備用，大量的到南浦洞再換</div>
+      <div><strong>~20:55 買 T-money 卡 + 換少量韓元</strong><br>出關後大廳有便利商店（CU/GS25），買 T-money 卡 ₩2,500 並儲值 ₩20,000<br>如果換匯處還開（Money Box 到 21:00），先換 ₩50,000 備用，大量的到南浦洞再換</div>
     </div>
 
     <div class="flex gap-3">
       <div class="w-7 h-7 rounded-full bg-peach text-white flex items-center justify-center text-xs font-black shrink-0">6</div>
-      <div><strong>搭車去飯店</strong><br>
+      <div><strong>~21:00 搭車去飯店（約 21:30 到）</strong><br>
         <div class="mt-1 p-2 bg-white rounded-lg border border-dashed border-warmgray/15">
           <strong class="text-peach">推薦：Kakao T 叫車</strong>（約 30 分鐘）₩25,000~30,000（NT$600~720）<br>
           <span class="text-xs text-warmgray/60">第一天拖行李最輕鬆！出關後往右走到計程車搭乘處，或在 APP 叫車</span>
@@ -935,7 +1083,7 @@ tailwind.config = {
 
     <div class="flex gap-3">
       <div class="w-7 h-7 rounded-full bg-peach text-white flex items-center justify-center text-xs font-black shrink-0">7</div>
-      <div><strong>Check in 飯店</strong><br>海雲臺中心飯店（해운대센텀호텔）<br>
+      <div><strong>~21:30 Check in 飯店</strong><br>海雲臺中心飯店（해운대센텀호텔）<br>
       <span class="text-xs text-warmgray/60">地址：부산광역시 해운대구 센텀3로 20 ｜ 電話：+82 51-720-9000</span></div>
     </div>
 
@@ -948,7 +1096,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img food"><span class="card-img-icon">🍗</span><div class="card-img-info"><div class="card-img-title">puradak 炸雞</div><div class="card-img-area">21:00 - 22:00 · 海雲台 · 宵夜</div></div><div class="card-img-cost">₩20,000<small>NT$480</small></div></div>
+    <div class="card-img food"><span class="card-img-icon">🍗</span><div class="card-img-info"><div class="card-img-title">puradak 炸雞</div><div class="card-img-area">22:00 - 23:00 · 海雲台 · 宵夜</div></div><div class="card-img-cost">₩20,000<small>NT$480</small></div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20230707113019_photo1_753fea4c5d8f.webp" alt="puradak 炸雞" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -967,7 +1115,7 @@ tailwind.config = {
       <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">蒜味炸雞（갈릭）、起司炸雞（치즈）</span></div>
       <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~1 小時</span></div>
       <div class="detail-row"><span class="detail-label">交通</span><span class="detail-value">飯店步行或 Coupang Eats 外送到飯店</span></div>
-      <div class="detail-row"><span class="detail-label">備註</span><span class="detail-value">如果太晚到可改叫外送！橋村炸雞（교촌치킨 해운대점）也是好選擇</span></div>
+      <div class="detail-row"><span class="detail-label">💡 攻略</span><span class="detail-value">到飯店已經很晚了，直接用 Coupang Eats 叫外送到飯店最方便！不用再出門</span></div>
       <div class="detail-row"><span class="detail-label">韓文地址</span><span class="detail-value">부산광역시 해운대구 해운대로483번길 1-7</span></div>
       <div class="detail-row"><span class="detail-label">營業時間</span><span class="detail-value">12:00~24:00（每日）</span></div>
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要（可外送）</span></div>
@@ -1023,7 +1171,7 @@ tailwind.config = {
   <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
   <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
     <span class="text-sm shrink-0">🚕</span>
-    <div><strong>08:30 Centum City → 機張 coralani</strong><br>Kakao T 叫車（約 25 分鐘）₩15,000~18,000（NT$360~432）<br>
+    <div><strong>09:30 Centum City → 機張 coralani</strong><br>Kakao T 叫車（約 25 分鐘）₩15,000~18,000（NT$360~432）<br>
     <small>搜尋：코랄라니 기장 | 早上去人少，不用排太久</small>
   </div>
 </div>
@@ -1035,7 +1183,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img cafe"><span class="card-img-icon">☕</span><div class="card-img-info"><div class="card-img-title">coralani 躺椅咖啡廳</div><div class="card-img-area">09:00 - 09:45 · 機張 · 下午茶</div></div><div class="card-img-cost">₩8,000<small>NT$192</small></div></div>
+    <div class="card-img cafe"><span class="card-img-icon">☕</span><div class="card-img-info"><div class="card-img-title">coralani 躺椅咖啡廳</div><div class="card-img-area">10:00 - 10:45 · 機張 · 下午茶</div></div><div class="card-img-cost">₩8,000<small>NT$192</small></div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20260226054609369_photo_cd0b530dc87f.webp" alt="coralani 躺椅咖啡廳" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1078,7 +1226,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img pass"><span class="card-img-icon">🛷</span><div class="card-img-info"><div class="card-img-title">Skyline Luge 斜坡滑車</div><div class="card-img-area">10:00 - 11:30 · 機張 · PASS</div></div><div class="card-img-cost">PASS</div></div>
+    <div class="card-img pass"><span class="card-img-icon">🛷</span><div class="card-img-info"><div class="card-img-title">Skyline Luge 斜坡滑車</div><div class="card-img-area">11:00 - 12:30 · 機張 · PASS</div></div><div class="card-img-cost">PASS</div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/58a126d1-d2c5-4225-ae3f-590473f489fc.jpeg" alt="Skyline Luge 斜坡滑車" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1122,7 +1270,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img food"><span class="card-img-icon">🍜</span><div class="card-img-info"><div class="card-img-title">龍宮海鮮炸醬麵</div><div class="card-img-area">11:30 - 12:30 · 機張 · 午餐</div></div><div class="card-img-cost">₩10,000<small>NT$240</small></div></div>
+    <div class="card-img food"><span class="card-img-icon">🍜</span><div class="card-img-info"><div class="card-img-title">龍宮海鮮炸醬麵</div><div class="card-img-area">12:30 - 13:15 · 機張 · 午餐</div></div><div class="card-img-cost">₩10,000<small>NT$240</small></div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20260124103736103_photo_f6a496c68e63.webp" alt="龍宮海鮮炸醬麵" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1165,7 +1313,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img pass"><span class="card-img-icon">🏊</span><div class="card-img-info"><div class="card-img-title">ClubD Oasis 汗蒸幕水上樂園</div><div class="card-img-area">13:00 - 14:15 · 海雲台 · PASS</div></div><div class="card-img-cost">PASS</div></div>
+    <div class="card-img pass"><span class="card-img-icon">🏊</span><div class="card-img-info"><div class="card-img-title">ClubD Oasis 汗蒸幕水上樂園</div><div class="card-img-area">13:45 - 14:45 · 海雲台 · PASS</div></div><div class="card-img-cost">PASS</div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20250723091002_photo1_238d400424af.webp" alt="ClubD Oasis 汗蒸幕水上樂園" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1198,7 +1346,7 @@ tailwind.config = {
 <div class="flex gap-3 mb-2">
   <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
   <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
-    <span class="text-sm shrink-0">🚶</span><div><strong>ClubD Oasis → 해변열車 尾浦站</strong><br>步行約 10 分鐘或 Kakao T ₩5,000（NT$120）</div>
+    <span class="text-sm shrink-0">🚕</span><div><strong>ClubD Oasis → 해변열車 尾浦站</strong><br>Kakao T（約 10 分鐘）₩5,000（NT$120）</div>
   </div>
 </div>
 
@@ -1208,7 +1356,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img pass"><span class="card-img-icon">🚂</span><div class="card-img-info"><div class="card-img-title">海雲台海岸列車</div><div class="card-img-area">14:30 - 14:55 · 尾浦→青沙浦 · PASS</div></div><div class="card-img-cost">PASS</div></div>
+    <div class="card-img pass"><span class="card-img-icon">🚂</span><div class="card-img-info"><div class="card-img-title">海雲台海岸列車</div><div class="card-img-area">15:00 - 15:25 · 尾浦→青沙浦 · PASS</div></div><div class="card-img-cost">PASS</div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://www.bluelinepark.com/images/cont/p_cheongsapo.png" alt="海雲台海岸列車" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1242,49 +1390,7 @@ tailwind.config = {
 <div class="flex gap-3 mb-2">
   <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
   <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
-    <span class="text-sm shrink-0">🚶</span><div><strong>青沙浦站 → diart coffee</strong><br>步行約 3 分鐘 ｜ 就在青沙浦站旁邊</div>
-  </div>
-</div>
-
-  <div class="flex gap-4 mb-4" data-id="d2-8">
-  <div class="flex flex-col items-center pt-4">
-    <div class="timeline-dot" style="color: #7db8d4; background: #7db8d4;"></div>
-    <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
-  </div>
-  <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img cafe"><span class="card-img-icon">☕</span><div class="card-img-info"><div class="card-img-title">diart coffee</div><div class="card-img-area">14:55 - 15:25 · 青沙浦 · 海景咖啡</div></div><div class="card-img-cost">₩8,000<small>NT$192</small></div></div>
-<div class="carousel-wrapper">
-      <div class="img-carousel" onscroll="updateDots(this)">
-        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20251223064709_photo1_b3250d0fb741.webp" alt="diart coffee" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
-
-        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20260101111654504_photo_6a7eedb0c392.webp" alt="diart coffee" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
-        <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20250419101323_photo1_5ea5390af79d.webp" alt="diart coffee" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
-      </div>
-      <div class="carousel-dots"><span class="carousel-dot active"></span><span class="carousel-dot"></span><span class="carousel-dot"></span></div>
-    </div>
-    <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
-      <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
-      <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
-    </div>
-    <div class="card-detail hidden px-4 pb-4 text-sm border-t-2 border-dashed border-warmgray/10">
-      <div class="detail-row"><span class="detail-label">韓文搜尋</span><span class="detail-value">디아트커피 해운대</span></div>
-      <div class="detail-row"><span class="detail-label">推薦</span><span class="detail-value">墨西哥奶油蜂蜜麵包（멕시칸빵）、海景座位</span></div>
-      <div class="detail-row"><span class="detail-label">停留</span><span class="detail-value">~45 分鐘</span></div>
-      <div class="detail-row"><span class="detail-label">韓文地址</span><span class="detail-value">부산광역시 해운대구 청사포로128번길 12</span></div>
-      <div class="detail-row"><span class="detail-label">營業時間</span><span class="detail-value">10:30~21:30（L.O. 21:00）</span></div>
-      <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">不需要（海景窗位建議早到）</span></div>
-      <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡</span></div>
-      <a href="https://map.naver.com/v5/search/%EB%94%94%EC%95%84%ED%8A%B8%EC%BB%A4%ED%94%BC%20%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-mint text-white hover:bg-mint/80 transition-colors mt-2">📍 Naver Map</a>
-            <a href="https://search.naver.com/search.naver?where=image&query=%EB%94%94%EC%95%84%ED%8A%B8%EC%BB%A4%ED%94%BC+%ED%95%B4%EC%9A%B4%EB%8C%80" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-lavender text-white hover:bg-lavender/80 transition-colors mt-2 ml-1">📸 Naver 實景</a>
-<textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
-    </div>
-  </div>
-</div>
-
-<div class="flex gap-3 mb-2">
-  <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
-  <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
-    <span class="text-sm shrink-0">🚶</span><div><strong>diart coffee → 膠囊列車搭乘處</strong><br>步行約 3 分鐘 ｜ 喝完咖啡走過去剛好</div>
+    <span class="text-sm shrink-0">🚶</span><div><strong>青沙浦站 → 膠囊列車搭乘處</strong><br>步行 3 分鐘 ｜ 下車直接走去搭</div>
   </div>
 </div>
 
@@ -1363,7 +1469,7 @@ tailwind.config = {
 <div class="flex gap-3 mb-2">
   <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
   <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
-    <span class="text-sm shrink-0">🌅</span><div><strong>散步해운대海邊等日落</strong><br>步行沿海邊走到 LCT 大樓，18:45 日落時分進場最佳</div>
+    <span class="text-sm shrink-0">🌅</span><div><strong>散步海雲台海邊等日落 🌅（日落約 18:45）</strong><br>步行沿海邊走到 LCT 大樓，日落時分進場夜景最美</div>
   </div>
 </div>
 
@@ -1373,7 +1479,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img pass"><span class="card-img-icon">🏙️</span><div class="card-img-info"><div class="card-img-title">Busan X the SKY + 星巴克</div><div class="card-img-area">18:00 - 19:30 · 海雲台 · PASS</div></div><div class="card-img-cost">PASS</div></div>
+    <div class="card-img pass"><span class="card-img-icon">🏙️</span><div class="card-img-info"><div class="card-img-title">Busan X the SKY + 星巴克</div><div class="card-img-area">19:00 - 20:30 · 海雲台 · PASS</div></div><div class="card-img-cost">PASS</div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://blog.kakaocdn.net/dna/drL57S/btrX6ooaF0k/AAAAAAAAAAAAAAAAAAAAAPkujm7H-UXwd00Xi1Bkmp8o0UzogxVjP-21nmUEFDBa/img.jpg" alt="Busan X the SKY" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1397,7 +1503,7 @@ tailwind.config = {
       <div class="detail-row"><span class="detail-label">營業時間</span><span class="detail-value">10:00~21:00（最後入場 20:30）全年無休</span></div>
       <div class="detail-row"><span class="detail-label">訂位</span><span class="detail-value">PASS 無法線上預約！現場出示 QR code 直接入場。平日下午人較少</span></div>
       <div class="detail-row"><span class="detail-label">支付</span><span class="detail-value">現金、信用卡（成人 ₩29,000）</span></div>
-      <div class="detail-row"><span class="detail-label">💡 攻略</span><span class="detail-value">18:00 進場剛好看日落（18:45）！從白天→夕陽→夜景一次看完。99F 星巴克必喝，限定城市杯值得收藏。夜景版的釜山港+廣安大橋燈光超美</span></div>
+      <div class="detail-row"><span class="detail-label">💡 攻略</span><span class="detail-value">19:00 進場剛好看夜景！日落 18:45 後進場，直接看夕陽→夜景最美。99F 星巴克必喝，限定城市杯值得收藏。夜景版的釜山港+廣安大橋燈光超美</span></div>
       <a href="https://map.naver.com/v5/search/%EB%B6%80%EC%82%B0%EC%97%91%EC%8A%A4%EB%8D%94%EC%8A%A4%EC%B9%B4%EC%9D%B4" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-mint text-white hover:bg-mint/80 transition-colors mt-2">📍 Naver Map</a>
             <a href="https://search.naver.com/search.naver?where=image&query=%EB%B6%80%EC%82%B0%EC%97%91%EC%8A%A4%EB%8D%94%EC%8A%A4%EC%B9%B4%EC%9D%B4" target="_blank" class="inline-flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-full bg-lavender text-white hover:bg-lavender/80 transition-colors mt-2 ml-1">📸 Naver 實景</a>
 <textarea class="note-input" placeholder="備忘筆記..." oninput="saveNote(this)"></textarea>
@@ -1418,7 +1524,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img food"><span class="card-img-icon">🍜</span><div class="card-img-info"><div class="card-img-title">31cm 海鮮刀削麵</div><div class="card-img-area">20:00 - 21:00 · 海雲台 · 晚餐</div></div><div class="card-img-cost">₩11,000<small>NT$264</small></div></div>
+    <div class="card-img food"><span class="card-img-icon">🍜</span><div class="card-img-info"><div class="card-img-title">31cm 海鮮刀削麵</div><div class="card-img-area">20:30 - 21:30 · 海雲台 · 晚餐</div></div><div class="card-img-cost">₩11,000<small>NT$264</small></div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20251026073038658_photo_e63477a5917c.webp" alt="31cm 海鮮刀削麵" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1469,11 +1575,20 @@ tailwind.config = {
       </div>
     </div>
     <div class="flex items-start gap-3 p-2 bg-white rounded-xl border border-dashed border-warmgray/15">
+      <span class="text-lg">☕</span>
+      <div class="flex-1">
+        <div class="font-bold text-sm text-warmgray">diart coffee 海景咖啡</div>
+        <div class="text-xs text-warmgray/60">青沙浦 · ₩8,000 · 디아트커피</div>
+        <div class="text-xs text-peach mt-0.5">↔ 海岸列車到青沙浦後如果有時間可以喝</div>
+        <div class="text-xs text-mint mt-0.5">⏰ 海岸列車下車到膠囊之間只有 5 分鐘，除非膠囊延後才有空</div>
+      </div>
+    </div>
+    <div class="flex items-start gap-3 p-2 bg-white rounded-xl border border-dashed border-warmgray/15">
       <span class="text-lg">🏊</span>
       <div class="flex-1">
         <div class="font-bold text-sm text-warmgray">ClubD Oasis 汗蒸幕水上樂園 <span class="text-xs bg-mint-light text-mint px-1 rounded">已在主行程 ✅</span></div>
-        <div class="text-xs text-warmgray/60">海雲台 · PASS · 클럽디오아시스 · 13:00-14:15</div>
-        <div class="text-xs text-mint mt-0.5">✅ 已排入下午 13:00，ClubD → 海岸列車 → diart → 膠囊</div>
+        <div class="text-xs text-warmgray/60">海雲台 · PASS · 클럽디오아시스 · 13:45-14:45</div>
+        <div class="text-xs text-mint mt-0.5">✅ 已排入下午 13:45，ClubD → 海岸列車 → 膠囊</div>
       </div>
     </div>
     <div class="flex items-start gap-3 p-2 bg-white rounded-xl border border-dashed border-warmgray/15">
@@ -1578,12 +1693,12 @@ tailwind.config = {
   </div>
 </div>
 
-  <div class="flex gap-4 mb-2">
+<div class="flex gap-3 mb-2">
   <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
   <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
-    <span class="text-sm shrink-0">🚶</span><div><strong>egg drop → Running Man</strong><br>步行約 5 分鐘 ｜ 都在西面站附近
+    <span class="text-sm shrink-0">🚶</span><div><strong>10:00 - 11:00 西面自由時間</strong><br>Running Man 11:00 才開！可以：① 西面地下街逛逛（서면지하상가，地鐵站連通）② 釜田市場走走（부전시장，步行 5 分鐘）③ egg drop 慢慢吃不趕</div>
   </div>
-</div></div>
+</div>
 
   <div class="flex gap-4 mb-4" data-id="d3-2">
   <div class="flex flex-col items-center pt-4">
@@ -1591,7 +1706,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img pass"><span class="card-img-icon">🏃</span><div class="card-img-info"><div class="card-img-title">Running Man 體驗館</div><div class="card-img-area">10:00 - 11:30 · 西面 · PASS</div></div><div class="card-img-cost">PASS</div></div>
+    <div class="card-img pass"><span class="card-img-icon">🏃</span><div class="card-img-info"><div class="card-img-title">Running Man 體驗館</div><div class="card-img-area">11:00 - 12:30 · 西面 · PASS</div></div><div class="card-img-cost">PASS</div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://d2ur7st6jjikze.cloudfront.net/offer_photos/110389/1793465_large_1763612507.jpg" alt="Running Man 體驗館" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1634,7 +1749,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img food"><span class="card-img-icon">🐙</span><div class="card-img-info"><div class="card-img-title">螞蟻家辣炒章魚</div><div class="card-img-area">11:45 - 12:45 · 西面 · 午餐</div></div><div class="card-img-cost">₩16,000<small>NT$384</small></div></div>
+    <div class="card-img food"><span class="card-img-icon">🐙</span><div class="card-img-info"><div class="card-img-title">螞蟻家辣炒章魚</div><div class="card-img-area">12:45 - 13:45 · 西面 · 午餐</div></div><div class="card-img-cost">₩16,000<small>NT$384</small></div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://blog.kakaocdn.net/dna/pOD61/btrXBX0puw5/AAAAAAAAAAAAAAAAAAAAAAc1AnbScVpTCsMClmM3ysH_RE8X9DdGEAZi1EdPTFva/img.jpg" alt="螞蟻家辣炒章魚" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1677,7 +1792,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img cafe"><span class="card-img-icon">☕</span><div class="card-img-info"><div class="card-img-title">田埔咖啡街</div><div class="card-img-area">12:45 - 13:15 · 西面 · 散步</div></div></div>
+    <div class="card-img cafe"><span class="card-img-icon">☕</span><div class="card-img-info"><div class="card-img-title">田埔咖啡街</div><div class="card-img-area">13:45 - 14:15 · 西面 · 散步</div></div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/c0cc0c4b-656a-492b-a55b-b30c1849fef9.jpeg" alt="田埔咖啡街" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1710,7 +1825,7 @@ tailwind.config = {
   <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
   <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
     <span class="text-sm shrink-0">🚇</span>
-    <div><strong>13:30 西面 → 松島</strong><br>地鐵 1 號線 서면到자갈치（6 站，約 15 分鐘）₩1,400（NT$34），再轉巴士 26/30 或步行 15 分鐘到纜車站
+    <div><strong>14:30 西面 → 松島</strong><br>地鐵 1 號線 서면到자갈치（6 站，約 15 分鐘）₩1,400（NT$34），再轉巴士 26/30（約 30 分鐘到纜車站）
   </div>
 </div>
   </div>
@@ -1721,7 +1836,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img pass"><span class="card-img-icon">🚡</span><div class="card-img-info"><div class="card-img-title">松島海上纜車</div><div class="card-img-area">14:15 - 15:15 · 松島 · PASS</div></div><div class="card-img-cost">PASS</div></div>
+    <div class="card-img pass"><span class="card-img-icon">🚡</span><div class="card-img-info"><div class="card-img-title">松島海上纜車</div><div class="card-img-area">15:00 - 16:00 · 松島 · PASS</div></div><div class="card-img-cost">PASS</div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://ak-d.tripcdn.com/images/1mj0512000g6v8tju126E.jpg" alt="松島海上纜車" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1757,7 +1872,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img pass"><span class="card-img-icon">🌉</span><div class="card-img-info"><div class="card-img-title">松島龍宮雲橋</div><div class="card-img-area">15:15 - 15:45 · 松島 · PASS</div></div><div class="card-img-cost">PASS</div></div>
+    <div class="card-img pass"><span class="card-img-icon">🌉</span><div class="card-img-info"><div class="card-img-title">松島龍宮雲橋</div><div class="card-img-area">16:00 - 16:30 · 松島 · PASS</div></div><div class="card-img-cost">PASS</div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/fe0c294a-c0eb-41dc-947c-b9c494d2c2ac.jpeg" alt="松島龍宮雲橋" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1789,7 +1904,7 @@ tailwind.config = {
 <div class="flex gap-3 mb-2">
   <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
   <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
-    <span class="text-sm shrink-0">🚌</span><div><strong>松島 → 甘川洞文化村</strong><br>巴士（約 15 分鐘）₩1,200（NT$29）｜ 松島過去超近</div>
+    <span class="text-sm shrink-0">🚌</span><div><strong>松島 → 甘川洞文化村</strong><br>巴士（約 25 分鐘）₩1,200（NT$29）</div>
   </div>
 </div>
 
@@ -1799,7 +1914,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img attraction"><span class="card-img-icon">🎨</span><div class="card-img-info"><div class="card-img-title">甘川洞文化村</div><div class="card-img-area">16:00 - 17:30 · 甘川洞 · 拍照</div></div><div class="card-img-cost">₩2,000<small>NT$48</small></div></div>
+    <div class="card-img attraction"><span class="card-img-icon">🎨</span><div class="card-img-info"><div class="card-img-title">甘川洞文化村</div><div class="card-img-area">17:00 - 18:30 · 甘川洞 · 拍照</div></div><div class="card-img-cost">₩2,000<small>NT$48</small></div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://ak-d.tripcdn.com/images/1mi6d224x92kh2edh74F6.jpg?proc=source/trip" alt="甘川洞文化村" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1844,7 +1959,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img pass"><span class="card-img-icon">📖</span><div class="card-img-info"><div class="card-img-title">Flipbook Studio 手翻書</div><div class="card-img-area">17:30 - 18:30 · 甘川洞 · 自費</div></div><div class="card-img-cost">₩25,000<small>NT$600</small></div></div>
+    <div class="card-img pass"><span class="card-img-icon">📖</span><div class="card-img-info"><div class="card-img-title">Flipbook Studio 手翻書</div><div class="card-img-area">18:30 - 19:30 · 甘川洞 · 自費</div></div><div class="card-img-cost">₩25,000<small>NT$600</small></div></div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -1868,7 +1983,7 @@ tailwind.config = {
 <div class="flex gap-3 mb-2">
   <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
   <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
-    <span class="text-sm shrink-0">🚌</span><div><strong>甘川洞 → 南浦洞</strong><br>巴士（約 15 分鐘）₩1,200（NT$29）</div>
+    <span class="text-sm shrink-0">🚌</span><div><strong>甘川洞 → 南浦洞</strong><br>巴士（約 25 分鐘）₩1,200（NT$29）</div>
   </div>
 </div>
 
@@ -1878,7 +1993,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img food"><span class="card-img-icon">🐟</span><div class="card-img-info"><div class="card-img-title">古來思魚糕 + 元祖糖餅</div><div class="card-img-area">18:45 - 19:05 · 南浦洞 · 點心</div></div><div class="card-img-cost">₩5,000<small>NT$120</small></div></div>
+    <div class="card-img food"><span class="card-img-icon">🐟</span><div class="card-img-info"><div class="card-img-title">古來思魚糕 + 元祖糖餅</div><div class="card-img-area">20:00 - 20:20 · 南浦洞 · 點心</div></div><div class="card-img-cost">₩5,000<small>NT$120</small></div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://d12zq4w4guyljn.cloudfront.net/300_300_20250114191831_photo1_a2e1b1990f36.jpg" alt="古來思魚糕 + 元祖糖餅" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1923,7 +2038,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img food"><span class="card-img-icon">🍲</span><div class="card-img-info"><div class="card-img-title">南浦雪濃湯</div><div class="card-img-area">19:10 - 19:50 · 南浦洞 · 晚餐</div></div><div class="card-img-cost">₩10,000<small>NT$240</small></div></div>
+    <div class="card-img food"><span class="card-img-icon">🍲</span><div class="card-img-info"><div class="card-img-title">南浦雪濃湯</div><div class="card-img-area">20:20 - 21:00 · 南浦洞 · 晚餐</div></div><div class="card-img-cost">₩10,000<small>NT$240</small></div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://ak-d.tripcdn.com/images/1mi4j224x8yf1qeng7624.jpg?proc=source/trip" alt="南浦雪濃湯" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -1966,7 +2081,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img shopping"><span class="card-img-icon">🛍️</span><div class="card-img-info"><div class="card-img-title">BIFF廣場 + 富平市場</div><div class="card-img-area">19:50 - 20:20 · 南浦洞 · 逛街</div></div></div>
+    <div class="card-img shopping"><span class="card-img-icon">🛍️</span><div class="card-img-info"><div class="card-img-title">BIFF廣場 + 富平市場</div><div class="card-img-area">21:00 - 21:30 · 南浦洞 · 逛街</div></div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/c5b72c43-e6f7-4325-916e-b91c0ecd087d.jpeg" alt="BIFF廣場 + 富平市場" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -2006,7 +2121,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img food"><span class="card-img-icon">🍡</span><div class="card-img-info"><div class="card-img-title">紅豆奶油艾草糕</div><div class="card-img-area">20:20 - 20:35 · 南浦洞 · 甜點</div></div><div class="card-img-cost">₩3,500<small>NT$84</small></div></div>
+    <div class="card-img food"><span class="card-img-icon">🍡</span><div class="card-img-info"><div class="card-img-title">紅豆奶油艾草糕</div><div class="card-img-area">21:30 - 21:40 · 南浦洞 · 甜點</div></div><div class="card-img-cost">₩3,500<small>NT$84</small></div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/c5b72c43-e6f7-4325-916e-b91c0ecd087d.jpeg" alt="紅豆奶油艾草糕" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -2047,7 +2162,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img attraction"><span class="card-img-icon">🗼</span><div class="card-img-info"><div class="card-img-title">釜山塔（龍頭山公園）</div><div class="card-img-area">20:35 - 21:00 · 南浦洞 · 可跳過</div></div><div class="card-img-cost">免費<small>塔內 ₩8,000</small></div></div>
+    <div class="card-img attraction"><span class="card-img-icon">🗼</span><div class="card-img-info"><div class="card-img-title">釜山塔（龍頭山公園）</div><div class="card-img-area">21:40 - 22:00 · 南浦洞 · 可跳過</div></div><div class="card-img-cost">免費<small>塔內 ₩8,000</small></div></div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -2071,7 +2186,7 @@ tailwind.config = {
 <div class="flex gap-3 mb-2">
   <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
   <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
-    <span class="text-sm shrink-0">🚇</span><div><strong>南浦洞 → 西面（松亭3代）</strong><br>地鐵 1 號線 남포→서면（約 15 分鐘）₩1,400（NT$34）</div>
+    <span class="text-sm shrink-0">🚇</span><div><strong>22:00 南浦洞 → 西面（松亭3代）</strong><br>地鐵 1 號線 남포→서면（約 15 分鐘）₩1,400（NT$34）</div>
   </div>
 </div>
 
@@ -2081,7 +2196,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img food"><span class="card-img-icon">🍲</span><div class="card-img-info"><div class="card-img-title">松亭3代豬肉湯飯</div><div class="card-img-area">21:15 - 21:45 · 西面 · 宵夜</div></div><div class="card-img-cost">₩9,000<small>NT$216</small></div></div>
+    <div class="card-img food"><span class="card-img-icon">🍲</span><div class="card-img-info"><div class="card-img-title">松亭3代豬肉湯飯</div><div class="card-img-area">22:15 - 22:45 · 西面 · 宵夜</div></div><div class="card-img-cost">₩9,000<small>NT$216</small></div></div>
     <div class="p-3 cursor-pointer flex items-center justify-between hover:bg-warmgray-light/30 transition-colors rounded-b-2xl" onclick="toggleDetail(this)">
       <span class="text-sm text-warmgray/50">👆 點擊看詳情</span>
       <span class="text-warmgray/40 transition-transform duration-200 text-xs" data-expand>▼</span>
@@ -2105,7 +2220,7 @@ tailwind.config = {
 <div class="flex gap-3 mb-2">
   <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
   <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
-    <span class="text-sm shrink-0">🚇</span><div><strong>西面 → Centum City 飯店</strong><br>地鐵 2 號線（5 站，約 12 分鐘）₩1,400（NT$34）</div>
+    <span class="text-sm shrink-0">🚇</span><div><strong>22:45 西面 → Centum City 飯店</strong><br>地鐵 2 號線（5 站，約 12 分鐘）₩1,400（NT$34）</div>
   </div>
 </div>
 
@@ -2548,7 +2663,7 @@ tailwind.config = {
         <div class="flex justify-between items-start">
           <div>
             <p class="text-lg font-black text-warmgray">🛫 最後巡禮 + 回程</p>
-            <p class="text-sm text-warmgray/60 mt-1">21:05 飛機 ｜ 海雲台悠閒半日 ｜ 17:00 前出發去機場</p>
+            <p class="text-sm text-warmgray/60 mt-1">21:05 飛機 ｜ 海雲台悠閒半日 ｜ 16:30 出發去機場</p>
           </div>
           <div class="text-right">
             <span class="text-lg font-black text-peach">約₩45,000</span>
@@ -2813,7 +2928,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img nature"><span class="card-img-icon">🏖️</span><div class="card-img-info"><div class="card-img-title">海雲台最後散步</div><div class="card-img-area">14:20 - 14:30 · 海雲台 · 免費</div></div><div class="card-img-cost">免費</div></div>
+    <div class="card-img nature"><span class="card-img-icon">🏖️</span><div class="card-img-info"><div class="card-img-title">海雲台最後散步</div><div class="card-img-area">14:15 - 14:30 · 海雲台 · 免費</div></div><div class="card-img-cost">免費</div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://media.triple.guide/triple-cms/c_limit,f_auto,h_1024,w_1024/4e0d012d-48cd-4831-a142-7599a938434c.jpeg" alt="海雲台最後散步" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -2894,7 +3009,7 @@ tailwind.config = {
     <div class="w-px flex-1 mt-1" style="border-left: 2px dashed #e0d8d0"></div>
   </div>
   <div class="flex-1 border-2 border-dashed border-warmgray/15 rounded-2xl overflow-hidden bg-white mb-1">
-    <div class="card-img shopping"><span class="card-img-icon">🛍️</span><div class="card-img-info"><div class="card-img-title">最後採購</div><div class="card-img-area">15:30 - 16:30 · Centum City · 購物</div></div></div>
+    <div class="card-img shopping"><span class="card-img-icon">🛍️</span><div class="card-img-info"><div class="card-img-title">最後採購</div><div class="card-img-area">15:30 - 16:00 · Centum City · 購物</div></div></div>
 <div class="carousel-wrapper">
       <div class="img-carousel" onscroll="updateDots(this)">
         <img src="https://ak-d.tripcdn.com/images/1mi21224x8x5sqj1t2FCE.jpg?proc=source/trip" alt="新世界百貨 Centum City" style="flex-shrink:0;width:100%;height:200px;object-fit:cover;scroll-snap-align:start;" onerror="this.style.display='none'" loading="lazy">
@@ -2922,7 +3037,7 @@ tailwind.config = {
   <div class="flex flex-col items-center"><div class="w-px flex-1" style="border-left: 2px dashed #e0d8d0"></div></div>
   <div class="flex-1 py-1.5 px-3 text-xs text-warmgray/60 bg-transparent rounded-lg" style="display:flex; align-items:center; gap:8px;">
     <span class="text-sm shrink-0">行李</span>
-    <div><strong>16:30 - 17:00</strong> 回飯店收行李、Check out
+    <div><strong>16:00</strong> 回飯店收行李、Check out
   </div>
 </div>
   </div>
@@ -2934,14 +3049,14 @@ tailwind.config = {
 
     <div class="flex gap-3">
       <div class="w-7 h-7 rounded-full bg-softblue text-white flex items-center justify-center text-xs font-black shrink-0">1</div>
-      <div><strong>16:30 收行李、Check out</strong><br>整理行李，確認沒有遺漏物品。護照、機票、退稅單據帶好</div>
+      <div><strong>16:00 收行李、Check out</strong><br>整理行李，確認沒有遺漏物品。護照、機票、退稅單據帶好</div>
     </div>
 
     <div class="flex gap-3">
       <div class="w-7 h-7 rounded-full bg-softblue text-white flex items-center justify-center text-xs font-black shrink-0">2</div>
-      <div><strong>17:00 出發去金海機場</strong><br>
+      <div><strong>16:30 出發去機場</strong><br>
         <div class="mt-1 p-2 bg-white rounded-lg border border-dashed border-warmgray/15">
-          <strong class="text-peach">推薦：Kakao T 叫車</strong>（約 30 分鐘）₩25,000~30,000（NT$600~720）<br>
+          <strong class="text-peach">推薦：Kakao T 叫車</strong>（預留 45 分鐘應對塞車）₩25,000~30,000（NT$600~720）<br>
           <span class="text-xs text-warmgray/60">最後一天拖行李叫車最輕鬆</span>
         </div>
         <div class="mt-1 p-2 bg-white rounded-lg border border-dashed border-warmgray/15">
@@ -2953,7 +3068,7 @@ tailwind.config = {
 
     <div class="flex gap-3">
       <div class="w-7 h-7 rounded-full bg-softblue text-white flex items-center justify-center text-xs font-black shrink-0">3</div>
-      <div><strong>17:30 抵達金海機場國際線航廈</strong><br>虎航在國際線航廈（국제선）。注意國際線和國內線是不同棟！<br><span class="text-mint font-bold">💡 如果 Day 1 沒辦到 SES，現在去 2F 出境事務所辦（週一~五 09:00~18:00）→ 辦完出境就能走自動通關！</span></div>
+      <div><strong>17:15 抵達金海機場國際線航廈</strong><br>虎航在國際線航廈（국제선）。注意國際線和國內線是不同棟！<br><span class="text-mint font-bold">💡 如果 Day 1 沒辦到 SES，現在去 2F 出境事務所辦（週一~五 09:00~18:00）→ 辦完出境就能走自動通關！</span></div>
     </div>
 
     <div class="flex gap-3">
