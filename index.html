@@ -4315,5 +4315,26 @@ function updateDots(carousel) {
   }
 }
 </script>
+
+<!-- BGM -->
+<audio id="bgm" src="busan.mp3" loop preload="auto"></audio>
+<script>
+const bgm=document.getElementById('bgm');
+bgm.volume=0;
+
+let bgmStarted=false;
+function autoStart(){
+  if(bgmStarted)return;
+  bgmStarted=true;
+  bgm.play().then(()=>{
+    let t=0;const dur=60;
+    const fade=setInterval(()=>{
+      t++;bgm.volume=0.4*Math.pow(t/dur,2.5);
+      if(t>=dur){bgm.volume=0.4;clearInterval(fade);}
+    },100);
+  }).catch(()=>{bgmStarted=false;});
+}
+['click','touchstart','scroll','keydown'].forEach(e=>document.addEventListener(e,autoStart));
+</script>
 </body>
 </html>
