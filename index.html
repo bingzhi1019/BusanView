@@ -4318,19 +4318,27 @@ function updateDots(carousel) {
 
 <!-- BGM -->
 <audio id="bgm" src="busan.mp3" loop preload="auto"></audio>
+<div id="bgm-btn" onclick="toggleBGM()" style="position:fixed;bottom:16px;right:16px;z-index:9999;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,0.08);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.75em;opacity:0.4;transition:opacity 0.2s" onmouseenter="this.style.opacity='0.8'" onmouseleave="this.style.opacity='0.4'">🎵</div>
 <script>
-const bgm=document.getElementById('bgm');
+const bgm=document.getElementById('bgm'),bgmBtn=document.getElementById('bgm-btn');
 bgm.volume=0;
+let targetVol=0.4;
+
+function toggleBGM(){
+  if(bgm.paused){bgm.play();bgmBtn.textContent='🎵';}
+  else{bgm.pause();bgmBtn.textContent='•';}
+}
 
 let bgmStarted=false;
 function autoStart(){
   if(bgmStarted)return;
   bgmStarted=true;
   bgm.play().then(()=>{
+    bgmBtn.textContent='🎵';
     let t=0;const dur=60;
     const fade=setInterval(()=>{
-      t++;bgm.volume=0.4*Math.pow(t/dur,2.5);
-      if(t>=dur){bgm.volume=0.4;clearInterval(fade);}
+      t++;bgm.volume=targetVol*Math.pow(t/dur,2.5);
+      if(t>=dur){bgm.volume=targetVol;clearInterval(fade);}
     },100);
   }).catch(()=>{bgmStarted=false;});
 }
