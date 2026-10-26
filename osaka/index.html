@@ -97,10 +97,47 @@
     text-align: center;
     padding: 8px 0 20px;
   }
+  .mobile-itinerary { display: none; }
   @media (max-width: 800px) {
-    .container { padding: 14px; }
+    .container { padding: 14px 10px; }
     h1 { font-size: 25px; }
-    .day-title h2 { font-size: 19px; }
+    .subtitle { font-size: 14px; line-height: 1.7; }
+    .day { margin-bottom: 18px; }
+    .day-title { padding: 15px 14px; }
+    .day-title h2 { font-size: 19px; line-height: 1.5; }
+    .day-title p { font-size: 13px; line-height: 1.6; }
+    .info { padding: 12px 14px; font-size: 14px; }
+    .table-wrap { display: none; }
+    .mobile-itinerary { display: block; padding: 8px 10px 12px; }
+    .mobile-item {
+      padding: 13px 12px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .mobile-item:last-child { border-bottom: 0; }
+    .mobile-time {
+      display: inline-block;
+      margin-bottom: 5px;
+      color: #37474f;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .mobile-place {
+      margin-bottom: 9px;
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+    .mobile-detail {
+      display: grid;
+      grid-template-columns: 76px minmax(0, 1fr);
+      gap: 4px 8px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .mobile-label { color: #78909c; font-weight: 700; }
+    .mobile-value { min-width: 0; overflow-wrap: anywhere; }
   }
   @media print {
     body { background: white; }
@@ -223,5 +260,43 @@
 
   <div class="footer">大阪四天三夜｜行程表 HTML 版</div>
 </div>
+<script>
+(function() {
+  var labels = ['時間軸', '地點 / 行程', '預計停留', '交通方式', '預計花費', '營業資訊 / 支付', '注意事項 / 攻略'];
+  document.querySelectorAll('.day table tbody').forEach(function(tbody) {
+    var list = document.createElement('div');
+    list.className = 'mobile-itinerary';
+    tbody.querySelectorAll('tr').forEach(function(row) {
+      var cells = row.querySelectorAll('td');
+      if (!cells.length) return;
+      var item = document.createElement('article');
+      item.className = 'mobile-item';
+      var time = document.createElement('div');
+      time.className = 'mobile-time';
+      time.textContent = cells[0].textContent.trim();
+      var place = document.createElement('div');
+      place.className = 'mobile-place';
+      place.innerHTML = cells[1].innerHTML;
+      var detail = document.createElement('div');
+      detail.className = 'mobile-detail';
+      for (var i = 2; i < cells.length; i++) {
+        var label = document.createElement('div');
+        label.className = 'mobile-label';
+        label.textContent = labels[i] || '補充資訊';
+        var value = document.createElement('div');
+        value.className = 'mobile-value';
+        value.innerHTML = cells[i].innerHTML;
+        detail.appendChild(label);
+        detail.appendChild(value);
+      }
+      item.appendChild(time);
+      item.appendChild(place);
+      item.appendChild(detail);
+      list.appendChild(item);
+    });
+    tbody.closest('.table-wrap').after(list);
+  });
+})();
+</script>
 </body>
 </html>
