@@ -5,9 +5,15 @@
 ## 網站結構
 
 ```text
-index.html   旅程入口頁
-busan.html   釜山五天四夜完整行程
-osaka.html   大阪四天三夜完整行程
+index.html       旅程入口頁
+README.md        專案說明
+shared/          共用資源
+  apple-touch-icon.png
+busan/           釜山旅程
+  index.html
+  busan.mp3
+osaka/           大阪旅程
+  index.html
 ```
 
 使用者先進入 `index.html`，再從旅程卡片選擇想查看的目的地。兩個旅程頁可以各自維持適合該行程的版面與互動，不需要強迫使用相同的內容格式。
@@ -46,17 +52,19 @@ http://localhost:8000/
 
 新增城市時，採用「一個入口頁＋一個獨立旅程頁」：
 
-1. 新增旅程頁，例如 `kyoto.html`。
-2. 在 `index.html` 的 `.trip-grid` 新增一張旅程卡片。
-3. 將卡片的 `href` 指向新的 HTML 檔案。
+1. 建立城市資料夾，例如 `kyoto/`。
+2. 在資料夾內新增 `kyoto/index.html`。
+3. 在根目錄 `index.html` 的 `.trip-grid` 新增一張旅程卡片。
+4. 將卡片的 `href` 指向 `kyoto/index.html`。
 4. 更新卡片上的國家、日期、旅程名稱與簡介。
-5. 若有音樂、圖片或其他資產，使用相對路徑放在 repository 中。
-6. 在 GitHub Pages 實際網址測試入口與旅程頁連結。
+6. 若有該城市專屬音樂、圖片或其他資產，放在該城市資料夾內並使用相對路徑。
+7. 共用資產放在 `shared/`，並從城市頁使用 `../shared/資產檔名`。
+8. 在 GitHub Pages 實際網址測試入口與旅程頁連結。
 
 範例：
 
 ```html
-<a class="trip-card" href="kyoto.html">
+<a class="trip-card" href="kyoto/">
   <div class="trip-flag">🇯🇵</div>
   <div class="trip-name">京都三天兩夜</div>
   <div class="trip-meta">日本・2027 / 03 / 01 ～ 2027 / 03 / 03</div>
