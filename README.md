@@ -1,6 +1,6 @@
 # BusanView
 
-旅行行程入口網站，部署在 GitHub Pages。目前有兩個已完成的旅程：釜山與大阪。
+旅行行程入口網站，部署在 Cloudflare。目前有兩個已完成的旅程：釜山與大阪。
 
 ## 網站結構
 
@@ -18,21 +18,9 @@ osaka/           大阪旅程
 
 使用者先進入 `index.html`，再從旅程卡片選擇想查看的目的地。兩個旅程頁可以各自維持適合該行程的版面與互動，不需要強迫使用相同的內容格式。
 
-## GitHub Pages
+## 線上網站
 
-在 repository 的 **Settings → Pages** 設定：
-
-- Source：Deploy from a branch
-- Branch：`main`
-- Folder：`/ (root)`
-
-網站網址：
-
-```text
-https://bingzhi1019.github.io/BusanView/
-```
-
-請以 GitHub repository 的 Pages 設定為準。
+https://journey.beenbing.workers.dev/
 
 ## 本機預覽
 
@@ -56,15 +44,15 @@ http://localhost:8000/
 2. 在資料夾內新增 `kyoto/index.html`。
 3. 在根目錄 `index.html` 的 `.trip-grid` 新增一張旅程卡片。
 4. 將卡片的 `href` 指向 `kyoto/index.html`。
-4. 更新卡片上的國家、日期、旅程名稱與簡介。
+5. 更新卡片上的國家、日期、旅程名稱與簡介。
 6. 若有該城市專屬音樂、圖片或其他資產，放在該城市資料夾內並使用相對路徑。
 7. 共用資產放在 `shared/`，並從城市頁使用 `../shared/資產檔名`。
-8. 在 GitHub Pages 實際網址測試入口與旅程頁連結。
+8. 在線上網站測試入口與旅程頁連結。
 
 範例：
 
 ```html
-<a class="trip-card" href="kyoto/">
+<a class="trip-card" href="kyoto/index.html">
   <div class="trip-flag">🇯🇵</div>
   <div class="trip-name">京都三天兩夜</div>
   <div class="trip-meta">日本・2027 / 03 / 01 ～ 2027 / 03 / 03</div>
